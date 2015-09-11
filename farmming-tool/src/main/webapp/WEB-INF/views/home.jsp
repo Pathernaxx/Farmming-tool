@@ -29,7 +29,6 @@
 <div class="container">
   <div class="outer">
     <div class="inner">
-      <h1>농기계.com</h1>
       <button>대여</button> <input type="button" name="사전" value="사전" onclick="location.href='/farmingtool/dictionary/view.action'"> 
     </div>
   </div>

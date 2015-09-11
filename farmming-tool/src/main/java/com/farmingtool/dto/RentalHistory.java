@@ -1,5 +1,5 @@
 package com.farmingtool.dto;
 
-public class MemberRentalHistory {
+public class RentalHistory {
 
 }
