@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.farmmingtool.controller">
+	<logger name="com.farmingtool.controller">
 		<level value="info" />
 	</logger>
 	

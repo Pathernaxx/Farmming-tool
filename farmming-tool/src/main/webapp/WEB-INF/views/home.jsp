@@ -10,7 +10,7 @@
   width: 100%;
   height: 100%;
   margin: 0 0 auto;
-  background-image: url('/farmmingtool/resources/images/mainback.jpg');
+  background-image: url('/farmingtool/resources/images/mainback.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -29,8 +29,7 @@
 <div class="container">
   <div class="outer">
     <div class="inner">
-      <h1>농기계.com</h1>
-      <button>대여</button> <input type="button" name="사전" value="사전" onclick="location.href='/farmmingtool/dictionary/view.action'"> 
+      <button>대여</button> <input type="button" name="사전" value="사전" onclick="location.href='/farmingtool/dictionary/view.action'"> 
     </div>
   </div>
 </div>
