@@ -1,0 +1,122 @@
+@CHARSET "utf-8";
+
+body {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size: 12px;
+}
+
+body {
+	background: #ffffff none repeat scroll 0;
+	color: #333333;
+	margin: 0;
+	padding: 0;	
+}
+
+#pageContainer {
+	background: #ffffff none repeat scroll 0;
+	margin: 0 auto;
+	max-width: 1024px;
+	min-width: 1024px;
+	padding:0 0;
+}
+
+#header {
+	background-color: #FEFFFF;
+	color: #666666;
+	width: 95%;
+	padding-bottom: 4px;
+	padding-top:2px;
+	height: 80px;
+	margin:0 auto;
+}
+
+#header a {
+	margin-left:40px;
+	color: #666666;
+	font-weight: bold;
+	text-decoration: none;
+	
+}
+/*제목이 가운데 정렬하기 위한 왼쪽 여백*/
+#header .title-padding {
+	width:29%;
+	float:left;
+	
+}
+/*제목*/
+#header .title {
+	text-align:center;
+	width:40%;
+	float:left;
+	font-size: 40px;
+	font-weight: bolder;
+	padding-top: 18px;
+}
+/*헤더에 담기는 것들(오른쪽에 로그인, total)*/
+#header .links {
+	
+	font-size:9pt;
+	width:30%;
+	text-align:right;
+	padding-top:40px;
+	float:right;
+}
+/*헤더에 찍히는 것들(링크들)*/
+#header .links a {
+	color:#666666;
+	margin-left: 15px;
+}
+/*헤더에 마우스 올렸을 때(링크들)*/
+#header .links a:HOVER{
+	color:#000000;
+}
+
+
+#menu {
+	width:97%;
+	margin-right:5px;
+	background-color:#6699FF ;
+	color:#476BB2;
+	padding: 5px 15px 5px /*bottom - left - top - 0 */ ;
+	margin:0 auto;
+	text-align: center;
+}
+
+#menu ul {
+	display: inline;
+	margin-left: 0;
+	padding-left: 0;
+	
+}
+
+#menu ul li {
+
+	display: inline;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+	margin-left: 0;
+}
+
+/*메뉴 글자*/
+#menu ul li a {
+	color: #ffffff;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 8px;
+	
+}
+
+/* 마우스 올라왔을때와 tab버튼으로 해당 메뉴 포커스 했을때 설정 */
+/* 확대해서 보이는 느낌은 원래 투명이다가 hover나 focus되면 색상이 설정되어서
+	padding한 만큼 상자가 커진다.*/
+#menu ul li a:hover, #menu ul li a:focus{ 
+	background-color: #5C8AE6;
+}
+
+a {
+	text-decoration: none;
+}
+a:HOVER {
+	text-decoration: underline;
+}

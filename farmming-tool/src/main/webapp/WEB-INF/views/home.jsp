@@ -29,7 +29,8 @@
 <div class="container">
   <div class="outer">
     <div class="inner">
-      <button>대여</button> <input type="button" name="사전" value="사전" onclick="location.href='/farmingtool/dictionary/view.action'"> 
+      <input type="button" name="rental" value="대여" onclick="location.href='/farmingtool/rental/rentalmain.action'">
+      <input type="button" name="사전" value="사전" onclick="location.href='/farmingtool/dictionary/view.action'"> 
     </div>
   </div>
 </div>
