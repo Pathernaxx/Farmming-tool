@@ -21,7 +21,7 @@
 	<div>
 		<ul>
 			<li><a href="/farmingtool/dictionary/view.action">백과사전</a>
-			<li><a href="/farmingtool/dictionary/rentalmain.action">농기계대여</a></li>
+			<li><a href="/farmingtool/rental/rentalmain.action">농기계대여</a></li>
 			<li><a href="#">마이페이지</a></li>
 		</ul>
 
