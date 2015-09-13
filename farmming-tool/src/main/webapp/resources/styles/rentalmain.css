@@ -7,3 +7,16 @@
 	width: 200px;
 	height: 30px;
 }
+
+#message {
+	width: 800px;
+	height:200px;
+	border: 1px solid;
+	border-color:#cccccc;
+}
+
+#search {
+	widht: 50px;
+	height: 30px;
+	background-color: white;
+}

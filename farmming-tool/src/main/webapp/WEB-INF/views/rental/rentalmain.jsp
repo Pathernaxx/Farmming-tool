@@ -36,15 +36,19 @@
 			<select id="rental-option" name="tool-small">
 				<option value="" selected="selected">기계선택2-소분류</option>
 				<option value="농용트랙터">농용트랙터</option>
-			</select><br/><br/>
-			<div id="message">
-				대여가격, 교육이수정보 등의 안내말
-			</div>
-			<input type="button" name="search" value="검색" onclick=""/>
+			</select> &nbsp; <input type="button" id="search" name="search" value="검색" onclick=""/> <br/><br/>
+			
+			<h4 id="rental-condition-title" style="font-weight: bold;color:#006699">대여시 안내사항 및 주의사항</h4>
+				<div id="message">
+					&nbsp;■ 대여가격 : <br/>
+					&nbsp;■ 대여일 / 반납일 : <br/>
+					&nbsp;■ 주의 사항 : <br/>
+					&nbsp;<font style='color:red;font-weight: bold;'>※ 교육을 이수하지 않을 시 예약이 취소될 수 있습니다. ※</font>
+				</div>
 		</div><br/><br/>
 		
 		<div id="rental-calendar">
-		달력
+		달력<br/><br/><br/>
 		</div>
 		
 	</div>
