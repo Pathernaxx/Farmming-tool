@@ -83,10 +83,29 @@
     height: 100%;
     }
     #content {
-	height: 50px;
-     margin: 5px;
+	height: 650px;
+    margin: 5px;
+    border: 3px solid; 
+    }
+    
+    .item {
+    width: 200px;
+    height: 250px;
+    border: 3px solid;
+    margin: 5px;
+    float: left;
+    
     }
   </style>
+  <!-- Load jQuery from Google CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
+  <script type="text/javascript">
+    $("#content").masonry({
+        itemSelector : '.item',
+        columnWidth : 200
+    });
+  </script>
 </head>
 <body>
   <!-- Centered page -->
@@ -94,14 +113,21 @@
   <div id="header">
    <table id="headertable">
     <tr>
-      <td width=10%><a id="left-panel-link" href="#left-panel"><img width=80 height=68 src="/farmmingtool/resources/images/sidemenuleft.png" ></a></td>
+      <td width=10%><a id="left-panel-link" href="#left-panel"><img width=80 height=68 src="/farmingtool/resources/images/sidemenuleft.png" ></a></td>
       <td style="text-align: center;"><p>농기계</p></td>
-      <td width=10% style="text-align: right;"><a id="right-panel-link" href="#right-panel"><img width=80 height=68 src="/farmmingtool/resources/images/sidemenuright.png" ></a></td>
+      <td width=10% style="text-align: right;"><a id="right-panel-link" href="#right-panel"><img width=80 height=68 src="/farmingtool/resources/images/sidemenuright.png" ></a></td>
     </tr>
    </table>
   </div>
   <div id="content">
-   레이아웃 내용
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+      <div class="item">7</div>
+      <div class="item">8</div>
   </div>
 </div> 
   <!-- Left panel -->
@@ -115,10 +141,8 @@
     <h2>Right panel</h2>
     <p>Clicking outside this panel wont close it because <code>clickClose = false</code></p>
   </div>
-<!-- Load jQuery from Google CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <!-- Load Panelslider -->
-<script src="/farmmingtool/resources/js/jquery.panelslider.js"></script>
+<script src="/farmingtool/resources/js/jquery.panelslider.js"></script>
   <script>
     $('#left-panel-link').panelslider();
     $('#right-panel-link').panelslider({
