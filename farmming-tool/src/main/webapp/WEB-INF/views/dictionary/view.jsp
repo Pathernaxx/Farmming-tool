@@ -79,13 +79,13 @@
       background: #333;
     }
     #page{
-    border: 3px solid; 
-    height: 100%;
+    border: 3px solid blue; 
     }
     #content {
 	height: 650px;
     margin: 5px;
-    border: 3px solid; 
+    border: 3px solid red; 
+   	overflow: auto;
     }
     
     .item {
@@ -94,7 +94,6 @@
     border: 3px solid;
     margin: 5px;
     float: left;
-    
     }
   </style>
   <!-- Load jQuery from Google CDN -->
@@ -103,7 +102,13 @@
   <script type="text/javascript">
     $("#content").masonry({
         itemSelector : '.item',
-        columnWidth : 200
+        columnWidth : 200,
+        isAnimated: true,
+        animationOptions:{
+        	duartion: 750,
+        	easing: 'linear',
+        	queue: false
+        }
     });
   </script>
 </head>
@@ -128,6 +133,14 @@
       <div class="item">6</div>
       <div class="item">7</div>
       <div class="item">8</div>
+      <div class="item">9</div>
+      <div class="item">10</div>
+      <div class="item">11</div>
+      <div class="item">12</div>
+      <div class="item">13</div>
+      <div class="item">14</div>
+      <div class="item">15</div>
+      <div class="item">16</div>
   </div>
 </div> 
   <!-- Left panel -->
