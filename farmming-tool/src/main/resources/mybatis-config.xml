@@ -12,6 +12,7 @@
 
 <mappers>
 	<!-- <mapper resource="com/teamplanner/mapper/ActivityMapper.xml"/> -->
+	<mapper resource="com/farmingtool/mapper/RentalHistoryMapper.xml"/>
 </mappers>
 
 </configuration>
