@@ -182,7 +182,7 @@ function sub_change1() {
 		frm1.locationSmall.options[16].text = '남구';
 	}
 	if(mnu1 == 9) {
-		rm1.locationSmall.length = 26;
+		frm1.locationSmall.length = 26;
 		frm1.locationSmall.options[0].text = '지역선택2-시/군/구';
 		frm1.locationSmall.options[1].text = '광진구';
 		frm1.locationSmall.options[2].text = '동대문구';
