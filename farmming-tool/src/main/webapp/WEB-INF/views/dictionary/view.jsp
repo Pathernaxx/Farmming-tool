@@ -79,10 +79,11 @@
       background: #333;
     }
     #page{
-    border: 3px solid blue; 
+    border: 3px solid blue;
+    height: auto;
     }
     #content {
-	height: 650px;
+	height: auto;
     margin: 5px;
     border: 3px solid red; 
    	overflow: auto;
