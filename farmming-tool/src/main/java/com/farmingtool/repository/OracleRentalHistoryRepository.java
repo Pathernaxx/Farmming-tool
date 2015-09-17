@@ -11,7 +11,7 @@ public class OracleRentalHistoryRepository implements RentalHistoryRepository{
 
 	private RentalHistoryMapper rentalHistoryMapper;
 	
-	@Autowired        
+	@Autowired
 	@Qualifier(value="rentalHistoryMapper")
 	public void setRentalHistoryMapper(RentalHistoryMapper rentalHistoryMapper) {
 		this.rentalHistoryMapper = rentalHistoryMapper;
