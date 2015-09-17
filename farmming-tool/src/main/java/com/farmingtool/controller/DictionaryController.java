@@ -1,8 +1,16 @@
 package com.farmingtool.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.farmingtool.dto.FarmMachine;
+import com.farmingtool.service.FarmMachineService;
 
 
 @Controller
@@ -10,9 +18,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class DictionaryController {
 	
 	
-	@RequestMapping(value="view.action", method= RequestMethod.GET)
-	public String DictionaryApp(){
-		return "dictionary/cover";
+	private FarmMachineService farmMachineService;
+	@Autowired
+	@Qualifier("farmMachineService")
+	public void setFarmMachineService(FarmMachineService farmMachineService) {
+		this.farmMachineService = farmMachineService;
 	}
+	
+	
+	@RequestMapping(value="view.action", method= RequestMethod.GET)
+	public ModelAndView DictionaryApp(){
+		
+		ModelAndView mav = new ModelAndView();
+		List<FarmMachine> farmMachineList = farmMachineService.getFarmMachineList();
+		
+		for(FarmMachine fmList :  farmMachineList){
+			System.out.println(fmList.getFmNo());
+		}
+
+		
+		//mav.addObject("farmMachineList", farmMachineList);
+		mav.setViewName("dictionary/cover");
+		
+		
+ 		return mav;
+		
+	}
+
 	
 }
