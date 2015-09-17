@@ -22,9 +22,9 @@
 	<!-- contents -->
 	<div id="inputcontent">
 	
-		<div id="rental-condition"><br/><br/>
-			<h1 style="background-color: #FEFFFF; color: #666666;">농기계 대여 예약</h1>
-			<hr/><br/>
+		<div id="rental-condition">
+			<br/><br/>
+			<h1 style="background-color: #FEFFFF; color: #666666;">농기계 대여 예약</h1><hr/><br/>
 			
 			<form name = "frm1">
 				<h2 id="rental-condition-title">지역선택</h2>
