@@ -7,11 +7,11 @@
 <configuration>
 
 <typeAliases>
-	<!-- <typeAlias type="com.teamplanner.dto.Member" alias="Member"/> -->
+	<typeAlias type="com.farmingtool.dto.RentalHistory" alias="rentalHistory"/>
 </typeAliases>
 
 <mappers>
-	<!-- <mapper resource="com/teamplanner/mapper/ActivityMapper.xml"/> -->
+	<mapper resource="com/farmingtool/mapper/RentalHistoryMapper.xml"/>
 </mappers>
 
 </configuration>
