@@ -12,7 +12,7 @@ public class DictionaryController {
 	
 	@RequestMapping(value="view.action", method= RequestMethod.GET)
 	public String DictionaryApp(){
-		return "dictionary/view";
+		return "dictionary/cover";
 	}
 	
 }
