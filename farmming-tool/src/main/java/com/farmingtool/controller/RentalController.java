@@ -11,5 +11,11 @@ public class RentalController {
 	@RequestMapping(value="rentalmain.action", method=RequestMethod.GET)
 	public String rentalView() {
 		return "rental/rentalmain";
-		}
+	}
+	
+	@RequestMapping(value="rentalCheck.action", method=RequestMethod.GET)
+	public String rentalCheck() {
+		return "rental/rentalcheck";
+	}
+	
 }

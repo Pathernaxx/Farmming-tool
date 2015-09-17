@@ -87,6 +87,5 @@ public class FarmMachine {
 		this.fmPicture = fmPicture;
 	}
 	
-	
-	
+
 }
