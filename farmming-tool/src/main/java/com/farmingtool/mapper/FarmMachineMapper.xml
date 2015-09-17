@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.farmingtool.mapper.FarmMachineMapper">
+
+<resultMap type="FarmMachine" id="farmMachineResult">
+	<id column="fm_no" property="fmNo"/>
+	<result column="type_no" property="typeNo"/>
+	<result column="fm_name" property="fmName"/>
+	<result column="fm_structure" property="fmStructure"/>
+	<result column="fm_function" property="fmFunction"/>
+	<result column="fm_kinds" property="fmKinds"/>
+	<result column="fm_dimentions" property="fmDimentions"/>
+	<result column="fm_workingmachine" property="fmWorkingMachine"/>
+	<result column="fm_characteristic" property="fmCharacteristic"/>
+	<result column="fm_outline" property="fmOutline"/>
+	<result column="fm_necessity" property="fmNecessity"/>
+	<result column="fm_picture" property="fmPicture"/>
+</resultMap>
+
+<sql id="farmMachinecolunms">
+	fm_no, type_no, fm_name, fm_structure, 
+	fm_function, fm_kinds, fm_dimentions, fm_workingmachine, 
+	fm_characteristic, fm_outline, fm_necessity, fm_picture
+
+</sql>
+
+
+<select id="getFarmMachineList" resultMap="farmMachineResult">
+		select <include refid="farmMachinecolunms"></include>
+ 		from farmMachine
+
+</select>
+
+
+
+
+
+
+
+</mapper>
+
