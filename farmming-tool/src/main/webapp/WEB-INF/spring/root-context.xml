@@ -7,7 +7,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- <context:component-scan base-package="com.teamplanner.repository" /> -->
+	<context:component-scan base-package="com.farmingtool.repository" />
+	<context:component-scan base-package="com.farmingtool.service" />
 	
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource"
@@ -20,15 +21,13 @@
 		p:maxWaitMillis="1000">		
 	</bean>	
 		
-	<bean id="sessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation"
-			value="classpath:mybatis-config.xml" />	
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
 	</bean>
 
-	<!-- <bean id="boardMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.teamplanner.mapper.BoardMapper" />
+	<bean id="rentalHistoryMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.farmingtool.mapper.RentalHistoryMapper" />
 		<property name="sqlSessionFactory" ref="sessionFactory" />
-	</bean> -->	
+	</bean>
 </beans>

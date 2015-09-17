@@ -4,14 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.farmingtool.mapper.RentalHistoryMapper;
+
 @Repository(value="rentalHistoryRepository")
 public class OracleRentalHistoryRepository implements RentalHistoryRepository{
 
-	private RentalHistoryRepository rentalHistoryMapper;
+	private RentalHistoryMapper rentalHistoryMapper;
 	
 	@Autowired
-	@Qualifier(value="retalHistoryMapper")
-	public void setRentalHistoryMapper(RentalHistoryRepository rentalHistoryMapper) {
+	@Qualifier(value="rentalHistoryMapper")
+	public void setRentalHistoryMapper(RentalHistoryMapper rentalHistoryMapper) {
 		this.rentalHistoryMapper = rentalHistoryMapper;
 	}
 	
