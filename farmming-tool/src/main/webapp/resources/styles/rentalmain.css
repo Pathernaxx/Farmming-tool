@@ -4,19 +4,20 @@
 }
 
 #rental-option{
-	width: 200px;
+	width: 80%;
+	max-width:300px;
 	height: 30px;
 }
 
 #message {
-	width: 800px;
+	width: 95%;
 	height:200px;
 	border: 1px solid;
 	border-color:#cccccc;
 }
 
-#search {
-	widht: 50px;
+#rental_search {
+	width: 70px;
 	height: 30px;
 	background-color: white;
 }
