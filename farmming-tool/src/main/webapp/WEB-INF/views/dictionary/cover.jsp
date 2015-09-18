@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -378,7 +381,7 @@ $(function(){
         <div id="page-wrapper">
           <div class="row">
 			<div class="page-masonry">
-			  <div class="item">1</div>
+			 <!--  <div class="item">1</div>
 	      	  <div class="item">2</div>
 	          <div class="item">3</div>
 	          <div class="item">4</div>
@@ -393,7 +396,13 @@ $(function(){
 	          <div class="item">13</div>
 	          <div class="item">14</div>
 	          <div class="item">15</div>
-	          <div class="item">16</div>
+	          <div class="item">16</div> -->
+	          <c:forEach var="farmMachine" items="${ farmMachineList }">
+			      <div class="item">
+			      	<img src="/farmingtool/resources/images/fmimage/${ farmMachine.fmPicture }" width="200px" height="200px" style="padding-right: 4px">
+			      	<div>${ farmMachine.fmName }</div>
+			      </div>
+		      </c:forEach>
 			</div>
 		  </div>
         </div>

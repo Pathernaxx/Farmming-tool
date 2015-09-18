@@ -32,12 +32,12 @@ public class DictionaryController {
 		ModelAndView mav = new ModelAndView();
 		List<FarmMachine> farmMachineList = farmMachineService.getFarmMachineList();
 		
-		for(FarmMachine fmList :  farmMachineList){
+	/*	for(FarmMachine fmList :  farmMachineList){
 			System.out.println(fmList.getFmNo());
-		}
+		}*/
 
 		
-		//mav.addObject("farmMachineList", farmMachineList);
+		mav.addObject("farmMachineList", farmMachineList);
 		mav.setViewName("dictionary/cover");
 		
 		
