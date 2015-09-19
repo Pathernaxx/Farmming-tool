@@ -22,16 +22,21 @@
 		p:maxWaitMillis="1000">		
 	</bean>	
 		
-	<bean id="sessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation"
-			value="classpath:mybatis-config.xml" />	
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
 	</bean>
 
-	
 	<bean id="rentalHistoryMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.farmingtool.mapper.RentalHistoryMapper" />
 		<property name="sqlSessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="farmMachineMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.farmingtool.mapper.FarmMachineMapper" />
+		<property name="sqlSessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	
+	
 </beans>
