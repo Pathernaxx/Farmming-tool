@@ -12,7 +12,7 @@ import com.farmingtool.repository.FarmMachineRepository;
 
 
 @Service("farmMachineService")
-public class MyFarmMachineService implements FarmMachineService{
+public class PlanFarmMachineService implements FarmMachineService{
 
 	private FarmMachineRepository farmMachineRepository;
 	@Autowired

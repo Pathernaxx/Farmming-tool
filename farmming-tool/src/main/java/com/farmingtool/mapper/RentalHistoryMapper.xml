@@ -5,4 +5,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.farmingtool.mapper.RentalHistoryMapper">
+
+	<insert id="insertRentalHistory" parameterType="RentalHistory">
+		INSERT INTO rental_history(history_no, machine_no, member_id, history_rentaldate, history_returndate, history_status)
+		VALUES (rental_history_sequence.nextval, #{machineNo}, #{memberId}, #{historyRentalDate}, #{historyReturnDate}, #{historyStatus})
+	</insert>
+	
 </mapper>

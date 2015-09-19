@@ -440,7 +440,8 @@ $(function(){
 			</div>
 			
 			<div id="date-popover" class="popover top">
-			    <div id="date-popover-content" class="popover-content"></div>
+			    <div id="date-popover-content" class="popover-content">
+			    </div>
 			</div>
 			
 			<div id="my-calendar" style="margin-top:20px"></div>
@@ -515,6 +516,8 @@ $(function(){
 	        }
 	        
 	        $("#date-popover-content").html('<br/>선택한 날짜 : ' + date + '<br/>'+'예약하시겠습니까?<br/><br/>'+
+	        								'<input type="hidden" value="'+date+'" id="rentalDate"/>'+
+	        								'<input type="hidden" value="FA010001" id="machineNo"/>'+
 	        								'<input type="button" value="확인" onclick="moveToCheckRental()"/>&nbsp;'+
 	        								'<input type="button" value="취소" onclick="popoverClose()"/><br/>');
 	        $("#date-popover").show();
@@ -527,12 +530,17 @@ $(function(){
 	    
 	    function moveToCheckRental() {
 	    	//컨트롤러에서 예약처리
-	    	var dummy = "apple";
+	    	//alert($("#rentalDate").val());
+	    	var rentalDate = $("#rentalDate").val();
+	    	var machinNo = $("#machinNo").val();
 	    	$.ajax({
-	    		url: "/farmingtool/rental/moveToCheckRental.action",
+	    		url: "/farmingtool/rental/rentalMachine.action",
 	    		type: "get",
 	    		async: true,
-	    		data: {"dummy" : dummy},
+	    		data: {
+	    			"rentalDate" : rentalDate,
+	    			"machineNo" : machinNo
+	    			},
 	    		success: function(result) { //result
 	    			if(result != null)
 					{
