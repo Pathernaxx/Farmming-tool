@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.farmingtool.mapper.AccountMapper">
+	<select id="selectMemberByIdAndPassword" parameterType="hashmap" resultType="Member">
+		SELECT
+			member_id, member_name, member_phone1, member_phone2, member_address1, member_address2, member_warningcount
+		FROM
+			MEMBER
+		WHERE
+			member_id = #{ id } AND member_password = #{ password }
+	</select>
+	
+	<select id="selectAdminByIdAndPassword" parameterType="hashmap" resultType="Admin">
+		SELECT
+			admin_id, admin_name, admin_location, admin_phone
+		FROM
+			ADMIN
+		WHERE
+			admin_id = #{ id} AND admin_password = #{ password }
+	</select>
+	
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER(member_id, member_password, member_phone1, member_phone2, member_address1, member_address2)
+		VALUES(#{memberId}, #{memberPassword}, #{memberPhone1}, #{memberPhone2}, #{memberAddress1}, #{memberAddress2})
+	</insert>
+	
+	<insert id="insertAdmin" parameterType="Admin">
+		INSERT INTO ADMIN(admin_)
+	</insert>
+</mapper>
