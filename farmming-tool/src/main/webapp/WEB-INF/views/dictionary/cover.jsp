@@ -97,6 +97,7 @@
 .side-menu #dropdown .panel-body .navbar-nav li {
   padding-left: 15px;
   border-bottom: 1px solid #e7e7e7;
+  font-size:10px;
 }
 .side-menu #dropdown .panel-body .navbar-nav li:last-child {
   border-bottom: none;
