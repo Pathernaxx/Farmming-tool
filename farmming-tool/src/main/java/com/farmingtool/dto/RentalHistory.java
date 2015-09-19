@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class RentalHistory {
 	private int historyNo;
-	private int machineNo;
+	private String machineNo;
 	private String memberId;
-	private Date historyRentalDate;
-	private Date historyReturnDate;
-	private Date historyStatus;
+	private String historyRentalDate;
+	private String historyReturnDate;
+	private int historyStatus;
 	
 	public int getHistoryNo() {
 		return historyNo;
@@ -16,10 +16,10 @@ public class RentalHistory {
 	public void setHistoryNo(int historyNo) {
 		this.historyNo = historyNo;
 	}
-	public int getMachineNo() {
+	public String getMachineNo() {
 		return machineNo;
 	}
-	public void setMachineNo(int machineNo) {
+	public void setMachineNo(String machineNo) {
 		this.machineNo = machineNo;
 	}
 	public String getMemberId() {
@@ -28,23 +28,24 @@ public class RentalHistory {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public Date getHistoryRentalDate() {
+	public String getHistoryRentalDate() {
 		return historyRentalDate;
 	}
-	public void setHistoryRentalDate(Date historyRentalDate) {
+	public void setHistoryRentalDate(String historyRentalDate) {
 		this.historyRentalDate = historyRentalDate;
 	}
-	public Date getHistoryReturnDate() {
+	public String getHistoryReturnDate() {
 		return historyReturnDate;
 	}
-	public void setHistoryReturnDate(Date historyReturnDate) {
+	public void setHistoryReturnDate(String historyReturnDate) {
 		this.historyReturnDate = historyReturnDate;
 	}
-	public Date getHistoryStatus() {
+	public int getHistoryStatus() {
 		return historyStatus;
 	}
-	public void setHistoryStatus(Date historyStatus) {
+	public void setHistoryStatus(int historyStatus) {
 		this.historyStatus = historyStatus;
 	}
+	
 	
 }

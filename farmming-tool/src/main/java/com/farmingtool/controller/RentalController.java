@@ -45,6 +45,8 @@ public class RentalController {
 	public String rentalMachine(HttpServletRequest request, HttpSession session) throws ParseException {
 		
 		//String memberId = ((Member)session.getAttribute("loginuser")).getMemberId();
+		String memberId = "user1";
+		int statusNo = 1;
 		
 		/* 예약처리는 여기서 페이지 이동은 jsp ajax에서 */
 		String rentalDate = request.getParameter("rentalDate");
@@ -69,14 +71,16 @@ public class RentalController {
 //			System.out.println(dateString);
 			
 			RentalHistory history = new RentalHistory();
-			history.setHistoryRentalDate(rentalDate2); //rentalDate
-			history.setHistoryReturnDate(returnDate); //rentalDate + 1
-			//history.setHistoryStatus(); //0반납 1대여중
-			//history.setMachineNo(machineNo); //select 결과
-			//history.setMemberId(memberId); //session
+			history.setMemberId(memberId); //session
+			history.setHistoryRentalDate("2015-09-20"); //rentalDate
+			history.setHistoryReturnDate("2015-09-21"); //rentalDate + 1
+			history.setHistoryStatus(statusNo); //0반납 1대여중
+			history.setMachineNo(machineNo); //select 결과
 			
-			rentalHistoryService.insertRentalHistory(history);
-			detailMachineService.updateDetailMachineStatus(machineNo);
+			System.out.println(history.getMachineNo());
+			
+			//rentalHistoryService.insertRentalHistory(history);
+			//detailMachineService.updateDetailMachineStatus(machineNo);
 			
 			result = "aaa";
 			

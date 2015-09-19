@@ -517,7 +517,7 @@ $(function(){
 	        
 	        $("#date-popover-content").html('<br/>선택한 날짜 : ' + date + '<br/>'+'예약하시겠습니까?<br/><br/>'+
 	        								'<input type="hidden" value="'+date+'" id="rentalDate"/>'+
-	        								'<input type="hidden" value="FA010001" id="machineNo"/>'+
+	        								'<input type="hidden" value="FA0100001" id="machineNo"/>'+
 	        								'<input type="button" value="확인" onclick="moveToCheckRental()"/>&nbsp;'+
 	        								'<input type="button" value="취소" onclick="popoverClose()"/><br/>');
 	        $("#date-popover").show();
@@ -532,14 +532,14 @@ $(function(){
 	    	//컨트롤러에서 예약처리
 	    	//alert($("#rentalDate").val());
 	    	var rentalDate = $("#rentalDate").val();
-	    	var machinNo = $("#machinNo").val();
+	    	var machineNo = $("#machineNo").val();
 	    	$.ajax({
 	    		url: "/farmingtool/rental/rentalMachine.action",
 	    		type: "get",
 	    		async: true,
 	    		data: {
 	    			"rentalDate" : rentalDate,
-	    			"machineNo" : machinNo
+	    			"machineNo" : machineNo
 	    			},
 	    		success: function(result) { //result
 	    			if(result != null)
