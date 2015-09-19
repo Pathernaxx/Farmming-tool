@@ -8,6 +8,8 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +26,18 @@ public class RentalController {
 	
 	private DetailMachineService detailMachineService;
 	private RentalHistoryService rentalHistoryService;
+	
+	@Autowired
+	@Qualifier("detailMachineService")
+	public void setDetailMachineService(DetailMachineService detailMachineService) {
+		this.detailMachineService = detailMachineService;
+	}
+	
+	@Autowired
+	@Qualifier("rentalHistoryService")
+	public void setRentalHistoryService(RentalHistoryService rentalHistoryService) {
+		this.rentalHistoryService = rentalHistoryService;
+	}
 
 	@RequestMapping(value="rentalmain.action", method=RequestMethod.GET)
 	public String rentalView() {
@@ -70,17 +84,19 @@ public class RentalController {
 //			String dateString = format1.format(returnDate);
 //			System.out.println(dateString);
 			
+			/* 해당날짜에 가능한 대여기계 있을 때 아래 수행  */
+			
 			RentalHistory history = new RentalHistory();
 			history.setMemberId(memberId); //session
-			history.setHistoryRentalDate("2015-09-20"); //rentalDate
-			history.setHistoryReturnDate("2015-09-21"); //rentalDate + 1
+			history.setHistoryRentalDate(rentalDate2); //rentalDate
+			history.setHistoryReturnDate(returnDate); //rentalDate + 1
 			history.setHistoryStatus(statusNo); //0반납 1대여중
 			history.setMachineNo(machineNo); //select 결과
 			
-			System.out.println(history.getMachineNo());
+			//System.out.println(history.getMachineNo());
 			
-			//rentalHistoryService.insertRentalHistory(history);
-			//detailMachineService.updateDetailMachineStatus(machineNo);
+			rentalHistoryService.insertRentalHistory(history);
+			detailMachineService.updateDetailMachineStatus(machineNo);
 			
 			result = "aaa";
 			

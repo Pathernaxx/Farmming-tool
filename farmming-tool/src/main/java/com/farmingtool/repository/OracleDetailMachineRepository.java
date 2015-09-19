@@ -1,5 +1,8 @@
 package com.farmingtool.repository;
 
+import java.util.Date;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -19,6 +22,17 @@ public class OracleDetailMachineRepository implements DetailMachineRepository{
 	@Override
 	public void updateDetailMachineStatus(String machineNo) {
 		detailMachineMapper.updateDetailMachineStatus(machineNo);
+		
+	}
+
+	@Override
+	public int countRentableMachine(String historyRentalDate,String fmNo) {
+		
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("historyRentalDate", historyRentalDate);
+		params.put("fmNo", fmNo);
+		
+		return detailMachineMapper.countRentableMachine(params);
 		
 	}
 	
