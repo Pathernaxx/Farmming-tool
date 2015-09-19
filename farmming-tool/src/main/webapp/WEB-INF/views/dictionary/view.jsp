@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -125,22 +128,13 @@
    </table>
   </div>
   <div id="content">
-      <div class="item">1</div>
-      <div class="item">2</div>
-      <div class="item">3</div>
-      <div class="item">4</div>
-      <div class="item">5</div>
-      <div class="item">6</div>
-      <div class="item">7</div>
-      <div class="item">8</div>
-      <div class="item">9</div>
-      <div class="item">10</div>
-      <div class="item">11</div>
-      <div class="item">12</div>
-      <div class="item">13</div>
-      <div class="item">14</div>
-      <div class="item">15</div>
-      <div class="item">16</div>
+  
+  	  <c:forEach var="farmMachine" items="${ farmMachineList }">
+      <div class="item">
+      	<img src="/farmingtool/resources/images/fmimage/${ farmMachine.fmPicture }" width="200px" height="200px" style="padding-right: 4px">
+      	<div>${ farmMachine.fmName }</div>
+      </div>
+      </c:forEach>
   </div>
 </div> 
   <!-- Left panel -->

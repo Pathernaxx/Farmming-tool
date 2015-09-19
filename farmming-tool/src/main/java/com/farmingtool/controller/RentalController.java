@@ -1,8 +1,11 @@
 package com.farmingtool.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -24,14 +27,22 @@ public class RentalController {
 		return "rental/calendartest";
 	}
 	
-	@RequestMapping(value="moveToCheckRental.action", method=RequestMethod.POST)
+	@RequestMapping(value="rentalMachine.action", method=RequestMethod.GET)
+	@ResponseBody
+	public String rentalMachine(HttpServletRequest request) {
+		
+		/* 예약처리는 여기서 페이지 이동은 jsp ajax에서 */
+		
+		String dummy = request.getParameter("dummy");
+		//System.out.println(dummy);
+		String result = "aaa";
+		
+		return result;
+	}
+	
+	@RequestMapping(value="moveToCheckRental.action", method=RequestMethod.GET)
 	public String moveToCheckRental() {
-		
-		System.out.println("hello");
-		
-		String a="";
-		
-		return a;
+		return "rental/rentalcheckpage";
 	}
 
 	
