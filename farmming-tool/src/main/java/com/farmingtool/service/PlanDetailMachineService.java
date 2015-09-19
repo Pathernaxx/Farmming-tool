@@ -8,7 +8,7 @@ import com.farmingtool.repository.DetailMachineRepository;
 
 
 
-@Service("farmMachineService")
+@Service("detailMachineService")
 public class PlanDetailMachineService implements DetailMachineService{
 
 	private DetailMachineRepository detailMachineRepository;

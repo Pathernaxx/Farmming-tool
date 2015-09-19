@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.farmingtool.mapper.DetailMachineMapper;
 
-@Repository(value="farmMachineRepository")
+@Repository(value="detailMachineRepository")
 public class OracleDetailMachineRepository implements DetailMachineRepository{
 	
 	private DetailMachineMapper detailMachineMapper;
