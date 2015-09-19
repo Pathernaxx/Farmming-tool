@@ -526,16 +526,25 @@ $(function(){
 	    }
 	    
 	    function moveToCheckRental() {
+	    	//컨트롤러에서 예약처리
+	    	var dummy = "apple";
 	    	$.ajax({
 	    		url: "/farmingtool/rental/moveToCheckRental.action",
-	    		type: "post",
-	    		//data: {},
-	    		success: function(result) {
-	    			var url = "/farmingtool/rental/rentalcheckpage"
-					$(location).attr("href", url);
+	    		type: "get",
+	    		async: true,
+	    		data: {"dummy" : dummy},
+	    		success: function(result) { //result
+	    			if(result != null)
+					{
+	    				alert("예약 성공 : 확인 페이지로 이동합니다.")
+						var returnurl = '/farmingtool/rental/moveToCheckRental.action';
+						$(location).attr('href', returnurl);
+					} else {
+						alert('예약 실패 : 다시 시도해주세요.');
+					}
 	    		},
-	    		error: function() {
-	    			alert('실행 오류 발생');
+	    		error: function(xhr, status, error) {
+	    			alert(xhr + '/' + status + '/' + error);
 	    		}
 	    	});
 	    }
