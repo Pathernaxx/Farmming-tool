@@ -8,4 +8,6 @@ public interface FarmMachineRepository {
 
 	List<FarmMachine> getFarmMachineList();
 
+	FarmMachine getFarmMachineDetail(String fmno);
+
 }

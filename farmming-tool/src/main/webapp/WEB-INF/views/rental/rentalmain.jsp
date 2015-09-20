@@ -84,6 +84,9 @@
 			<input type="button" id="reservation" name="reservation" value="예약" 
 				onclick="location.href='/farmingtool/rental/rentalCheck.action'"/>
 				<!-- jquery를 통해 예약확인창 만들기 -->
+				
+			
+				<br/><br/><br/>
 		</div>		
 	</div>
 	

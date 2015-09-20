@@ -1,17 +1,17 @@
 package com.farmingtool.dto;
 
 public class DetailMachine {
-	private int machineNo;
+	private String machineNo;
 	private String fmNo;
 	private String machineName;
 	private String machineInformation;
 	private int machineRentalCost;
 	private int machineStatus;
 	private int locationNo2;
-	public int getMachineNo() {
+	public String getMachineNo() {
 		return machineNo;
 	}
-	public void setMachineNo(int machineNo) {
+	public void setMachineNo(String machineNo) {
 		this.machineNo = machineNo;
 	}
 	public String getFmNo() {

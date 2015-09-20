@@ -12,7 +12,7 @@ import com.farmingtool.repository.FarmMachineRepository;
 
 
 @Service("farmMachineService")
-public class MyFarmMachineService implements FarmMachineService{
+public class PlanFarmMachineService implements FarmMachineService{
 
 	private FarmMachineRepository farmMachineRepository;
 	@Autowired
@@ -26,6 +26,13 @@ public class MyFarmMachineService implements FarmMachineService{
 	public List<FarmMachine> getFarmMachineList() {
 		// TODO Auto-generated method stub
 		return farmMachineRepository.getFarmMachineList();
+	}
+
+
+	@Override
+	public FarmMachine getFarmMachineDetail(String fmno) {
+		// TODO Auto-generated method stub
+		return farmMachineRepository.getFarmMachineDetail(fmno);
 	}
 	
 	

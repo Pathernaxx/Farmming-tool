@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.farmingtool.mapper.DetailMachineMapper">
+
+	<update id="updateDetailMachineStatus"  parameterType="String">
+		UPDATE detailmachine
+		SET machine_status = 1
+		WHERE machine_no = #{machineNo}
+	</update>
+	
+	<select id="countRentableMachine" parameterType="hashMap" resultType="int">
+		SELECT count(machine_no) 
+		FROM detailmachine 
+		WHERE machine_no IN 
+			( 
+				<![CDATA[
+				SELECT machine_no 
+				FROM rental_history 
+				WHERE history_rentaldate < #{historyRentalDate} or history_rentaldate > #{historyRentalDate}
+				]]>
+			) and fm_no = #{fmNo}' and machine_status = 0;
+	</select>
+	
+</mapper>
