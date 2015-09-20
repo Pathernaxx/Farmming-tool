@@ -2,6 +2,7 @@ package com.farmingtool.repository;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,14 +27,19 @@ public class OracleDetailMachineRepository implements DetailMachineRepository{
 	}
 
 	@Override
-	public int countRentableMachine(String historyRentalDate,String fmNo) {
+	public List<String> countRentableMachine(Date historyRentalDate,String fmNo) {
 		
-		HashMap<String, String> params = new HashMap<String, String>();
+		HashMap<Object, Object> params = new HashMap<Object, Object>();
 		params.put("historyRentalDate", historyRentalDate);
 		params.put("fmNo", fmNo);
 		
 		return detailMachineMapper.countRentableMachine(params);
 		
+	}
+
+	@Override
+	public int countDetailMachine(String fmNo) {
+		return detailMachineMapper.countDetailMachine(fmNo);
 	}
 	
 	

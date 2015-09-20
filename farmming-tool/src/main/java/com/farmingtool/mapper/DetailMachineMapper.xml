@@ -12,17 +12,39 @@
 		WHERE machine_no = #{machineNo}
 	</update>
 	
-	<select id="countRentableMachine" parameterType="hashMap" resultType="int">
-		SELECT count(machine_no) 
+	<!-- 선택 날짜에 예약 가능한 기계 대수 카운트 : 예약 가능,불가능 판단 / 달력에 예약 가능 기계 대수 표시 -->
+	<select id="countRentableMachine" parameterType="hashMap" resultType="String">
+		SELECT machine_no 
 		FROM detailmachine 
-		WHERE machine_no IN 
-			( 
-				<![CDATA[
+		WHERE machine_no NOT IN 
+			(	
 				SELECT machine_no 
 				FROM rental_history 
-				WHERE history_rentaldate < #{historyRentalDate} or history_rentaldate > #{historyRentalDate}
-				]]>
-			) and fm_no = #{fmNo}' and machine_status = 0;
+				WHERE history_rentaldate = #{historyRentalDate}
+			)	
+				and fm_no = #{fmNo} and machine_status = 0
+	</select>
+	
+	<select id="countDetailMachine" parameterType="String" resultType="int">
+		SELECT count(machine_no)
+		FROM detailmachine
+		WHERE fm_no = #{fmNo};
 	</select>
 	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

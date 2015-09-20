@@ -2,8 +2,10 @@ package com.farmingtool.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,6 +41,9 @@ public class RentalController {
 		this.rentalHistoryService = rentalHistoryService;
 	}
 
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
 	@RequestMapping(value="rentalmain.action", method=RequestMethod.GET)
 	public String rentalView() {
 		return "rental/rentalmain";
@@ -54,6 +59,22 @@ public class RentalController {
 		return "rental/calendartest";
 	}
 	
+	@RequestMapping(value="resultCalendar.action", method=RequestMethod.GET)
+	@ResponseBody
+	public void resultCalendar(HttpServletRequest request) {
+		String fmNo = request.getParameter("fmNo");
+		//System.out.println(fmNo);
+		
+		//전체 보유 대수
+		int countDetailMachine = detailMachineService.countDetailMachine(fmNo);
+		
+		//대여 가능 대수
+		//List<String> rentableMachines = detailMachineService.countRentableMachine(historyRentalDate, fmNo) 
+		//int rentableMachineCount = rentableMachines.size();
+		
+	}
+	
+	
 	@RequestMapping(value="rentalMachine.action", method=RequestMethod.GET)
 	@ResponseBody
 	public String rentalMachine(HttpServletRequest request, HttpSession session) throws ParseException {
@@ -64,7 +85,9 @@ public class RentalController {
 		
 		/* 예약처리는 여기서 페이지 이동은 jsp ajax에서 */
 		String rentalDate = request.getParameter("rentalDate");
-		String machineNo = request.getParameter("machineNo");
+		String machineNo= null;
+							//request.getParameter("machineNo");
+		String fmNo = request.getParameter("fmNo");
 		
 		String result = null;
 		
@@ -84,21 +107,32 @@ public class RentalController {
 //			String dateString = format1.format(returnDate);
 //			System.out.println(dateString);
 			
-			/* 해당날짜에 가능한 대여기계 있을 때 아래 수행  */
+			//System.out.println(fmNo+'/'+rentalDate2);
 			
-			RentalHistory history = new RentalHistory();
-			history.setMemberId(memberId); //session
-			history.setHistoryRentalDate(rentalDate2); //rentalDate
-			history.setHistoryReturnDate(returnDate); //rentalDate + 1
-			history.setHistoryStatus(statusNo); //0반납 1대여중
-			history.setMachineNo(machineNo); //select 결과
+			List<String> rentableMachines = detailMachineService.countRentableMachine(rentalDate2, fmNo);
 			
-			//System.out.println(history.getMachineNo());
-			
-			rentalHistoryService.insertRentalHistory(history);
-			detailMachineService.updateDetailMachineStatus(machineNo);
-			
-			result = "aaa";
+			if (rentableMachines.size() > 0) {
+				/* 해당날짜에 가능한 대여기계 있을 때 랜덤하게 하나 선택해서 예약 아래 수행  */
+				
+				machineNo = rentableMachines.get(0);
+				
+				RentalHistory history = new RentalHistory();
+				history.setMemberId(memberId); //session
+				history.setHistoryRentalDate(rentalDate2); //rentalDate
+				history.setHistoryReturnDate(returnDate); //rentalDate + 1
+				history.setHistoryStatus(statusNo); //0반납 1대여중
+				history.setMachineNo(machineNo); //select 결과
+				
+				//System.out.println(history.getMachineNo());
+				
+				rentalHistoryService.insertRentalHistory(history);
+				detailMachineService.updateDetailMachineStatus(machineNo);
+				
+				result = "success";
+			} else {
+				/* 대여 가능한 기게가 없을 경우 */
+				result = "fail";
+			}
 			
 		} catch (java.text.ParseException ex) {
 			ex.printStackTrace();

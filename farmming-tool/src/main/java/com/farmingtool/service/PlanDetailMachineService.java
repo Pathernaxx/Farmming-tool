@@ -1,5 +1,8 @@
 package com.farmingtool.service;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -26,10 +29,15 @@ public class PlanDetailMachineService implements DetailMachineService{
 	}
 
 	@Override
-	public int countRentableMachine(String historyRentalDate,String fmNo) {
+	public List<String> countRentableMachine(Date historyRentalDate,String fmNo) {
 
 		return detailMachineRepository.countRentableMachine(historyRentalDate, fmNo);
 		
+	}
+
+	@Override
+	public int countDetailMachine(String fmNo) {
+		return detailMachineRepository.countDetailMachine(fmNo);
 	}
 
 
