@@ -10,11 +10,15 @@
 	<typeAlias type="com.farmingtool.dto.RentalHistory" alias="rentalHistory"/>
 	<typeAlias type="com.farmingtool.dto.Admin" alias="Admin"/>
 	<typeAlias type="com.farmingtool.dto.Member" alias="Member"/>
+	<typeAlias type="com.farmingtool.dto.FarmMachine" alias="FarmMachine"/>
+	<typeAlias type="com.farmingtool.dto.DetailMachine" alias="DetailMachine"/>
 </typeAliases>
 
 <mappers>
 	<mapper resource="com/farmingtool/mapper/RentalHistoryMapper.xml"/>
 	<mapper resource="com/farmingtool/mapper/AccountMapper.xml"/>
+	<mapper resource="com/farmingtool/mapper/FarmMachineMapper.xml"/>
+	<mapper resource="com/farmingtool/mapper/DetailMachineMapper.xml"/>
 </mappers>
 
 </configuration>
