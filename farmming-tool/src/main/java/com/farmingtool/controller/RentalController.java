@@ -16,9 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.farmingtool.dto.Member;
 import com.farmingtool.dto.RentalHistory;
+import com.farmingtool.dto.RentalInfomation;
 import com.farmingtool.service.DetailMachineService;
 import com.farmingtool.service.RentalHistoryService;
 
@@ -59,6 +61,9 @@ public class RentalController {
 		return "rental/calendartest";
 	}
 	
+	
+	
+	
 	@RequestMapping(value="resultCalendar.action", method=RequestMethod.GET)
 	@ResponseBody
 	public int resultCalendar(HttpServletRequest request) {
@@ -85,6 +90,7 @@ public class RentalController {
 		//String memberId = ((Member)session.getAttribute("loginuser")).getMemberId();
 		String memberId = "user1";
 		int statusNo = 1;
+		int locationNo2 = 2;
 		
 		/* 예약처리는 여기서 페이지 이동은 jsp ajax에서 */
 		String rentalDate = request.getParameter("rentalDate");
@@ -112,29 +118,26 @@ public class RentalController {
 			
 			//System.out.println(fmNo+'/'+rentalDate2);
 			
-			List<String> rentableMachines = detailMachineService.countRentableMachine(rentalDate2, fmNo);
+			List<String> rentableMachines = detailMachineService.countRentableMachine(rentalDate2, fmNo, locationNo2);
 			
 			if (rentableMachines.size() > 0) {
 				/* 해당날짜에 가능한 대여기계 있을 때 랜덤하게 하나 선택해서 예약 아래 수행  */
+				machineNo = rentableMachines.get(0);
 				
-//				machineNo = rentableMachines.get(0);
-//				
-//				RentalHistory history = new RentalHistory();
-//				history.setMemberId(memberId); //session
-//				history.setHistoryRentalDate(rentalDate2); //rentalDate
-//				history.setHistoryReturnDate(returnDate); //rentalDate + 1
-//				history.setHistoryStatus(statusNo); //0반납 1대여중
-//				history.setMachineNo(machineNo); //select 결과
-//				
-//				//System.out.println(history.getMachineNo());
-//				
-//				rentalHistoryService.insertRentalHistory(history);
-//				detailMachineService.updateDetailMachineStatus(machineNo);
+				RentalHistory history = new RentalHistory();
+				history.setMemberId(memberId); //session
+				history.setHistoryRentalDate(rentalDate2); //rentalDate
+				history.setHistoryReturnDate(returnDate); //rentalDate + 1
+				history.setHistoryStatus(statusNo); //0반납 1대여중
+				history.setMachineNo(machineNo); //select 결과
 				
-				result = "success";
+				rentalHistoryService.insertRentalHistory(history);
+				detailMachineService.updateDetailMachineStatus(machineNo);
+				
+				result = machineNo;
 			} else {
 				/* 대여 가능한 기게가 없을 경우 */
-				result = "fail";
+				result = null;
 			}
 			
 		} catch (java.text.ParseException ex) {
@@ -144,10 +147,19 @@ public class RentalController {
 		return result;
 	}
 	
+	//예약 확인창으로 이동
 	@RequestMapping(value="moveToCheckRental.action", method=RequestMethod.GET)
-	public String moveToCheckRental() {
-		return "rental/rentalcheckpage";
+	public ModelAndView moveToCheckRental(HttpSession session, String machineNo) {
+		
+		//String memberId = ((Member)session.getAttribute("loginuser")).getMemberId();
+		
+		//RentalInfomation info = detailMachineService.rentalCheck(machineNo, historyNo);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("machineNo", machineNo);
+		mav.setViewName("rental/rentalcheckpage");
+		
+		return mav;
 	}
 
-	
 }

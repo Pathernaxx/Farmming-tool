@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.farmingtool.dto.RentalInfomation;
 import com.farmingtool.repository.DetailMachineRepository;
 
 
@@ -29,15 +30,20 @@ public class PlanDetailMachineService implements DetailMachineService{
 	}
 
 	@Override
-	public List<String> countRentableMachine(Date historyRentalDate,String fmNo) {
+	public List<String> countRentableMachine(Date historyRentalDate,String fmNo,int locationNo2) {
 
-		return detailMachineRepository.countRentableMachine(historyRentalDate, fmNo);
+		return detailMachineRepository.countRentableMachine(historyRentalDate, fmNo, locationNo2);
 		
 	}
 
 	@Override
 	public int countDetailMachine(String fmNo, int locationNo2) {
 		return detailMachineRepository.countDetailMachine(fmNo, locationNo2);
+	}
+
+	@Override
+	public RentalInfomation rentalCheck(String machineNo, int historyNo) {
+		return detailMachineRepository.rentalCheck(machineNo, historyNo);
 	}
 
 
