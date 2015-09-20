@@ -8,4 +8,6 @@ public interface FarmMachineMapper {
 
 	List<FarmMachine> getFarmMachineList();
 
+	FarmMachine getFarmMachineDetail(String fmno);
+
 }

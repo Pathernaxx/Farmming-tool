@@ -24,39 +24,14 @@
     <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
 <style>
 .item {
-    width: 400px;
-    height: 200px;
+    width: 200px;
+    height: 250px;
     border: 3px solid;
     margin: 5px;
     float: left;
-    color : #BDBDBD;
-    border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
  }
- 
-.itemTitle{
-    width: 200px;
-    height: 300px;
-    margin: 5px;
-    color : #BDBDBD;
-	font : Verdana;
-} 
- 
 </style>
-<script type="text/javascript">
-$(function(){
-	var container = $('.page-masonry');
-	$container.imagesLoaded( function () {
-	       $container.masonry({
-	           columnWidth: '.item',
-	           itemSelector: '.item'
-	       });
-        });
-	});
 
-</script>
 </head>
 <body>
     <div id="wrapper">
@@ -395,20 +370,11 @@ $(function(){
         <div id="page-wrapper">
           <div class="row">
 			<div class="page-masonry">
-
-	          <c:forEach var="farmMachine" items="${ farmMachineList }">
-			      <div class="item" >
-			      <div style="float: left">
-			   	   <a href="showdetail.action?fmno=${ farmMachine.fmNo }">
-			      	<img src="/farmingtool/resources/images/fmimage/${ farmMachine.fmPicture }" width="200px" height="180px" style="padding-right: 4px">
-			       </a>
-			       </div>
-			      	<div style="float: left" >
-			      	 <a href="showdetail.action?fmno=${ farmMachine.fmNo }">${ farmMachine.fmName }</a>
-			      	</div>
-			       
+			      <div class="item">
+			      	<img src="/farmingtool/resources/images/fmimage/${ farmMachineDetail.fmPicture }" width="200px" height="200px" style="padding-right: 4px">
+			      	<div>${ farmMachineDetail.fmName }</div>
 			      </div>
-		      </c:forEach>
+		    
 			</div>
 		  </div>
         </div>

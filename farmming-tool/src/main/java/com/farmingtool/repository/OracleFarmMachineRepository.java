@@ -35,6 +35,13 @@ public class OracleFarmMachineRepository implements FarmMachineRepository{
 		// TODO Auto-generated method stub
 		return farmMachineMapper.getFarmMachineList();
 	}
+
+
+	@Override
+	public FarmMachine getFarmMachineDetail(String fmno) {
+		// TODO Auto-generated method stub
+		return farmMachineMapper.getFarmMachineDetail(fmno);
+	}
 	
 	
 	

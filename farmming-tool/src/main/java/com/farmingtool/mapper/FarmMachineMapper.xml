@@ -35,7 +35,11 @@
 
 </select>
 
+<select id="getFarmMachineDetail" resultMap="farmMachineResult">
+		select <include refid="farmMachinecolunms"></include>
+ 		from farmMachine where fm_no = #{ fmno }
 
+</select>
 
 
 
