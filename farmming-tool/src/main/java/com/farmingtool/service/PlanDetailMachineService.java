@@ -36,8 +36,8 @@ public class PlanDetailMachineService implements DetailMachineService{
 	}
 
 	@Override
-	public int countDetailMachine(String fmNo) {
-		return detailMachineRepository.countDetailMachine(fmNo);
+	public int countDetailMachine(String fmNo, int locationNo2) {
+		return detailMachineRepository.countDetailMachine(fmNo, locationNo2);
 	}
 
 

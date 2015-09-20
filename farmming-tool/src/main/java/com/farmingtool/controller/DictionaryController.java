@@ -41,7 +41,6 @@ public class DictionaryController {
 
 		return mav;
 	}
-
 	@RequestMapping(value="showdetail.action", method= RequestMethod.GET)
 	public ModelAndView DictionaryDetail(String fmno){
 		ModelAndView mav = new ModelAndView();
@@ -50,5 +49,6 @@ public class DictionaryController {
 		mav.setViewName("dictionary/coverdetail");
 		return mav;
 	}
+
 	
 }
