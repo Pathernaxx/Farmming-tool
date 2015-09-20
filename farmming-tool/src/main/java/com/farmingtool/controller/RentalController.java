@@ -2,7 +2,6 @@ package com.farmingtool.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -18,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.farmingtool.dto.Member;
+import com.farmingtool.dto.FarmMachine;
 import com.farmingtool.dto.RentalHistory;
 import com.farmingtool.dto.RentalInfomation;
+import com.farmingtool.dto.Type;
 import com.farmingtool.service.DetailMachineService;
+import com.farmingtool.service.FarmMachineService;
 import com.farmingtool.service.RentalHistoryService;
 
 @Controller
@@ -30,6 +31,7 @@ public class RentalController {
 	
 	private DetailMachineService detailMachineService;
 	private RentalHistoryService rentalHistoryService;
+	private FarmMachineService farmMachineService;
 	
 	@Autowired
 	@Qualifier("detailMachineService")
@@ -42,6 +44,12 @@ public class RentalController {
 	public void setRentalHistoryService(RentalHistoryService rentalHistoryService) {
 		this.rentalHistoryService = rentalHistoryService;
 	}
+	
+	@Autowired
+	@Qualifier("farmMachineService")
+	public void setFarmMachineService(FarmMachineService farmMachineService) {
+		this.farmMachineService = farmMachineService;
+	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -52,8 +60,18 @@ public class RentalController {
 	}
 	
 	@RequestMapping(value="rentalCheck.action", method=RequestMethod.GET)
-	public String rentalCheck() {
-		return "rental/rentalcheck";
+	public ModelAndView rentalCheck() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		List<Type> types = farmMachineService.getTypes();
+		List<FarmMachine> farmMachineList = farmMachineService.getFarmMachineAndTypeName();
+		
+		mav.addObject("types", types);
+		mav.addObject("farmMachineList", farmMachineList);
+		mav.setViewName("rental/rentalcheck");
+		
+		return mav;
 	}
 	
 	@RequestMapping(value="calendarTest.action", method=RequestMethod.GET)
