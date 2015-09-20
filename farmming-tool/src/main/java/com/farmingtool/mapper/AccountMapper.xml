@@ -5,9 +5,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.farmingtool.mapper.AccountMapper">
+
+	<!-- 
+	SELECT
+			member_id, member_name, member_phone1, member_phone2, member_address1, member_address2, 
+			member_postcode, member_extrainfo, l.location_name2 'location2', member_warningcount
+		FROM
+			MEMBER m, LOCATION2 l
+		WHERE
+			m.location2_no = l.location_no2 AND
+			member_id = #{ id } AND member_password = #{ password }
+	 -->
 	<select id="selectMemberByIdAndPassword" parameterType="hashmap" resultType="Member">
 		SELECT
-			member_id, member_name, member_phone1, member_phone2, member_address1, member_address2, member_warningcount
+			member_id, member_name, member_phone1, member_phone2, member_address1, member_address2, 
+			member_postcode, member_extrainfo, location2_no, member_warningcount
 		FROM
 			MEMBER
 		WHERE
@@ -20,15 +32,34 @@
 		FROM
 			ADMIN
 		WHERE
-			admin_id = #{ id} AND admin_password = #{ password }
+			admin_id = #{ id } AND admin_password = #{ password }
+	</select>
+	
+	<select id="selectMemberId" parameterType="String" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			MEMBER
+		WHERE
+			member_id = #{ id }
+	</select>
+	
+	<select id="selectAdminId" parameterType="String" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			ADMIN
+		WHERE
+			admin_id = #{ id }
 	</select>
 	
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER(member_id, member_password, member_phone1, member_phone2, member_address1, member_address2)
-		VALUES(#{memberId}, #{memberPassword}, #{memberPhone1}, #{memberPhone2}, #{memberAddress1}, #{memberAddress2})
+		INSERT INTO MEMBER(member_id, member_password, member_name, member_phone1, member_phone2, member_address1, member_address2, member_postcode, member_extrainfo)
+		VALUES(#{memberId}, #{memberPassword}, #{memberName}, #{memberPhone1}, #{memberPhone2}, #{memberAddress1}, #{memberAddress2}, #{memberPostcode}, #{memberExtraInfo})
 	</insert>
 	
 	<insert id="insertAdmin" parameterType="Admin">
-		INSERT INTO ADMIN(admin_)
+		INSERT INTO ADMIN(admin_id, admin_password, admin_name, admin_location1, admin_phone, admin_location2)
+		VALUES( #{adminId}, #{adminPassword}, #{adminName}, #{adminLocation1}, #{adminPhone}, #{adminLocation2})
 	</insert>
 </mapper>

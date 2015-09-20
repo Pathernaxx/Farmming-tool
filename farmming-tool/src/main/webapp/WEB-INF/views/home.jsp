@@ -33,6 +33,8 @@
       <input type="button" name="사전" value="사전" onclick="location.href='/farmingtool/dictionary/view.action'"> 
       <input type="button" id="reservation" name="reservation" value="달력연습" 
 				onclick="location.href='/farmingtool/rental/calendarTest.action'"/>
+		<input type="button" value="로그인" 
+		onclick="location.href='/farmingtool/account/login.action'"/>
     </div>
   </div>
 </div>
