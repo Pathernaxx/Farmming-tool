@@ -10,6 +10,7 @@
 	<typeAlias type="com.farmingtool.dto.RentalHistory" alias="rentalHistory"/>
 	<typeAlias type="com.farmingtool.dto.FarmMachine" alias="FarmMachine"/>
 	<typeAlias type="com.farmingtool.dto.DetailMachine" alias="DetailMachine"/>
+	<typeAlias type="com.farmingtool.dto.Type" alias="Type"/>
 </typeAliases>
 
 <mappers>
