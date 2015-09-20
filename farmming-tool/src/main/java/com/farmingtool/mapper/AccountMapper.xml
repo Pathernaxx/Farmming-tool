@@ -6,6 +6,25 @@
 
 <mapper namespace="com.farmingtool.mapper.AccountMapper">
 
+	<resultMap type="Member" id="resultMember">
+		<id column="member_id" property="memberId"/>
+		<result column="member_name" property="memberName"/>
+		<result column="member_phone1" property="memberPhone1"/>
+		<result column="member_phone2" property="memberPhone2"/>
+		<result column="member_address1" property="memberAddress1"/>
+		<result column="member_address2" property="memberAddress2"/>
+		<result column="member_postcode" property="memberPostcode"/>
+		<result column="member_extrainfo" property="memberExtraInfo"/>
+		<result column="location2" property="location2"/>
+		<result column="member_warningcount" property="memberWarningCount"/>
+	</resultMap>
+	
+	<resultMap type="Admin" id="resultAdmin">
+		<id column="admin_id" property="adminId"/>
+		<result column="admin_name" property="adminName"/>
+		<result column="admin_location" property="adminLocation"/>
+		<result column="admin_phone" property="adminPhone"/>
+	</resultMap>
 	<!-- 
 	SELECT
 			member_id, member_name, member_phone1, member_phone2, member_address1, member_address2, 
@@ -16,17 +35,18 @@
 			m.location2_no = l.location_no2 AND
 			member_id = #{ id } AND member_password = #{ password }
 	 -->
-	<select id="selectMemberByIdAndPassword" parameterType="hashmap" resultType="Member">
+	<select id="selectMemberByIdAndPassword" parameterType="hashmap" resultMap="resultMember">
 		SELECT
 			member_id, member_name, member_phone1, member_phone2, member_address1, member_address2, 
-			member_postcode, member_extrainfo, location2_no, member_warningcount
+			member_postcode, member_extrainfo, l.location_name2 "location2", member_warningcount
 		FROM
-			MEMBER
+			MEMBER m, LOCATION2 l
 		WHERE
+			m.location2_no = l.location_no2 AND
 			member_id = #{ id } AND member_password = #{ password }
 	</select>
 	
-	<select id="selectAdminByIdAndPassword" parameterType="hashmap" resultType="Admin">
+	<select id="selectAdminByIdAndPassword" parameterType="hashmap" resultMap="resultAdmin">
 		SELECT
 			admin_id, admin_name, admin_location, admin_phone
 		FROM

@@ -27,6 +27,13 @@ public class PlanFarmMachineService implements FarmMachineService{
 		// TODO Auto-generated method stub
 		return farmMachineRepository.getFarmMachineList();
 	}
+
+
+	@Override
+	public FarmMachine getFarmMachineDetail(String fmno) {
+		// TODO Auto-generated method stub
+		return farmMachineRepository.getFarmMachineDetail(fmno);
+	}
 	
 	
 

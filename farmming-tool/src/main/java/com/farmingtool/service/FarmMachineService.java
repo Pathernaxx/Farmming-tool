@@ -8,4 +8,6 @@ public interface FarmMachineService {
 
 	List<FarmMachine> getFarmMachineList();
 
+	FarmMachine getFarmMachineDetail(String fmno);
+
 }

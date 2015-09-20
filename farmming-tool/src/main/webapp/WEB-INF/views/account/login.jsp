@@ -48,7 +48,7 @@
 						
 						// returnurl이 없다면 홈으로
 						if( returnurl == '' || returnurl.length == 0 )
-							returnurl = '/farmingtool/home.jsp';
+							returnurl = '/farmingtool/home.action';
 						
 						$(location).attr('href', returnurl);
 					}
