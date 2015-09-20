@@ -25,16 +25,7 @@
 		<result column="admin_location" property="adminLocation"/>
 		<result column="admin_phone" property="adminPhone"/>
 	</resultMap>
-	<!-- 
-	SELECT
-			member_id, member_name, member_phone1, member_phone2, member_address1, member_address2, 
-			member_postcode, member_extrainfo, l.location_name2 'location2', member_warningcount
-		FROM
-			MEMBER m, LOCATION2 l
-		WHERE
-			m.location2_no = l.location_no2 AND
-			member_id = #{ id } AND member_password = #{ password }
-	 -->
+	
 	<select id="selectMemberByIdAndPassword" parameterType="hashmap" resultMap="resultMember">
 		SELECT
 			member_id, member_name, member_phone1, member_phone2, member_address1, member_address2, 
