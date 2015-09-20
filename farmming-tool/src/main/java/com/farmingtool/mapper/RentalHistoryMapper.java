@@ -1,5 +1,7 @@
 package com.farmingtool.mapper;
 
-public interface RentalHistoryMapper {
+import com.farmingtool.dto.RentalHistory;
 
+public interface RentalHistoryMapper {
+	void insertRentalHistory(RentalHistory history);
 }

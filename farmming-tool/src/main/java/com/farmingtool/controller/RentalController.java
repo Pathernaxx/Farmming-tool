@@ -1,13 +1,43 @@
 package com.farmingtool.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.farmingtool.dto.Member;
+import com.farmingtool.dto.RentalHistory;
+import com.farmingtool.service.DetailMachineService;
+import com.farmingtool.service.RentalHistoryService;
 
 @Controller
 @RequestMapping(value="rental")
 public class RentalController {
+	
+	private DetailMachineService detailMachineService;
+	private RentalHistoryService rentalHistoryService;
+	
+	@Autowired
+	@Qualifier("detailMachineService")
+	public void setDetailMachineService(DetailMachineService detailMachineService) {
+		this.detailMachineService = detailMachineService;
+	}
+	
+	@Autowired
+	@Qualifier("rentalHistoryService")
+	public void setRentalHistoryService(RentalHistoryService rentalHistoryService) {
+		this.rentalHistoryService = rentalHistoryService;
+	}
 
 	@RequestMapping(value="rentalmain.action", method=RequestMethod.GET)
 	public String rentalView() {
@@ -24,14 +54,62 @@ public class RentalController {
 		return "rental/calendartest";
 	}
 	
-	@RequestMapping(value="moveToCheckRental.action", method=RequestMethod.POST)
+	@RequestMapping(value="rentalMachine.action", method=RequestMethod.GET)
+	@ResponseBody
+	public String rentalMachine(HttpServletRequest request, HttpSession session) throws ParseException {
+		
+		//String memberId = ((Member)session.getAttribute("loginuser")).getMemberId();
+		String memberId = "user1";
+		int statusNo = 1;
+		
+		/* 예약처리는 여기서 페이지 이동은 jsp ajax에서 */
+		String rentalDate = request.getParameter("rentalDate");
+		String machineNo = request.getParameter("machineNo");
+		
+		String result = null;
+		
+		try {
+			//대여일 date 형식으로 변환
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			Date rentalDate2 = format.parse(rentalDate);
+			
+			//반납일 설정 (대여일 + 1)
+			Calendar c = Calendar.getInstance(); 
+			c.setTime(rentalDate2); 
+			c.add(Calendar.DATE, 1);
+			Date returnDate = c.getTime();
+
+			//날짜 String -> date 확인 코드
+//			SimpleDateFormat format1 = new SimpleDateFormat("yyyy년MM월dd일");
+//			String dateString = format1.format(returnDate);
+//			System.out.println(dateString);
+			
+			/* 해당날짜에 가능한 대여기계 있을 때 아래 수행  */
+			
+			RentalHistory history = new RentalHistory();
+			history.setMemberId(memberId); //session
+			history.setHistoryRentalDate(rentalDate2); //rentalDate
+			history.setHistoryReturnDate(returnDate); //rentalDate + 1
+			history.setHistoryStatus(statusNo); //0반납 1대여중
+			history.setMachineNo(machineNo); //select 결과
+			
+			//System.out.println(history.getMachineNo());
+			
+			rentalHistoryService.insertRentalHistory(history);
+			detailMachineService.updateDetailMachineStatus(machineNo);
+			
+			result = "aaa";
+			
+		} catch (java.text.ParseException ex) {
+			ex.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value="moveToCheckRental.action", method=RequestMethod.GET)
 	public String moveToCheckRental() {
-		
-		System.out.println("hello");
-		
-		String a="";
-		
-		return a;
+		return "rental/rentalcheckpage";
 	}
 
 	

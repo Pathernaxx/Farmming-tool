@@ -440,7 +440,8 @@ $(function(){
 			</div>
 			
 			<div id="date-popover" class="popover top">
-			    <div id="date-popover-content" class="popover-content"></div>
+			    <div id="date-popover-content" class="popover-content">
+			    </div>
 			</div>
 			
 			<div id="my-calendar" style="margin-top:20px"></div>
@@ -515,6 +516,8 @@ $(function(){
 	        }
 	        
 	        $("#date-popover-content").html('<br/>선택한 날짜 : ' + date + '<br/>'+'예약하시겠습니까?<br/><br/>'+
+	        								'<input type="hidden" value="'+date+'" id="rentalDate"/>'+
+	        								'<input type="hidden" value="FA0100001" id="machineNo"/>'+
 	        								'<input type="button" value="확인" onclick="moveToCheckRental()"/>&nbsp;'+
 	        								'<input type="button" value="취소" onclick="popoverClose()"/><br/>');
 	        $("#date-popover").show();
@@ -526,16 +529,30 @@ $(function(){
 	    }
 	    
 	    function moveToCheckRental() {
+	    	//컨트롤러에서 예약처리
+	    	//alert($("#rentalDate").val());
+	    	var rentalDate = $("#rentalDate").val();
+	    	var machineNo = $("#machineNo").val();
 	    	$.ajax({
-	    		url: "/farmingtool/rental/moveToCheckRental.action",
-	    		type: "post",
-	    		//data: {},
-	    		success: function(result) {
-	    			var url = "/farmingtool/rental/rentalcheckpage"
-					$(location).attr("href", url);
+	    		url: "/farmingtool/rental/rentalMachine.action",
+	    		type: "get",
+	    		async: true,
+	    		data: {
+	    			"rentalDate" : rentalDate,
+	    			"machineNo" : machineNo
+	    			},
+	    		success: function(result) { //result
+	    			if(result != null)
+					{
+	    				alert("예약 성공 : 확인 페이지로 이동합니다.")
+						var returnurl = '/farmingtool/rental/moveToCheckRental.action';
+						$(location).attr('href', returnurl);
+					} else {
+						alert('예약 실패 : 다시 시도해주세요.');
+					}
 	    		},
-	    		error: function() {
-	    			alert('실행 오류 발생');
+	    		error: function(xhr, status, error) {
+	    			alert(xhr + '/' + status + '/' + error);
 	    		}
 	    	});
 	    }
