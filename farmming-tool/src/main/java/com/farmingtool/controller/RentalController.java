@@ -61,16 +61,19 @@ public class RentalController {
 	
 	@RequestMapping(value="resultCalendar.action", method=RequestMethod.GET)
 	@ResponseBody
-	public void resultCalendar(HttpServletRequest request) {
+	public int resultCalendar(HttpServletRequest request) {
 		String fmNo = request.getParameter("fmNo");
-		//System.out.println(fmNo);
+		int locationNo2 = Integer.parseInt(request.getParameter("locationNo2"));
+		//System.out.println(fmNo+'/'+locationNo2);
 		
 		//전체 보유 대수
-		int countDetailMachine = detailMachineService.countDetailMachine(fmNo);
+		int countDetailMachine = detailMachineService.countDetailMachine(fmNo, locationNo2);
 		
 		//대여 가능 대수
 		//List<String> rentableMachines = detailMachineService.countRentableMachine(historyRentalDate, fmNo) 
 		//int rentableMachineCount = rentableMachines.size();
+		
+		return countDetailMachine;
 		
 	}
 	
@@ -114,19 +117,19 @@ public class RentalController {
 			if (rentableMachines.size() > 0) {
 				/* 해당날짜에 가능한 대여기계 있을 때 랜덤하게 하나 선택해서 예약 아래 수행  */
 				
-				machineNo = rentableMachines.get(0);
-				
-				RentalHistory history = new RentalHistory();
-				history.setMemberId(memberId); //session
-				history.setHistoryRentalDate(rentalDate2); //rentalDate
-				history.setHistoryReturnDate(returnDate); //rentalDate + 1
-				history.setHistoryStatus(statusNo); //0반납 1대여중
-				history.setMachineNo(machineNo); //select 결과
-				
-				//System.out.println(history.getMachineNo());
-				
-				rentalHistoryService.insertRentalHistory(history);
-				detailMachineService.updateDetailMachineStatus(machineNo);
+//				machineNo = rentableMachines.get(0);
+//				
+//				RentalHistory history = new RentalHistory();
+//				history.setMemberId(memberId); //session
+//				history.setHistoryRentalDate(rentalDate2); //rentalDate
+//				history.setHistoryReturnDate(returnDate); //rentalDate + 1
+//				history.setHistoryStatus(statusNo); //0반납 1대여중
+//				history.setMachineNo(machineNo); //select 결과
+//				
+//				//System.out.println(history.getMachineNo());
+//				
+//				rentalHistoryService.insertRentalHistory(history);
+//				detailMachineService.updateDetailMachineStatus(machineNo);
 				
 				result = "success";
 			} else {

@@ -428,13 +428,13 @@ $(function(){
 					<option value="" selected="selected">기계선택2-소분류</option>
 					<option value="농용트랙터">농용트랙터</option>
 				</select> &nbsp; 
-				<!-- <input type="hidden" value="FA010000" id="fmNo"/> -->
 				<input type="button" id="rental_search" name="search" value="검색" /> <br/><br/>
 			</form>
 			
 			<h4 id="rental-condition-title" style="font-weight: bold;color:#006699">대여시 안내사항 및 주의사항</h4>
 			
 			<div id="message">
+				&nbsp;■ 보유 대수 : <input type="text" id="totalDetailMachine" /><br/>
 				&nbsp;■ 대여가격 : <br/>
 				&nbsp;■ 대여일 / 반납일 : <br/>
 				&nbsp;■ 주의 사항 : <br/>
@@ -477,34 +477,57 @@ $(function(){
 	
 	$(function() {
 		$("#rental_search").click(function() {
-			$("#calendar-area").html('<div id="my-calendar" style="margin-top:20px"></div>');
-			$("#my-calendar").zabuto_calendar({
-	        	/* ajax: {
-	                url: "/boot2/resources/php/show_data.php",
-	                modal: true
-	            }, */
-	            action: function () {
-	                return myDateFunction(this.id, false);
-	            },
-	            /* action_nav: function () {
-	                return myNavFunction(this.id);
-	            }, */
-	            data: eventData,
-	        	language: "ko",
-	        	year: 2015,
-	            month: 9,
-	            show_previous: true,
-	            show_next: 12,
-	            cell_border: true,
-	            today: true,
-	            show_days: true,
-	            weekstartson: 0,
-	            nav_icon: {
-	              prev: '<i class="fa fa-chevron-circle-left"></i>',
-	              next: '<i class="fa fa-chevron-circle-right"></i>'
-	            }
+			
+			var fmNo = 'FA010000';
+			var locationNo2 = 21;
+			
+			$.ajax({
+				url: '/farmingtool/rental/resultCalendar.action',
+				type: 'get',
+				data: {
+					"fmNo" : fmNo,
+					"locationNo2" : locationNo2
+				},
+				success: function(result) {
+					//기계소분류 총 대수
+					var countDetailMachine = result;
+					
+					$("#totalDetailMachine").val(countDetailMachine);
+					$("#calendar-area").html('<div id="my-calendar" style="margin-top:20px"></div>');
+					$("#my-calendar").zabuto_calendar({
+			        	/* ajax: {
+			                url: "/boot2/resources/php/show_data.php",
+			                modal: true
+			            }, */
+			            action: function () {
+			                return myDateFunction(this.id, false);
+			            },
+			            /* action_nav: function () {
+			                return myNavFunction(this.id);
+			            }, */
+			            data: eventData,
+			        	language: "ko",
+			        	year: 2015,
+			            month: 9,
+			            show_previous: true,
+			            show_next: 12,
+			            cell_border: true,
+			            today: true,
+			            show_days: true,
+			            weekstartson: 0,
+			            nav_icon: {
+			              prev: '<i class="fa fa-chevron-circle-left"></i>',
+			              next: '<i class="fa fa-chevron-circle-right"></i>'
+			            }
 
-	        	});
+			        	});
+				},
+				error: function(xhr, status) {
+					alert("error");
+				}
+			});
+			
+			
 		});
 		var eventData = [ //이벤트 있는 날짜 배열로 받아서 사용할 것(JSON)
 			                 {"date":"2015-09-01","badge":false,"title":"Example 1"},

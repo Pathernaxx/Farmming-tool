@@ -25,10 +25,10 @@
 				and fm_no = #{fmNo} and machine_status = 0
 	</select>
 	
-	<select id="countDetailMachine" parameterType="String" resultType="int">
+	<select id="countDetailMachine" parameterType="hashMap" resultType="int">
 		SELECT count(machine_no)
 		FROM detailmachine
-		WHERE fm_no = #{fmNo};
+		WHERE fm_no = #{fmNo} and location_no2 = #{locationNo2}
 	</select>
 	
 </mapper>

@@ -7,6 +7,6 @@ public interface DetailMachineMapper {
 
 	void updateDetailMachineStatus(String machineNo);
 	List<String> countRentableMachine(HashMap<Object, Object> params);
-	int countDetailMachine(String fmNo);
+	int countDetailMachine(HashMap<String, Object> params);
 	
 }

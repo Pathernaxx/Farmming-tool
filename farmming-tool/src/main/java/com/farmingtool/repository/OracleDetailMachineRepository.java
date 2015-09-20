@@ -38,8 +38,13 @@ public class OracleDetailMachineRepository implements DetailMachineRepository{
 	}
 
 	@Override
-	public int countDetailMachine(String fmNo) {
-		return detailMachineMapper.countDetailMachine(fmNo);
+	public int countDetailMachine(String fmNo, int locationNo2) {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("fmNo", fmNo);
+		params.put("locationNo2", locationNo2);
+		
+		return detailMachineMapper.countDetailMachine(params);
 	}
 	
 	
