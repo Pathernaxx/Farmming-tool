@@ -16,4 +16,6 @@ public interface FarmMachineMapper {
 	List<FarmMachine> getFarmMachineAndTypeName();
 
 	List<Type> getTypes();
+
+	List<FarmMachine> getFarmMachineDetailBytypeNo(String typeNo);
 }

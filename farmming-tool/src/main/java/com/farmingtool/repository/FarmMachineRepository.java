@@ -16,4 +16,6 @@ public interface FarmMachineRepository {
 	List<FarmMachine> getFarmMachineAndTypeName();
 	
 	List<Type> getTypes();
+
+	List<FarmMachine> getFarmMachineDetailBytypeNo(String typeNo);
 }
