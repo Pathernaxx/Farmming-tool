@@ -61,6 +61,12 @@ public class PlanFarmMachineService implements FarmMachineService{
 	public List<Type> getTypesByLocation(String location2) {
 		List<Type> types = farmMachineRepository.getTypesByLocation(location2);
 		return types;
+	}	
+	
+	@Override
+	public List<FarmMachine> getFarmMachineDetailBytypeNo(String typeNo) {
+		// TODO Auto-generated method stub
+		return farmMachineRepository.getFarmMachineDetailBytypeNo(typeNo);
 	}
 	
 	

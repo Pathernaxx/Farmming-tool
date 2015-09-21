@@ -19,4 +19,6 @@ public interface FarmMachineService {
 	
 	List<Type> getTypesByLocation(String location2);
 
+	List<FarmMachine> getFarmMachineDetailBytypeNo(String typeNo);
+
 }

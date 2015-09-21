@@ -90,5 +90,14 @@
 </resultMap>
 <!-- 렌탈에서 검색하는 부분 끝 -->
 
+<select id="getFarmMachineDetailBytypeNo" parameterType="String" resultMap="farmMachineResult"> 
+	SELECT  <include refid="farmMachinecolunms"></include>
+	FROM farmMachine
+	WHERE type_no = #{typeNo}
+</select>
+
+
+
+
 </mapper>
 

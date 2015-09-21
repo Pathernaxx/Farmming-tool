@@ -62,7 +62,11 @@ public class OracleFarmMachineRepository implements FarmMachineRepository{
 		return types;
 	}
 	
-	
+	@Override
+	public List<FarmMachine> getFarmMachineDetailBytypeNo(String typeNo) {
+		// TODO Auto-generated method stub
+		return farmMachineMapper.getFarmMachineDetailBytypeNo(typeNo);
+	}
 	
 	
 }

@@ -22,7 +22,7 @@
 				FROM rental_history 
 				WHERE history_rentaldate = #{historyRentalDate}
 			)	
-				and fm_no = #{fmNo} and machine_status = 0
+				and fm_no = #{fmNo} and machine_status = 0 and location_no2 = #{locationNo2}
 	</select>
 	
 	<select id="countDetailMachine" parameterType="hashMap" resultType="int">
@@ -30,7 +30,6 @@
 		FROM detailmachine
 		WHERE fm_no = #{fmNo} and location_no2 = #{locationNo2}
 	</select>
-	
 	
 	<!--  -->
 	<select id="searchLocation2" parameterType="String" resultMap="getLocation2">
@@ -45,10 +44,13 @@
 	</resultMap>
 	
 	<!--  -->
+	<select id="rentalCheck" parameterType="hashMap" resultType="RentalInfomation">
+		SELECT d.machine_name, d.machine_information, d.machine_rentalcost, d.location_no2, r.member_id, r.machine_no, r.history_rentaldate, r.history_returndate
+		FROM detailmachine d, rental_history r
+		WHERE d.machine_no = #{machineNo} and d.machine_no = r.machine_no and r.history_no = #{historyNo};
+	</select>
+	
 </mapper>
-
-
-
 
 
 
