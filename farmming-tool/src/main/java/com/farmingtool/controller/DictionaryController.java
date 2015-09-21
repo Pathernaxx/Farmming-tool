@@ -50,5 +50,20 @@ public class DictionaryController {
 		mav.setViewName("dictionary/coverdetail");
 		return mav;
 	}
+	@RequestMapping(value="test.action", method= RequestMethod.GET)
+	public ModelAndView test11(){
+		
+		ModelAndView mav = new ModelAndView();
+		List<FarmMachine> farmMachineList = farmMachineService.getFarmMachineList();
+		
+		/*for(FarmMachine fmList :  farmMachineList){
+			System.out.println(fmList.getFmNo());
+		}*/
+		
+		mav.addObject("farmMachineList", farmMachineList);
+		mav.setViewName("dictionary/test3");
+
+		return mav;
+	}
 	
 }

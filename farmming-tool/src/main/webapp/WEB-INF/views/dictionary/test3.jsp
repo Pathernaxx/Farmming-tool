@@ -166,22 +166,16 @@ $(document).ready(function (){
         <div id="page-wrapper">
           <div class="row">
 			<div class="page-masonry">
-	           <c:forEach var="farmMachine" items="${ farmMachineList }">
+			    <c:forEach var="farmMachine" items="${ farmMachineList }">
 			      <div class="item" >
- 			      <div style="float: left">
-			      	<img src="/farmingtool/resources/images/fmimage/${ farmMachine.fmPicture }" width="200px" height="180px" style="padding-right: 4px">
-			       </div>
-			      	<div style="float: left" >
-			      	 ${ farmMachine.fmName }
-			      	</div> 
-			        <div style="float:left;">
-			         ${ farmMachine.fmStructure }
-			        </div>
+			       <table>
+			       	 
+			       </table>
 			      </div>
-		    </c:forEach> 
+			   </c:forEach>
+			      </div>
 			</div>
 		  </div>
-        </div>
         <!-- /#page-wrapper -->
 
     </div>
