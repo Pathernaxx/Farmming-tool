@@ -83,20 +83,16 @@ $(document).ready(function (){
 	$('#search').click(function(){
 		alert("검색");
 		
-		selected1 = $("#location1 option:selected").val();
-		selected2 = $("#location2 option:selected").val();
-		selected3 = $("#machine1 option:selected").val();
-		selected4 = $("#machine2 option:selected").val();
+		selected1 = $("#location2 option:selected").val();
+		selected2 = $("#machine2 option:selected").val();
 		
 		$.ajax({
 			url : "/farmingtool/rental/searchmachine.action",
 			async : true,
 			method : "POST",
 			data : {
-				location1 : selected1,
-				location2 : selected2,
-				machine1 : selected3,
-				machine2 : selected4
+				location2 : selected1,
+				fmNo : selected2
 			},
 			success : function(result) {
 				if (!result) {

@@ -198,19 +198,10 @@ public class RentalController {
 	@RequestMapping(value="searchmachinebylocation.action", method=RequestMethod.POST)
 	public ModelAndView searchMachineByLocation(String location2) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(location2+"!");
 		
 		List<Type> types = farmMachineService.getTypesByLocation("1");
 		List<FarmMachine> farmMachineListByLocation = 
 				farmMachineService.searchMachineByLocation("1");
-
-		for (FarmMachine farmMachine : farmMachineListByLocation) {
-			System.out.println(
-								farmMachine.getFmName()+","+
-								farmMachine.getFmNo()+","+
-								farmMachine.getTypeNo()
-							);
-		}
 		
 		mav.addObject("types", types);
 		mav.addObject("farmMachineList", farmMachineListByLocation);
@@ -219,10 +210,27 @@ public class RentalController {
 	}
 	
 	@RequestMapping(value="searchmachine.action", method=RequestMethod.POST)
-	public String searchMachine(String location1, String location2, String machine1, String machine2) {
-		System.out.println(location1+","+location2+","+machine1+","+machine2);
-		//1,1,A,FA020000
-		return "rental/";
+	public String searchMachine(String location2, String fmNo) {
+		System.out.println(location2+","+fmNo);
+		int locationNo2 = Integer.parseInt(location2);
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("locationNo2", locationNo2);
+		params.put("fmNo", fmNo);
+		
+		//1(횡성군),FA010000(농용트랙터)
+		
+		//detailMachine에서 fm_no를통해(FA010000) 해당 머신을 모두 가져온다.
+		// status 0 : 대여가능, 1 : 대여중,  2: 고장
+		// status가 2가 아닌 숫자를 모두 더하면 총 댓수
+		int rentalCount = detailMachineService.rentalMachineCount(params);
+		
+		//rentalhistory에서 rentalDate를 통해 DATE별로  
+		//Status가 0인 카운트를 세서 가져온다  (date는 sysdate기준으로 +1, +2, +3까지만 연습)
+		HashMap<Date, String> map = detailMachineService.rentalMachineCountByDate(params);
+		
+		return "rental";
+		
 	}
 
 }

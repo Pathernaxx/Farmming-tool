@@ -29,15 +29,10 @@
 
 <script type="text/javascript">
 $(document).ready(function (){
-	
-	
 });
-
 </script>
 </head>
 <body>
-<%-- <c:set var="farmMachineList" value="${farmMachineList }"/>
-<c:set var="type" value="${type}"/> --%>
         <div id="page-wrapper">
           <div class="row">
 			

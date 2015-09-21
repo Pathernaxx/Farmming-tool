@@ -1,5 +1,6 @@
 package com.farmingtool.mapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface DetailMachineMapper {
 	int countDetailMachine(HashMap<String, Object> params);
 	List<Location2> searchLocation2(String location1);
 	RentalInfomation rentalCheck(HashMap<String, Object> params);
+	int rentalMachineCount(HashMap<String, Object> params);
+	HashMap<Date, String> rentalMachineCountByDate(HashMap<String, Object> params);
 }
