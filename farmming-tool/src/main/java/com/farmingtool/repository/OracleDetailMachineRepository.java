@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.farmingtool.dto.Location2;
 import com.farmingtool.mapper.DetailMachineMapper;
 
 @Repository(value="detailMachineRepository")
@@ -45,6 +46,12 @@ public class OracleDetailMachineRepository implements DetailMachineRepository{
 		params.put("locationNo2", locationNo2);
 		
 		return detailMachineMapper.countDetailMachine(params);
+	}
+
+	@Override
+	public List<Location2> searchLocation2(String location1) {
+		List<Location2> location2s = detailMachineMapper.searchLocation2(location1);
+		return location2s;
 	}
 	
 	

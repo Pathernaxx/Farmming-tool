@@ -13,6 +13,7 @@
 	<typeAlias type="com.farmingtool.dto.FarmMachine" alias="FarmMachine"/>
 	<typeAlias type="com.farmingtool.dto.DetailMachine" alias="DetailMachine"/>
 	<typeAlias type="com.farmingtool.dto.Type" alias="Type"/>
+	<typeAlias type="com.farmingtool.dto.Location2" alias="Location2"/>
 </typeAliases>
 
 <mappers>

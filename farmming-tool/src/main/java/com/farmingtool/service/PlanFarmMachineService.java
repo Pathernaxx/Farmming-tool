@@ -10,8 +10,6 @@ import com.farmingtool.dto.FarmMachine;
 import com.farmingtool.dto.Type;
 import com.farmingtool.repository.FarmMachineRepository;
 
-
-
 @Service("farmMachineService")
 public class PlanFarmMachineService implements FarmMachineService{
 
@@ -56,6 +54,13 @@ public class PlanFarmMachineService implements FarmMachineService{
 		List<FarmMachine> farmMachineListByLocation = 
 				farmMachineRepository.searchMachineByLocation(location2);
 		return farmMachineListByLocation;
+	}
+
+
+	@Override
+	public List<Type> getTypesByLocation(String location2) {
+		List<Type> types = farmMachineRepository.getTypesByLocation(location2);
+		return types;
 	}
 	
 	

@@ -1,5 +1,7 @@
 package com.farmingtool.dto;
 
+import java.util.List;
+
 public class FarmMachine {
 
 	private String fmNo;
@@ -14,17 +16,6 @@ public class FarmMachine {
 	private String fmOutline;
 	private String fmNecessity;
 	private String fmPicture;
-	
-	// 대여에서 사용할 타입 이름
-	private String typeName;
-	
-	public String getTypeName() {
-		return typeName;
-	}
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
-	}
-	/////////////////////
 	
 	public String getFmNo() {
 		return fmNo;

@@ -15,7 +15,7 @@
 	<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
  
     <link rel='Stylesheet' href='/farmingtool/resources/styles/rentalmain.css' />
-    <!-- <script src="/farmingtool/resources/js/rentallist.js"></script> -->
+    <script src="/farmingtool/resources/js/rentallist.js"></script>
     <!-- <script src="/farmingtool/resources/js/address.js"></script> -->
 <style>
 .item {
@@ -29,116 +29,7 @@
 
 <script type="text/javascript">
 $(document).ready(function (){
-	$("#location1").click(function(){
-		selected1 = $("#location1 option:selected").val();
-		selected2 = searchForm.location2;
-		if(selected1 == "" || selected1 == null) {
-			selected2.length = 1;
-			selected2.options[0].text = '지역선택2-시/군/구';
-		}
-		if(selected1 == "강원도") {
-			selected2.length = 5;
-			selected2.options[0].text = '지역선택2-시/군/구';
-			selected2.options[1].text = '횡성군';
-			selected2.options[2].text = '영월군';
-			selected2.options[3].text = '평창군';
-			selected2.options[4].text = '정선군';
-			selected2.options[1].value = '횡성군';
-			selected2.options[2].value = '영월군';
-			selected2.options[3].value = '평창군';
-			selected2.options[4].value = '정선군';
-		}
-		if(selected1 == "경기도") {
-			selected2.length = 5;
-			selected2.options[0].text = '지역선택2-시/군/구';
-			selected2.options[1].text = '파주시';
-			selected2.options[2].text = '수원시';
-			selected2.options[3].text = '수원시 권선구';
-			selected2.options[4].text = '수원시 팔달구';
-			selected2.options[1].value = '파주시';
-			selected2.options[2].value = '수원시';
-			selected2.options[3].value = '수원시 권선구';
-			selected2.options[4].value = '수원시 팔달구';
-		}
-		selected2.options[0].selected = true;
-	});
 	
-	$("#location2").click(function(){
-		selected1 = $("#location1 option:selected").val();
-		selected2 = $("#location2 option:selected").val();
-		if(selected2 == "" || selected2 == null){
-			return;
-		}
-		$.ajax({
-			url : "/farmingtool/rental/searchmachinebylocation.action",
-			async : true,
-			method : "POST",
-			data : {
-				location2 : selected2
-			},
-			success : function(result) {
-				if (!result) {
-					alert('입력 실패!');
-					console.log(data);
-				} else { 
-					alert('입력 성공!');
-					var sel = $(result.substr(result.indexOf("<select")));
-					$('.rental_option2').css("display", "none");
-					$( "#rental-condition-title2" ).append(sel);
-					/* $("#machine1 option.eq('')").attr("selected", "selected");
-					$("#machine1").click(function(){
-						selected1 = $("#machine1 option:selected").val();
-						if(selected1 == null || selected1 ==""){
-							return;
-						}
-						if(selected1 != null){
-							$(farmMachineListByLocation)
-							$('#machine2 option[class!='+selected1+']').css("display","none");
-							$('#machine2 option[class='+selected1+']').css("display","block");
-						}
-					}); */
-				}
-			},
-			error : function(xhr, status, error) {
-				alert('입력이 에러');
-			}
-		});//ajax
-	});
-	
-	$("#machine1").click(function(){
-		selected1 = $("#machine1 option:selected").val();
-		if(selected1 == null || selected1 ==""){
-			return;
-		}
-		if(selected1 != null){
-			$('#machine2 option[class!='+selected1+']').css("display","none");
-			$('#machine2 option[class='+selected1+']').css("display","block");
-		}
-	});
-	
-	$('#search').click(function(){
-		alert("검색");
-		var form = $('.searchForm').serialize();
-		$.ajax({
-			url : "/farmingtool/rental/searchmachine.action",
-			async : true,
-			method : "POST",
-			data : form,
-			success : function(result) {
-				if (!result) {
-					alert('입력 실패!');
-					console.log(data);
-				} else { 
-					alert('입력 성공!');
-					
-				}
-			},
-			error : function(xhr, status, error) {
-				alert('입력이 에러');
-			}
-		});//ajax
-		
-	});
 	
 });
 
@@ -149,33 +40,36 @@ $(document).ready(function (){
 <c:set var="type" value="${type}"/> --%>
         <div id="page-wrapper">
           <div class="row">
-			<form id="searchForm" >
-				<h2 id="rental-condition-title1">지역선택</h2>
-				<select id="location1" name="location1" class="rental_option">
-					<option value="" selected="selected">지역선택1-도/시</option>
-					<option value="강원도">강원도</option>
-					<option value="경기도">경기도</option>
-					<!-- <option value="">경상남도</option>
-					<option value="">경상북도</option>
-					<option value="">광주광역시</option>
-					<option value="">대구광역시</option>
-					<option value="">대전광역시</option>
-					<option value="">부산광역시</option>
-					<option value="">서울특별시</option>
-					<option value="">세종특별자치시</option>
-					<option value="">울산광역시</option>
-					<option value="">인천광역시</option>
-					<option value="">전라남도</option>
-					<option value="">전라북도</option>
-					<option value="">제주특별자치도</option>
-					<option value="">충청남도</option>
-					<option value="">충청북도</option> -->
-				</select> &nbsp;
+			
+			<h2 id="rental-condition-title1">지역선택</h2>
+			<select id="location1" name="location1" class="rental_option">
+				<option value="" selected="selected">지역선택1-도/시</option>
+				<option value="1">강원도</option>
+				<option value="2">경기도</option>
+				<option value="3">경상남도</option>
+				<option value="4">경상북도</option>
+				<option value="5">광주광역시</option>
+				<option value="6">대구광역시</option>
+				<option value="7">대전광역시</option>
+				<option value="8">부산광역시</option>
+				<option value="9">서울특별시</option>
+				<option value="10">세종특별자치시</option>
+				<option value="11">울산광역시</option>
+				<option value="12">인천광역시</option>
+				<option value="13">전라남도</option>
+				<option value="14">전라북도</option>
+				<option value="15">제주특별자치도</option>
+				<option value="16">충청남도</option>
+				<option value="17">충청북도</option>
+			</select> &nbsp;
+			<div id="ac">
 				<select id="location2" name="location2" class="rental_option">
 					<option value="" selected="selected" id="origin">지역선택2-시/군/구</option>
 				</select><br/><br/>
-				
-				<h2 id="rental-condition-title2">기계선택</h2>
+			</div>
+		
+			<h2 class="rental-condition-title2">기계선택</h2>
+			<div id="ac2">
 				<select id="machine1" name="machine1" class="rental_option2">
 					<option value="" selected="selected">기계선택1-대분류</option>
 					<c:forEach var="type" items="${types}" >
@@ -183,13 +77,13 @@ $(document).ready(function (){
 					</c:forEach>
 				</select> &nbsp;
 				<select id="machine2" class="rental_option2">
-					<option value="" selected="selected">기계선택2-소분류</option>
+					<option value="" class="basic_type" selected="selected">기계선택2-소분류</option>
 					<c:forEach var="farmMachine" items="${farmMachineList}" >
 						<option value="${farmMachine.fmNo}" class="${farmMachine.typeNo}" style="display: none">${farmMachine.fmName}</option>
 					</c:forEach>
 				</select> &nbsp;
-				<input type="button" id="search" value="검색" /> <br/><br/>
-			</form>
+			</div>
+			<input type="button" id="search" value="검색" /> <br/><br/>
 			
 			<h4 id="rental-condition-title" style="font-weight: bold;color:#006699">대여시 안내사항 및 주의사항</h4>
 			
@@ -213,7 +107,6 @@ $(document).ready(function (){
 		  </div>
         </div>
         <!-- /#page-wrapper -->
-
 
 </body>
 </html>

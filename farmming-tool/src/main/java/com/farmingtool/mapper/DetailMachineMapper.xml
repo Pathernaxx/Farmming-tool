@@ -31,6 +31,20 @@
 		WHERE fm_no = #{fmNo} and location_no2 = #{locationNo2}
 	</select>
 	
+	
+	<!--  -->
+	<select id="searchLocation2" parameterType="String" resultMap="getLocation2">
+		SELECT location_no2, location_name2
+		FROM location2
+		WHERE location_no1 = #{location1}
+	</select>
+	
+	<resultMap id="getLocation2" type="Location2">
+		<id column="location_no2" property="locationNo2"/>
+		<result column="location_name2" property="locationName2"/>
+	</resultMap>
+	
+	<!--  -->
 </mapper>
 
 

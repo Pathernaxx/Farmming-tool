@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.farmingtool.dto.Location2;
 import com.farmingtool.repository.DetailMachineRepository;
 
 
@@ -38,6 +39,12 @@ public class PlanDetailMachineService implements DetailMachineService{
 	@Override
 	public int countDetailMachine(String fmNo, int locationNo2) {
 		return detailMachineRepository.countDetailMachine(fmNo, locationNo2);
+	}
+
+	@Override
+	public List<Location2> searchLocation2(String location1) {
+		List<Location2> location2s = detailMachineRepository.searchLocation2(location1);
+		return location2s;
 	}
 
 
