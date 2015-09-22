@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.farmingtool.mapper.AdminMachineSettingMapper">
+	<insert id="insertDetailMachine" parameterType="DetailMachine">
+		INSERT INTO DETAILMACHINE(MACHINE_NO, FM_NO, MACHINE_NAME, MACHINE_INFORMATION, MACHINE_RENTALCOST, LOCATION_NO2)
+		VALUES(#{machineNo}, #{fmNo}, #{machineName}, #{machineInformation}, #{machineRentalCost}, #{locationNo2})
+	</insert>
+	
+	<update id="updateDetailMachineCost" parameterType="hashmap">
+		UPDATE
+			DETAILMACHINE
+		SET
+			machine_rentalcost = #{ rentalcost }
+		WHERE
+			machine_no = #{machineNo}
+	</update>
+	
+	<delete id="deleteDetailMachine" parameterType="string">
+		DELETE FROM
+			DETAILMACHINE
+		WHERE
+			machine_no = #{ machineNo }
+	</delete>
+</mapper>

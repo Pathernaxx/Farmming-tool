@@ -49,6 +49,10 @@
 				alert( "아이디 입력후 중복 체크 해주세요." );
 				$( "input[name='loginid']" ).focus();
 				return false;
+			} else if( $( "input[name='name']").val() == "" ) {
+				alert("이름을 입력해주세요.");
+				$( "input[name='name']").focus();
+				return false;
 			} else if( $( "input[name='password1']" ).val() == "" ) {
 				alert( "비밀번호를 입력 해주세요." );
 				$( "input[name='password1']" ).focus();

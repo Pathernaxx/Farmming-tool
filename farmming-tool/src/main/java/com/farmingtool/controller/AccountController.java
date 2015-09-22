@@ -1,5 +1,7 @@
 package com.farmingtool.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,8 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.farmingtool.dto.Admin;
+import com.farmingtool.dto.Location1;
+import com.farmingtool.dto.Location2;
 import com.farmingtool.dto.Member;
 import com.farmingtool.service.AccountService;
 
@@ -41,6 +46,9 @@ public class AccountController {
 		
 		if(id.contains("ADMIN_"))
 		{
+			// ADMIN_ 제거
+			id = id.substring(6);
+			
 			// 예외 처리
 			// ID 불일치
 			if(accountService.getAdminId(id) == 0)
@@ -91,6 +99,65 @@ public class AccountController {
 		return message;
 	}
 	
+	@RequestMapping(value="registerAdmin.action", method=RequestMethod.GET)
+	public ModelAndView registAdmin()
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("account/adminRegistForm");
+		
+		List<Location1> locations1 = accountService.getLocation1();
+		List<Location2> locations2 = accountService.getLocation2();
+		
+		// location1
+		 mav.addObject("locations1", locations1);
+		
+		// location2
+		 mav.addObject("locations2", locations2);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="registerAdmin.action", method=RequestMethod.POST)
+	public String registAdminPost(ServletRequest request)
+	{
+		// input 값
+		// ID, PASSWORD, NAME, LOCATION1, LOCATION2, PHONE
+		String adminId = 		request.getParameter("loginid");
+		String adminPassword = 	request.getParameter("password1");
+		String adminName = 		request.getParameter("name");
+		String adminLocation1 = request.getParameter("location1");
+		String adminLocation2 = request.getParameter("location2");
+		String adminPhone = 
+								request.getParameter("phoneNo1") + "-" + 
+								request.getParameter("phoneNo2") + "-" + 
+								request.getParameter("phoneNo3");
+		
+		Admin admin = new Admin();
+		
+		admin.setAdminId(adminId);
+		admin.setAdminName(adminName);
+		admin.setAdminPassword(adminPassword);
+		admin.setAdminPhone(adminPhone);
+		admin.setAdminLocation1(adminLocation1);
+		admin.setAdminLocation2(adminLocation2);
+		
+		accountService.setAdmin(admin);
+		
+		return "account/login";
+	}
+	
+	@RequestMapping(value="adminIdcheck.action", method=RequestMethod.GET)
+	@ResponseBody
+	public String idcheckAdmin(String id)
+	{
+		int result = accountService.getAdminId(id);
+		
+		if(result == 0)
+			return "good";
+		
+		return "bad";
+	}
+	
 	@RequestMapping(value="idcheck.action", method=RequestMethod.GET)
 	@ResponseBody
 	public String idcheck(String id)
@@ -131,6 +198,7 @@ public class AccountController {
 		
 //		System.out.println(id + "/" + password + "/" + name + "/" + phone + "/" + mobilePhone +"/" +
 //		postcode + "/" + address1 + "/" + address2 + "/" + extraInfo);
+		String[] address = address1.split(" ");
 		
 		Member member = new Member();
 		member.setMemberId(id);
@@ -144,7 +212,7 @@ public class AccountController {
 		member.setMemberExtraInfo(extraInfo);
 		
 		// location2 입력
-		// member.setLocation2();
+		member.setLocationName2(address[1]);
 		
 		accountService.setMember(member);
 		

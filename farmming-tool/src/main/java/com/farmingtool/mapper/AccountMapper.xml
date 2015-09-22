@@ -15,31 +15,70 @@
 		<result column="member_address2" property="memberAddress2"/>
 		<result column="member_postcode" property="memberPostcode"/>
 		<result column="member_extrainfo" property="memberExtraInfo"/>
-		<result column="location2" property="location2"/>
+		<result column="location_name2" property="locationName2"/>
 		<result column="member_warningcount" property="memberWarningCount"/>
 	</resultMap>
 	
 	<resultMap type="Admin" id="resultAdmin">
 		<id column="admin_id" property="adminId"/>
 		<result column="admin_name" property="adminName"/>
-		<result column="admin_location" property="adminLocation"/>
+		<result column="admin_location1" property="adminLocation1"/>
+		<result column="admin_location2" property="adminLocation2"/>
 		<result column="admin_phone" property="adminPhone"/>
 	</resultMap>
+	
+	<resultMap type="Location1" id="resultLocation1">
+		<id column="location_no1" property="locationNo1" />
+		<result column="location_name1" property="locationName1"/>
+	</resultMap>
+	
+	<resultMap type="Location2" id="resultLocation2">
+		<id column="location_no2" property="locationNo2" />
+		<result column="location_name2" property="locationName2"/>
+	</resultMap>
+	
+	<select id="selectLocation1" resultMap="resultLocation1">
+		SELECT
+			location_no1, location_name1
+		FROM
+			LOCATION1
+	</select>
+	
+	<select id="selectLocation2" resultMap="resultLocation2">
+		SELECT
+			location_no2, location_name2
+		FROM
+			LOCATION2
+	</select>
+	
+	<select id="selectMemberList" resultMap="resultMember">
+		SELECT
+			member_id, member_name, member_phone1, member_phone2, member_address1, member_address2, 
+			member_postcode, member_extrainfo, location_name2, member_warningcount
+		FROM
+			MEMBER
+	</select>
+	
+	<select id="selectAdminList" resultMap="resultAdmin">
+		SELECT
+			admin_id, admin_name, admin_location1, admin_location2, admin_phone
+		FROM
+			ADMIN
+	</select>
 	
 	<select id="selectMemberByIdAndPassword" parameterType="hashmap" resultMap="resultMember">
 		SELECT
 			member_id, member_name, member_phone1, member_phone2, member_address1, member_address2, 
-			member_postcode, member_extrainfo, l.location_name2 "location2", member_warningcount
+			member_postcode, member_extrainfo, location_name2, member_warningcount
 		FROM
-			MEMBER m, LOCATION2 l
+			MEMBER
 		WHERE
-			m.location2_no = l.location_no2 AND
 			member_id = #{ id } AND member_password = #{ password }
 	</select>
 	
 	<select id="selectAdminByIdAndPassword" parameterType="hashmap" resultMap="resultAdmin">
 		SELECT
-			admin_id, admin_name, admin_location, admin_phone
+			admin_id, admin_name, admin_location1, admin_location2, admin_phone
 		FROM
 			ADMIN
 		WHERE
@@ -65,12 +104,37 @@
 	</select>
 	
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER(member_id, member_password, member_name, member_phone1, member_phone2, member_address1, member_address2, member_postcode, member_extrainfo)
-		VALUES(#{memberId}, #{memberPassword}, #{memberName}, #{memberPhone1}, #{memberPhone2}, #{memberAddress1}, #{memberAddress2}, #{memberPostcode}, #{memberExtraInfo})
+		INSERT INTO MEMBER(member_id, member_password, member_name, member_phone1, member_phone2, member_address1, member_address2, member_postcode, member_extrainfo, location_name2)
+		VALUES(#{memberId}, #{memberPassword}, #{memberName}, #{memberPhone1}, #{memberPhone2}, #{memberAddress1}, #{memberAddress2}, #{memberPostcode}, #{memberExtraInfo}, #{locationName2})
 	</insert>
 	
 	<insert id="insertAdmin" parameterType="Admin">
 		INSERT INTO ADMIN(admin_id, admin_password, admin_name, admin_location1, admin_phone, admin_location2)
 		VALUES( #{adminId}, #{adminPassword}, #{adminName}, #{adminLocation1}, #{adminPhone}, #{adminLocation2})
 	</insert>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER
+		SET member_password = #{memberPassword}, member_phone1 = #{memberPhone1}, 
+			member_phone2 = #{memberPhone2}, member_address1 = #{memberAddress1}, 
+			member_address2 = #{memberAddress2}, member_postcode = #{memberPostcode}, 
+			member_extrainfo = #{memberExtraInfo}, location_name2 = #{locationName2}
+		WHERE member_id = #{memberId}
+	</update>
+	
+	<update id="updateAdmin" parameterType="Admin">
+		UPDATE ADMIN
+		SET 
+			admin_password = #{adminPassword}, admin_name = #{adminName}, admin_phone = #{adminPhone}
+		WHERE
+			admin_id = #{adminId}
+	</update>
+	
+	<update id="updateAdminLocation" parameterType="hashmap">
+		UPDATE ADMIN
+		SET
+			admin_location1 = #{adminLocation1}, admin_location2 = #{adminLocation2}
+		WHERE
+			admin_id = #{adminId}
+	</update>
 </mapper>
