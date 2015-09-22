@@ -1,10 +1,13 @@
 package com.farmingtool.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.farmingtool.dto.FarmMachine;
 import com.farmingtool.dto.RentalHistory;
 import com.farmingtool.repository.RentalHistoryRepository;
 
@@ -25,5 +28,6 @@ public class PlanRentalHistoryService implements RentalHistoryService {
 		rentalHistoryRepository.insertRentalHistory(history);
 		
 	}
+
 	
 }

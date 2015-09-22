@@ -390,7 +390,9 @@ $(function(){
 
         <div id="page-wrapper">
           <div class="row">
-			<div id="rentalCheck">이름, 대여기계, 대여일, 반납일 ...</div>
+			<div id="rentalCheck">이름, 대여기계, 대여일, 반납일 ...
+				<input type="text" value="${machineNo}"/>
+			</div>
 		  </div>
         </div>
         <!-- /#page-wrapper -->

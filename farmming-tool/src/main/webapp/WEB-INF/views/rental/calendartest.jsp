@@ -435,7 +435,7 @@ $(function(){
 			
 			<div id="message">
 				&nbsp;■ 보유 대수 : <input type="text" id="totalDetailMachine" /><br/>
-				&nbsp;■ 대여가격 : <br/>
+				&nbsp;■ 대여가격 : <input type="text" id="rentalCost"/><br/>
 				&nbsp;■ 대여일 / 반납일 : <br/>
 				&nbsp;■ 주의 사항 : <br/>
 				&nbsp;<font style='color:red;font-weight: bold;'>※ 교육을 이수하지 않을 시 예약이 취소될 수 있습니다. ※</font>
@@ -478,8 +478,8 @@ $(function(){
 	$(function() {
 		$("#rental_search").click(function() {
 			
-			var fmNo = 'FA010000';
-			var locationNo2 = 21;
+			var fmNo = 'FA020000';
+			var locationNo2 = 2;
 			
 			$.ajax({
 				url: '/farmingtool/rental/resultCalendar.action',
@@ -565,7 +565,6 @@ $(function(){
 	    	//컨트롤러에서 예약처리
 	    	//alert($("#rentalDate").val());
 	    	var rentalDate = $("#rentalDate").val();
-	    	var machineNo = $("#machineNo").val();
 	    	var fmNo = $("#fmNo").val();
 	    	$.ajax({
 	    		url: "/farmingtool/rental/rentalMachine.action",
@@ -573,32 +572,25 @@ $(function(){
 	    		async: true,
 	    		data: {
 	    			"rentalDate" : rentalDate,
-	    			//"machineNo" : machineNo,
 	    			"fmNo" : fmNo
 	    			},
 	    		success: function(result) { //result
-	    			if(result == "success")
+	    			if(result != null)
 					{
-	    				alert("예약 성공 : 확인 페이지로 이동합니다.")
-						var returnurl = '/farmingtool/rental/moveToCheckRental.action';
+	    				alert("예약 성공 : 확인 페이지로 이동합니다."+result)
+						var returnurl = '/farmingtool/rental/moveToCheckRental.action?machineNo='+result;
 						$(location).attr('href', returnurl);
 					} else {
-						alert('예약 실패 : 다시 시도해주세요.');
+						$("#date-popover").hide();
+						alert("예약 실패 : 모든 기계가 대여 중입니다. 다른 날짜를 선택해주세요.");
 					}
 	    		},
-	    		error: function(xhr, status, error) {
-	    			alert(xhr + '/' + status + '/' + error);
+	    		error: function() {
+	    			alert("예약 실패 : 다시 시도해주세요.");
 	    		}
 	    	});
 	    }
 	    
-	    /* function myNavFunction(id) {
-	        $("#date-popover").hide();
-	        var nav = $("#" + id).data("navigation");
-	        var to = $("#" + id).data("to");
-	        //console.log('nav ' + nav + ' to: \ + to.month + '/' + to.year');
-	        console.log('이게뭐냥');
-	    } */
 	</script>
 </body>
 </html>

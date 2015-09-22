@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
     <title>FARM MACHINE</title>
     <!-- Bootstrap Core CSS -->
     <link rel='Stylesheet' href='/farmingtool/resources/styles/bootstrap.css' />
@@ -43,7 +44,7 @@
  
 </style>
 <script type="text/javascript">
-$(function(){
+/* $(function(){
 	var container = $('.page-masonry');
 	$container.imagesLoaded( function () {
 	       $container.masonry({
@@ -51,7 +52,148 @@ $(function(){
 	           itemSelector: '.item'
 	       });
         });
+	
+
+	}); */
+
+$(function(){
+	
+	$(".ajaxfarmlist").click(function( event ) {
+		var fmID = $(this).attr('id'); 
+			$("#sp1").empty();
+			
+			$.ajax({
+				url : "/farmingtool/dictionary/ajaxfmList.action",
+				async : false,
+				type : "GET",
+				data : {
+					typeNo : fmID
+				},
+				success : function(fmBytypeNo){
+					if (fmBytypeNo != null){
+						$.each(fmBytypeNo, function(index, listitem){
+							var html=
+								"<div class='item'>"+
+								      "<div style='float: left'>"+
+								   	   	"<a href='showdetail.action?fmno="+listitem.fmNo+"'>"+
+								      	"<img src='/farmingtool/resources/images/fmimage/"+ listitem.fmPicture +"' width='200px' height='180px' style='padding-right: 4px'>"+
+								        "</a>"+
+							       "</div>"+
+							       "<div style='float: left' >"+
+							      	 	"<a href='showdetail.action?fmno="+listitem.fmNo+"'>"+listitem.fmName+"</a>"+
+							      	"</div>"+
+							      "</div>";
+								
+						$("#sp1").append($(html)); 
+							
+						});
+						
+					}
+					else{
+						alert("success but exception");
+					}
+					
+				},
+				error : function(){
+					alert("error");
+				}
+			});
+			event.preventDefault(); 
+			
+		});
+		
+		
+		
+
+	
+	
+	
+/* 	$('#FA').click(function(event) {
+		alert("하이!A");
+		$("#sp1").empty();
+		
+		$.ajax({
+			url : "/farmingtool/dictionary/ajaxfmList.action",
+			async : false,
+			type : "GET",
+			data : {
+				typeNo : "A"
+			},
+			success : function(fmBytypeNo){
+				if (fmBytypeNo != null){
+					$.each(fmBytypeNo, function(index, listitem){
+						var html=
+							"<div class='item'>"+
+							      "<div style='float: left'>"+
+							   	   	"<a href='showdetail.action?fmno="+listitem.fmNo+"'>"+
+							      	"<img src='/farmingtool/resources/images/fmimage/"+ listitem.fmPicture +"' width='200px' height='180px' style='padding-right: 4px'>"+
+							        "</a>"+
+						       "</div>"+
+						       "<div style='float: left' >"+
+						      	 	"<a href='showdetail.action?fmno="+listitem.fmNo+"'>"+listitem.fmName+"</a>"+
+						      	"</div>"+
+						      "</div>";
+							
+					$("#sp1").append($(html)); 
+						
+					});
+					
+				}
+				else{
+					alert("success but exception");
+				}
+				
+			},
+			error : function(){
+				alert("error");
+			}
+		});
+		event.preventDefault(); 
 	});
+	$('#FB').click(function(event) {
+		alert("하이!B");
+		$("#sp1").empty();
+		
+		$.ajax({
+			url : "/farmingtool/dictionary/ajaxfmList.action",
+			async : false,
+			type : "GET",
+			data : {
+				typeNo : "B"
+			},
+			success : function(fmBytypeNo){
+				if (fmBytypeNo != null){
+					$.each(fmBytypeNo, function(index, listitem){
+						var html=
+							"<div class='item'>"+
+							      "<div style='float: left'>"+
+							   	   	"<a href='showdetail.action?fmno="+listitem.fmNo+"'>"+
+							      	"<img src='/farmingtool/resources/images/fmimage/"+ listitem.fmPicture +"' width='200px' height='180px' style='padding-right: 4px'>"+
+							        "</a>"+
+						       "</div>"+
+						       "<div style='float: left' >"+
+						      	 	"<a href='showdetail.action?fmno="+listitem.fmNo+"'>"+listitem.fmName+"</a>"+
+						      	"</div>"+
+						      "</div>";
+							
+					$("#sp1").append($(html)); 
+						
+					});
+					
+				}
+				else{
+					alert("success but exception");
+				}
+				
+			},
+			error : function(){
+				alert("error");
+			}
+		});
+		event.preventDefault(); 
+	}); */
+});
+
 
 </script>
 </head>
@@ -101,37 +243,37 @@ $(function(){
                                     <a href="#">사용/분류 <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">가공기계류</a>
+                                            <a href="#" id="A" class="ajaxfarmlist">가공기계류</a>
                                         </li>
                                         <li>
-                                            <a href="#">경운기및부속작업</a>
+                                            <a href="#" id="B" class="ajaxfarmlist">경운기및부속작업</a>
                                         </li>
                                         <li>
-                                            <a href="#">관리기계류</a>
+                                            <a href="#" id="C" class="ajaxfarmlist">관리기계류</a>
                                         </li>
                                         <li>
-                                            <a href="#">관리기및부속작업</a>
+                                            <a href="#" id="D" class="ajaxfarmlist">관리기및부속작업</a>
                                         </li>
                                          <li>
-                                            <a href="#">기타기계류</a>
+                                            <a href="#" id="E" class="ajaxfarmlist">기타기계류</a>
                                         </li>
                                          <li>
-                                            <a href="#">방제기계류</a>
+                                            <a href="#" id="F" class="ajaxfarmlist">방제기계류</a>
                                         </li>
                                          <li>
-                                            <a href="#">수확기계류</a>
+                                            <a href="#" id="G" class="ajaxfarmlist">수확기계류</a>
                                         </li>
                                          <li>
-                                            <a href="#">시설용기계류</a>
+                                            <a href="#" id="H" class="ajaxfarmlist">시설용기계류</a>
                                         </li> 
                                          <li>
-                                            <a href="#">축산용기계류</a>
+                                            <a href="#" id="I" class="ajaxfarmlist">축산용기계류</a>
                                         </li> 
                                          <li>
-                                            <a href="#">트랙터및부속작업</a>
+                                            <a href="#" id="J" class="ajaxfarmlist">트랙터및부속작업</a>
                                         </li>
                                          <li>
-                                            <a href="#">파종이식기계류</a>
+                                            <a href="#" id="K" class="ajaxfarmlist">파종이식기계류</a>
                                         </li>                                                                                                                                                              
                                     </ul>
                                     <!-- /.nav-third-level -->
@@ -154,21 +296,21 @@ $(function(){
 
         <div id="page-wrapper">
           <div class="row">
-			<div class="page-masonry">
+			<div class="page-masonry" id="sp1">
 
 	          <c:forEach var="farmMachine" items="${ farmMachineList }">
-			      <div class="item" >
-			      <div style="float: left">
-			   	   <a href="showdetail.action?fmno=${ farmMachine.fmNo }">
-			      	<img src="/farmingtool/resources/images/fmimage/${ farmMachine.fmPicture }" width="200px" height="180px" style="padding-right: 4px">
-			       </a>
-			       </div>
-			      	<div style="float: left" >
-			      	 <a href="showdetail.action?fmno=${ farmMachine.fmNo }">${ farmMachine.fmName }</a>
-			      	</div>
-			       
+			      <div class="item">
+				      <div style="float: left">
+					   	   <a href="showdetail.action?fmno=${ farmMachine.fmNo }">
+					      	<img src="/farmingtool/resources/images/fmimage/${ farmMachine.fmPicture }" width="200px" height="180px" style="padding-right: 4px">
+					       </a>
+				       </div>
+				      	<div style="float: left" >
+				      	 	<a href="showdetail.action?fmno=${ farmMachine.fmNo }">${ farmMachine.fmName }</a>
+				      	</div>
 			      </div>
 		      </c:forEach>
+		      
 			</div>
 		  </div>
         </div>

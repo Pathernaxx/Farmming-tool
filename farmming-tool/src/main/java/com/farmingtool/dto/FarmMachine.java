@@ -1,5 +1,7 @@
 package com.farmingtool.dto;
 
+import java.util.List;
+
 public class FarmMachine {
 
 	private String fmNo;
@@ -14,6 +16,7 @@ public class FarmMachine {
 	private String fmOutline;
 	private String fmNecessity;
 	private String fmPicture;
+	
 	public String getFmNo() {
 		return fmNo;
 	}
