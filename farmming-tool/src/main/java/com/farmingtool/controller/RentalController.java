@@ -2,8 +2,11 @@ package com.farmingtool.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,12 +15,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.farmingtool.dto.FarmMachine;
+import com.farmingtool.dto.Location2;
 import com.farmingtool.dto.RentalHistory;
 import com.farmingtool.dto.RentalInfomation;
 import com.farmingtool.dto.Type;
@@ -178,6 +183,54 @@ public class RentalController {
 		mav.setViewName("rental/rentalcheckpage");
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="searchlocation2.action", method=RequestMethod.POST)
+	public ModelAndView searchLocation2(String location1) {
+		ModelAndView mav = new ModelAndView();
+		List<Location2> location2s = detailMachineService.searchLocation2(location1);
+		
+		mav.addObject("location2s", location2s);
+		mav.setViewName("rental/location2list");
+		return mav;
+	}
+	
+	@RequestMapping(value="searchmachinebylocation.action", method=RequestMethod.POST)
+	public ModelAndView searchMachineByLocation(String location2) {
+		ModelAndView mav = new ModelAndView();
+		
+		List<Type> types = farmMachineService.getTypesByLocation("1");
+		List<FarmMachine> farmMachineListByLocation = 
+				farmMachineService.searchMachineByLocation("1");
+		
+		mav.addObject("types", types);
+		mav.addObject("farmMachineList", farmMachineListByLocation);
+		mav.setViewName("rental/newfarmmachinelist");
+		return mav;
+	}
+	
+	@RequestMapping(value="searchmachine.action", method=RequestMethod.POST)
+	public String searchMachine(String location2, String fmNo) {
+		System.out.println(location2+","+fmNo);
+		int locationNo2 = Integer.parseInt(location2);
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("locationNo2", locationNo2);
+		params.put("fmNo", fmNo);
+		
+		//1(횡성군),FA010000(농용트랙터)
+		
+		//detailMachine에서 fm_no를통해(FA010000) 해당 머신을 모두 가져온다.
+		// status 0 : 대여가능, 1 : 대여중,  2: 고장
+		// status가 2가 아닌 숫자를 모두 더하면 총 댓수
+		int rentalCount = detailMachineService.rentalMachineCount(params);
+		
+		//rentalhistory에서 rentalDate를 통해 DATE별로  
+		//Status가 0인 카운트를 세서 가져온다  (date는 sysdate기준으로 +1, +2, +3까지만 연습)
+		HashMap<Date, String> map = detailMachineService.rentalMachineCountByDate(params);
+		
+		return "rental";
+		
 	}
 
 }

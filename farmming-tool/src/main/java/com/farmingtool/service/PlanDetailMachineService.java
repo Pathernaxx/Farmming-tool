@@ -1,16 +1,17 @@
 package com.farmingtool.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.farmingtool.dto.Location2;
 import com.farmingtool.dto.RentalInfomation;
+//github.com/Pathernaxx/Farmming-tool.git
 import com.farmingtool.repository.DetailMachineRepository;
-
-
 
 @Service("detailMachineService")
 public class PlanDetailMachineService implements DetailMachineService{
@@ -42,8 +43,26 @@ public class PlanDetailMachineService implements DetailMachineService{
 	}
 
 	@Override
+	public List<Location2> searchLocation2(String location1) {
+		List<Location2> location2s = detailMachineRepository.searchLocation2(location1);
+		return location2s;
+	}
+		
+	@Override
 	public RentalInfomation rentalCheck(String machineNo, int historyNo) {
 		return detailMachineRepository.rentalCheck(machineNo, historyNo);
+	}
+
+	@Override
+	public int rentalMachineCount(HashMap<String, Object> params) {
+		int rentalCount = detailMachineRepository.rentalMachineCount(params);
+		return rentalCount;
+	}
+
+	@Override
+	public HashMap<Date, String> rentalMachineCountByDate(HashMap<String, Object> params) {
+		HashMap<Date, String> map = detailMachineRepository.rentalMachineCountByDate(params);
+		return map;
 	}
 
 

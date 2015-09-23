@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.farmingtool.dto.Location2;
 import com.farmingtool.dto.RentalInfomation;
+//github.com/Pathernaxx/Farmming-tool.git
 import com.farmingtool.mapper.DetailMachineMapper;
 
 @Repository(value="detailMachineRepository")
@@ -50,6 +52,12 @@ public class OracleDetailMachineRepository implements DetailMachineRepository{
 	}
 
 	@Override
+	public List<Location2> searchLocation2(String location1) {
+		List<Location2> location2s = detailMachineMapper.searchLocation2(location1);
+		return location2s;
+	}
+	
+	@Override
 	public RentalInfomation rentalCheck(String machineNo, int historyNo) {
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
@@ -57,6 +65,18 @@ public class OracleDetailMachineRepository implements DetailMachineRepository{
 		params.put("historyNo", historyNo);
 		
 		return detailMachineMapper.rentalCheck(params);
+	}
+
+	@Override
+	public int rentalMachineCount(HashMap<String, Object> params) {
+		int rentalCount = detailMachineMapper.rentalMachineCount(params);
+		return rentalCount;
+	}
+
+	@Override
+	public HashMap<Date, String> rentalMachineCountByDate(HashMap<String, Object> params) {
+		HashMap<Date, String> map = detailMachineMapper.rentalMachineCountByDate(params);
+		return map;
 	}
 	
 	

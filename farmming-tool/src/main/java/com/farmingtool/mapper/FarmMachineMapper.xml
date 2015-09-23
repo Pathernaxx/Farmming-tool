@@ -44,10 +44,28 @@
 
 <!-- 렌탈에서 검색하는 부분  시작-->
 <select id="searchMachineByLocation" parameterType="String" resultMap="farmMachineAndTypeName">
-	SELECT f.fm_no, f.type_no, f.fm_name
+	SELECT distinct(f.fm_no), f.type_no, f.fm_name
 	FROM detailMachine d, farmMachine f
 	WHERE d.location_no2 = #{location2} AND d.fm_no = f.fm_no
 </select>
+
+<select id="getTypesByLocation" parameterType="String" resultMap="typeNoByLocation">
+	SELECT distinct(f.type_no)
+	FROM detailMachine d, farmMachine f
+	WHERE d.location_no2 = #{location2} AND d.fm_no = f.fm_no
+</select>
+
+<resultMap id="typeNoByLocation" type="Type">
+	<id column="type_no" property="typeNo"/>
+	<association column="type_no" property="typeName" select="getTypeName"/>
+</resultMap>
+
+<select id="getTypeName" resultType="String">
+	SELECT type_name
+	FROM type
+	WHERE type_no = #{type_no}
+</select>
+
 
 <select id="getTypes" resultMap="getType">
 	SELECT type_no, type_name
@@ -69,14 +87,7 @@
 	<id column="fm_no" property="fmNo"/>
 	<result column="fm_name" property="fmName"/>
 	<result column="type_no" property="typeNo"/>
-	<association column="type_no" property="typeName" select="getTypeName"/>
 </resultMap>
-
-<select id="getTypeName" parameterType="String" resultType="String"> 
-	SELECT type_name
-	FROM type
-	WHERE type_no = #{type_no}
-</select>
 <!-- 렌탈에서 검색하는 부분 끝 -->
 
 <select id="getFarmMachineDetailBytypeNo" parameterType="String" resultMap="farmMachineResult"> 
@@ -84,8 +95,6 @@
 	FROM farmMachine
 	WHERE type_no = #{typeNo}
 </select>
-
-
 
 
 </mapper>
