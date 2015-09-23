@@ -16,7 +16,6 @@
  
     <link rel='Stylesheet' href='/farmingtool/resources/styles/rentalmain.css' />
     <script src="/farmingtool/resources/js/rentallist.js"></script>
-    <!-- <script src="/farmingtool/resources/js/address.js"></script> -->
 <style>
 .item {
     width: 200px;
