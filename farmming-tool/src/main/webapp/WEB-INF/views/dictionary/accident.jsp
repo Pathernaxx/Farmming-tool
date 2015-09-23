@@ -46,7 +46,8 @@ $(document).ready(function (){
 		  itemSelector: '.item',
 		  isAnimated: true
 	});
-	var key = $("key");
+	/* 하아 모르겠다!!!!! */
+	var key = "rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D";
 	alert(key);
 	$.ajax({
 		url: "http://www.rda.go.kr/openapidata/service/rdamachinesafe_api/rdamachinesafe_list",
