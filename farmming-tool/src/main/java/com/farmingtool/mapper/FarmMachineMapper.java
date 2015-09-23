@@ -20,4 +20,6 @@ public interface FarmMachineMapper {
 	List<Type> getTypesByLocation(String location2);
 
 	List<FarmMachine> getFarmMachineDetailBytypeNo(String typeNo);
+
+	List<FarmMachine> getFMSearchBySearchword(String searchword);
 }
