@@ -16,7 +16,6 @@ $(document).ready(function (){
 					alert('입력 실패!');
 					console.log(data);
 				} else { 
-					alert('로케1 입력 성공!');
 					$('#ac').empty();
 					var se = $(result.substr(result.indexOf("<se")));
 					$( "#ac" ).append(se);
@@ -49,7 +48,6 @@ $(document).ready(function (){
 						alert('입력 실패!');
 						console.log(data);
 					} else { 
-						alert('로케2 입력 성공!!');
 						$("#ac2").empty();
 						var di = $(result.substr(result.indexOf("<div")));
 						$("#ac2").append(di);
@@ -100,6 +98,8 @@ $(document).ready(function (){
 					console.log(data);
 				} else { 
 					alert('입력 성공!');
+					var rentalCountByDate = result;
+					alert(rentalCountByDate.calDate);
 				}
 			},
 			error : function(xhr, status, error) {

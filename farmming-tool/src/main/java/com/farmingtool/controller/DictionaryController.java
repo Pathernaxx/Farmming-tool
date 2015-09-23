@@ -71,7 +71,17 @@ public class DictionaryController {
 		return mav;
 	}	
 	
-	
+	@RequestMapping(value="ajaxfmSearch.action", method = RequestMethod.GET)
+	@ResponseBody
+	public List<FarmMachine> ajaxfmSearch(String searchword) {
+		List<FarmMachine> fmSearchList = farmMachineService.getFMSearchBySearchword(searchword);
+
+		/*for(FarmMachine fmList :  fmSearchList){
+		System.out.println(fmList.getFmNo());
+		}*/
+		
+		return fmSearchList;
+	}
 	
 	
 	
