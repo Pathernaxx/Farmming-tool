@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.js"></script>
     <title>FARM MACHINE</title>
     <!-- Bootstrap Core CSS -->
@@ -46,14 +46,23 @@ $(document).ready(function (){
 		  itemSelector: '.item',
 		  isAnimated: true
 	});
-
-	
+	var key = $("key");
+	alert(key);
 	$.ajax({
-		type:"POST",
-		url: "http://www.rda.go.kr/openapidata/service/rdamachinesafe_api/rdamachinesafe_list?numOfRows=109&searchword=&ServiceKey=rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D",
+		url: "http://www.rda.go.kr/openapidata/service/rdamachinesafe_api/rdamachinesafe_list",
 		dataType: "xml",
+		contentType: "application/xml; charset=UTF-8",
 		async: false,
-		success : response_parse
+		data: {
+			searchword:"",
+			numOfRows:"109",
+			ServiceKey: key
+		},
+		success : response_parse,
+		error : function(xhr, ajaxOptions, thrownError){
+			console.log(xhr.status);
+			console.log(thrownError);
+		}
 	});
 	
 	function response_parse(xml){

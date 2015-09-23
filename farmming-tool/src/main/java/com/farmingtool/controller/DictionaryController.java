@@ -63,8 +63,12 @@ public class DictionaryController {
 	}
 	
 	@RequestMapping(value="accident.action", method= RequestMethod.GET)
-	public String Accident(){
-		return "dictionary/accident";
+	public ModelAndView Accident(){
+		ModelAndView mav = new ModelAndView();
+		String key ="rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D";
+		mav.addObject("key", key);
+		mav.setViewName("dictionary/accident");
+		return mav;
 	}	
 	
 	
