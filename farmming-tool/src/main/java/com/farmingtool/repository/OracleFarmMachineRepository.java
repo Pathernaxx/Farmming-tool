@@ -1,22 +1,13 @@
 package com.farmingtool.repository;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.farmingtool.dto.FarmMachine;
+import com.farmingtool.dto.Type;
 import com.farmingtool.mapper.FarmMachineMapper;
 
 @Repository(value="farmMachineRepository")
@@ -41,6 +32,35 @@ public class OracleFarmMachineRepository implements FarmMachineRepository{
 	public FarmMachine getFarmMachineDetail(String fmno) {
 		// TODO Auto-generated method stub
 		return farmMachineMapper.getFarmMachineDetail(fmno);
+	}
+
+
+	@Override
+	public List<FarmMachine> getFarmMachineAndTypeName() {
+		List<FarmMachine> farmMachineList = farmMachineMapper.getFarmMachineAndTypeName();
+		return farmMachineList;
+	}
+
+
+	@Override
+	public List<Type> getTypes() {
+		List<Type> types = farmMachineMapper.getTypes();
+		return types;
+	}
+
+
+	@Override
+	public List<FarmMachine> searchMachineByLocation(String location2) {
+		List<FarmMachine> farmMachineListByLocation = 
+				farmMachineMapper.searchMachineByLocation(location2);
+		return farmMachineListByLocation;
+	}
+
+
+	@Override
+	public List<FarmMachine> getFarmMachineDetailBytypeNo(String typeNo) {
+		// TODO Auto-generated method stub
+		return farmMachineMapper.getFarmMachineDetailBytypeNo(typeNo);
 	}
 	
 	

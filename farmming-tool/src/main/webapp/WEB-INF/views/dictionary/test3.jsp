@@ -38,27 +38,36 @@
 	overflow: hidden;
  }
  
+ 
 .item--gigante{
-    width: 500px;
-    height: 400px;
+    width: 800px;
+    height: 500px;
 }
+
+
+.item--gigante img{
+ 	width: 290px;
+ 	height: 400px;
+}
+
  
 </style>
 <script type="text/javascript">
 $(document).ready(function (){
 	var $masry = $('.page-masonry').masonry({
 		  itemSelector: '.item',
-		  isAnimated: true
+		  isAnimated: true,
+		  isResizeBound: false
 	});
 	  $masry.on( 'layoutComplete', function( event, laidOutItems ) {
 		    console.log( 'layoutComplete with ' + laidOutItems.length + ' items' );
 		  });
 
-		  $masry.on( 'click', '.item', function() {
-		    // change size of item by toggling gigante class
-		    $( this ).toggleClass('item--gigante');
-		    $masry.masonry('layout');
-		  });
+	  $masry.on( 'click', '.item', function() {
+		 // change size of item by toggling gigante class
+		 $( this ).toggleClass('item--gigante');
+		 $masry.masonry('layout');
+	   });
 });
 
 </script>
@@ -168,11 +177,44 @@ $(document).ready(function (){
 			<div class="page-masonry">
 			    <c:forEach var="farmMachine" items="${ farmMachineList }">
 			      <div class="item" >
-			       <table>
-			       	 
-			       </table>
+					<div class="detail1" style="float: left; border: .3em">
+					  <img src="/farmingtool/resources/images/fmimage/${ farmMachine.fmPicture }" width="200px" height="180px" style="padding-right: 4px">
+	
+					    <p>${ farmMachine.fmName }</p>
+						<hr />
+					    <button>대여하기</button>
+
+					</div>
+					<div class="detail2" style="float: left; border: .3em; width: 500px;height: 498px; overflow: auto;">
+					 <table>
+					  <tr>
+					   <td><br>⊙ 구조 <br>${ farmMachine.fmStructure }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 기능및용도 <br>${ farmMachine.fmFunction }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 종류 <br>${ farmMachine.fmKinds }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 보급과정 <br>${ farmMachine.fmDimentions }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 부착용작업기 <br>${ farmMachine.fmWorkingMachine }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 특징 <br>${ farmMachine.fmCharacteristic }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 개요 <br>${ farmMachine.fmOutline }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 필요성 <br>${ farmMachine.fmNecessity }</td>
+					  </tr>					  
+					 </table>
+					</div>
 			      </div>
-			   </c:forEach>
+			   		</c:forEach>
 			      </div>
 			</div>
 		  </div>

@@ -1,9 +1,12 @@
 package com.farmingtool.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.farmingtool.dto.FarmMachine;
 import com.farmingtool.dto.RentalHistory;
 import com.farmingtool.mapper.RentalHistoryMapper;
 
@@ -24,6 +27,6 @@ public class OracleRentalHistoryRepository implements RentalHistoryRepository{
 		rentalHistoryMapper.insertRentalHistory(history);
 		
 	}
-	
+
 	
 }

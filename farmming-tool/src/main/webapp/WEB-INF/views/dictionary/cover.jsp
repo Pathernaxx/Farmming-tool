@@ -23,7 +23,7 @@
     <!-- Custom Fonts -->
     <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"> 
     
-<style>
+<style>s
 .item {
     width: 200px;
     height: 205px;
@@ -50,15 +50,58 @@ $(document).ready(function (){
 		  itemSelector: '.item',
 		  isAnimated: true
 	});
-	  $masry.on( 'layoutComplete', function( event, laidOutItems ) {
+/* 	  $masry.on( 'layoutComplete', function( event, laidOutItems ) {
 		    console.log( 'layoutComplete with ' + laidOutItems.length + ' items' );
 		  });
-
+ */
 		  $masry.on( 'click', '.item', function() {
 		    // change size of item by toggling gigante class
 		    $( this ).toggleClass('item--gigante');
 		    $masry.masonry('layout');
 		  });
+		  $(".ajaxfarmlist").click(function( event ) {
+		      var fmID = $(this).attr('id'); 
+		         $("#sp1").empty();
+		         
+		         $.ajax({
+		            url : "/farmingtool/dictionary/ajaxfmList.action",
+		            async : false,
+		            type : "GET",
+		            data : {
+		               typeNo : fmID
+		            },
+		            success : function(fmBytypeNo){
+		               if (fmBytypeNo != null){
+		                  $.each(fmBytypeNo, function(index, listitem){
+		                     var html=
+		                        "<div class='item'>"+
+		                              "<div style='float: left'>"+
+		                                    "<a href='showdetail.action?fmno="+listitem.fmNo+"'>"+
+		                                 "<img src='/farmingtool/resources/images/fmimage/"+ listitem.fmPicture +"' width='200px' height='180px' style='padding-right: 4px'>"+
+		                                "</a>"+
+		                            "</div>"+
+		                            "<div style='float: left' >"+
+		                                  "<a href='showdetail.action?fmno="+listitem.fmNo+"'>"+listitem.fmName+"</a>"+
+		                              "</div>"+
+		                           "</div>";
+		                        
+		                  $("#sp1").append($(html)); 
+		                     
+		                  });
+		                  
+		               }
+		               else{
+		                  alert("success but exception");
+		               }
+		               
+		            },
+		            error : function(){
+		               alert("error");
+		            }
+		         });
+		         event.preventDefault(); 
+		         
+		      });
 });
 
 </script>
@@ -109,38 +152,38 @@ $(document).ready(function (){
                                     <a href="#">사용/분류 <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">가공기계류</a>
+                                            <a href="#" id="A" class="ajaxfarmlist">가공기계류</a>
                                         </li>
                                         <li>
-                                            <a href="#">경운기및부속작업</a>
+                                            <a href="#" id="B" class="ajaxfarmlist">경운기및부속작업</a>
                                         </li>
                                         <li>
-                                            <a href="#">관리기계류</a>
+                                            <a href="#" id="C" class="ajaxfarmlist">관리기계류</a>
                                         </li>
                                         <li>
-                                            <a href="#">관리기및부속작업</a>
+                                            <a href="#" id="D" class="ajaxfarmlist">관리기및부속작업</a>
                                         </li>
                                          <li>
-                                            <a href="#">기타기계류</a>
+                                            <a href="#" id="E" class="ajaxfarmlist">기타기계류</a>
                                         </li>
                                          <li>
-                                            <a href="#">방제기계류</a>
+                                            <a href="#" id="F" class="ajaxfarmlist">방제기계류</a>
                                         </li>
                                          <li>
-                                            <a href="#">수확기계류</a>
+                                            <a href="#" id="G" class="ajaxfarmlist">수확기계류</a>
                                         </li>
                                          <li>
-                                            <a href="#">시설용기계류</a>
+                                            <a href="#" id="H" class="ajaxfarmlist">시설용기계류</a>
                                         </li> 
                                          <li>
-                                            <a href="#">축산용기계류</a>
+                                            <a href="#" id="I" class="ajaxfarmlist">축산용기계류</a>
                                         </li> 
                                          <li>
-                                            <a href="#">트랙터및부속작업</a>
+                                            <a href="#" id="J" class="ajaxfarmlist">트랙터및부속작업</a>
                                         </li>
                                          <li>
-                                            <a href="#">파종이식기계류</a>
-                                        </li>                                                                                                                                                              
+                                            <a href="#" id="K" class="ajaxfarmlist">파종이식기계류</a>
+                                        </li>                                                                                                                                                               
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
@@ -165,23 +208,50 @@ $(document).ready(function (){
 
         <div id="page-wrapper">
           <div class="row">
-			<div class="page-masonry">
-	           <c:forEach var="farmMachine" items="${ farmMachineList }">
+			<div class="page-masonry" id="sp1">
+			    <c:forEach var="farmMachine" items="${ farmMachineList }">
 			      <div class="item" >
- 			      <div style="float: left">
-			      	<img src="/farmingtool/resources/images/fmimage/${ farmMachine.fmPicture }" width="200px" height="180px" style="padding-right: 4px">
-			       </div>
-			      	<div style="float: left" >
-			      	 ${ farmMachine.fmName }
-			      	</div> 
-			        <div style="float:left;">
-			         ${ farmMachine.fmStructure }
-			        </div>
+					<div class="detail1" style="float: left; border: .3em">
+					  <img src="/farmingtool/resources/images/fmimage/${ farmMachine.fmPicture }" width="200px" height="180px" style="padding-right: 4px">
+	
+					    <p>${ farmMachine.fmName }</p>
+						<hr />
+					    <button>대여하기</button>
+
+					</div>
+					<div class="detail2" style="float: left; border: .3em; width: 500px;height: 498px; overflow: auto;">
+					 <table>
+					  <tr>
+					   <td><br>⊙ 구조 <br>${ farmMachine.fmStructure }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 기능및용도 <br>${ farmMachine.fmFunction }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 종류 <br>${ farmMachine.fmKinds }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 보급과정 <br>${ farmMachine.fmDimentions }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 부착용작업기 <br>${ farmMachine.fmWorkingMachine }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 특징 <br>${ farmMachine.fmCharacteristic }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 개요 <br>${ farmMachine.fmOutline }</td>
+					  </tr>
+					  <tr>
+					   <td><br>⊙ 필요성 <br>${ farmMachine.fmNecessity }</td>
+					  </tr>					  
+					 </table>
+					</div>
 			      </div>
-		    </c:forEach> 
+			   		</c:forEach>
+			      </div>
 			</div>
 		  </div>
-        </div>
         <!-- /#page-wrapper -->
 
     </div>

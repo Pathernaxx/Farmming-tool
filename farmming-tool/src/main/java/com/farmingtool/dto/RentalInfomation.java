@@ -1,18 +1,16 @@
 package com.farmingtool.dto;
 
-import java.util.List;
+import java.util.Date;
 
-public class DetailMachine {
-	private String machineNo;
-	private String fmNo;
+public class RentalInfomation {
 	private String machineName;
 	private String machineInformation;
 	private int machineRentalCost;
-	private int machineStatus;
 	private int locationNo2;
-	
-	//사용 가능한 기계번호 리스트
-	private List<String> rentableMachines;
+	private String machineNo;
+	private String memberId;
+	private Date historyRentalDate;
+	private Date historyReturnDate;
 	
 	public String getMachineNo() {
 		return machineNo;
@@ -20,11 +18,23 @@ public class DetailMachine {
 	public void setMachineNo(String machineNo) {
 		this.machineNo = machineNo;
 	}
-	public String getFmNo() {
-		return fmNo;
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setFmNo(String fmNo) {
-		this.fmNo = fmNo;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	public Date getHistoryRentalDate() {
+		return historyRentalDate;
+	}
+	public void setHistoryRentalDate(Date historyRentalDate) {
+		this.historyRentalDate = historyRentalDate;
+	}
+	public Date getHistoryReturnDate() {
+		return historyReturnDate;
+	}
+	public void setHistoryReturnDate(Date historyReturnDate) {
+		this.historyReturnDate = historyReturnDate;
 	}
 	public String getMachineName() {
 		return machineName;
@@ -44,23 +54,11 @@ public class DetailMachine {
 	public void setMachineRentalCost(int machineRentalCost) {
 		this.machineRentalCost = machineRentalCost;
 	}
-	public int getMachineStatus() {
-		return machineStatus;
-	}
-	public void setMachineStatus(int machineStatus) {
-		this.machineStatus = machineStatus;
-	}
 	public int getLocationNo2() {
 		return locationNo2;
 	}
 	public void setLocationNo2(int locationNo2) {
 		this.locationNo2 = locationNo2;
-	}
-	public List<String> getRentableMachines() {
-		return rentableMachines;
-	}
-	public void setRentableMachines(List<String> rentableMachines) {
-		this.rentableMachines = rentableMachines;
 	}
 	
 }
