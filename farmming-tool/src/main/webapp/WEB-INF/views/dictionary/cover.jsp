@@ -11,6 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.js"></script>
     <title>FARM MACHINE</title>
     <!-- Bootstrap Core CSS -->
     <link rel='Stylesheet' href='/farmingtool/resources/styles/bootstrap.css' />
@@ -44,18 +45,6 @@
  
 </style>
 <script type="text/javascript">
-/* $(function(){
-	var container = $('.page-masonry');
-	$container.imagesLoaded( function () {
-	       $container.masonry({
-	           columnWidth: '.item',
-	           itemSelector: '.item'
-	       });
-        });
-	
-
-	}); */
-
 $(function(){
 	
 	$(".ajaxfarmlist").click(function( event ) {
@@ -102,96 +91,6 @@ $(function(){
 			
 		});
 		
-		
-		
-
-	
-	
-	
-/* 	$('#FA').click(function(event) {
-		alert("하이!A");
-		$("#sp1").empty();
-		
-		$.ajax({
-			url : "/farmingtool/dictionary/ajaxfmList.action",
-			async : false,
-			type : "GET",
-			data : {
-				typeNo : "A"
-			},
-			success : function(fmBytypeNo){
-				if (fmBytypeNo != null){
-					$.each(fmBytypeNo, function(index, listitem){
-						var html=
-							"<div class='item'>"+
-							      "<div style='float: left'>"+
-							   	   	"<a href='showdetail.action?fmno="+listitem.fmNo+"'>"+
-							      	"<img src='/farmingtool/resources/images/fmimage/"+ listitem.fmPicture +"' width='200px' height='180px' style='padding-right: 4px'>"+
-							        "</a>"+
-						       "</div>"+
-						       "<div style='float: left' >"+
-						      	 	"<a href='showdetail.action?fmno="+listitem.fmNo+"'>"+listitem.fmName+"</a>"+
-						      	"</div>"+
-						      "</div>";
-							
-					$("#sp1").append($(html)); 
-						
-					});
-					
-				}
-				else{
-					alert("success but exception");
-				}
-				
-			},
-			error : function(){
-				alert("error");
-			}
-		});
-		event.preventDefault(); 
-	});
-	$('#FB').click(function(event) {
-		alert("하이!B");
-		$("#sp1").empty();
-		
-		$.ajax({
-			url : "/farmingtool/dictionary/ajaxfmList.action",
-			async : false,
-			type : "GET",
-			data : {
-				typeNo : "B"
-			},
-			success : function(fmBytypeNo){
-				if (fmBytypeNo != null){
-					$.each(fmBytypeNo, function(index, listitem){
-						var html=
-							"<div class='item'>"+
-							      "<div style='float: left'>"+
-							   	   	"<a href='showdetail.action?fmno="+listitem.fmNo+"'>"+
-							      	"<img src='/farmingtool/resources/images/fmimage/"+ listitem.fmPicture +"' width='200px' height='180px' style='padding-right: 4px'>"+
-							        "</a>"+
-						       "</div>"+
-						       "<div style='float: left' >"+
-						      	 	"<a href='showdetail.action?fmno="+listitem.fmNo+"'>"+listitem.fmName+"</a>"+
-						      	"</div>"+
-						      "</div>";
-							
-					$("#sp1").append($(html)); 
-						
-					});
-					
-				}
-				else{
-					alert("success but exception");
-				}
-				
-			},
-			error : function(){
-				alert("error");
-			}
-		});
-		event.preventDefault(); 
-	}); */
 });
 
 
