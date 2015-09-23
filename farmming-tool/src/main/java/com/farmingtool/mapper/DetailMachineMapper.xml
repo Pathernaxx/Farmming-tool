@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.farmingtool.mapper.DetailMachineMapper">
+
+	<update id="updateDetailMachineStatus"  parameterType="String">
+		UPDATE detailmachine
+		SET machine_status = 1
+		WHERE machine_no = #{machineNo}
+	</update>
+	
+	<!-- 선택 날짜에 예약 가능한 기계 대수 카운트 : 예약 가능,불가능 판단 / 달력에 예약 가능 기계 대수 표시 -->
+	<select id="countRentableMachine" parameterType="hashMap" resultType="String">
+		SELECT machine_no 
+		FROM detailmachine 
+		WHERE machine_no NOT IN 
+			(	
+				SELECT machine_no 
+				FROM rental_history 
+				WHERE history_rentaldate = #{historyRentalDate}
+			)	
+				and fm_no = #{fmNo} and machine_status = 0 and location_no2 = #{locationNo2}
+	</select>
+	
+	<select id="countDetailMachine" parameterType="hashMap" resultType="int">
+		SELECT count(machine_no)
+		FROM detailmachine
+		WHERE fm_no = #{fmNo} and location_no2 = #{locationNo2}
+	</select>
+	
+	<!--  -->
+	<select id="searchLocation2" parameterType="String" resultMap="getLocation2">
+		SELECT location_no2, location_name2
+		FROM location2
+		WHERE location_no1 = #{location1}
+	</select>
+	
+	<resultMap id="getLocation2" type="Location2">
+		<id column="location_no2" property="locationNo2"/>
+		<result column="location_name2" property="locationName2"/>
+	</resultMap>
+	
+	<!--  -->
+	<select id="rentalCheck" parameterType="hashMap" resultType="RentalInfomation">
+		SELECT d.machine_name, d.machine_information, d.machine_rentalcost, d.location_no2, r.member_id, r.machine_no, r.history_rentaldate, r.history_returndate
+		FROM detailmachine d, rental_history r
+		WHERE d.machine_no = #{machineNo} and d.machine_no = r.machine_no and r.history_no = #{historyNo};
+	</select>
+	
+	<!-- 전체 렌탈 가능 대수 -->
+	<select id="rentalMachineCount" parameterType="hashMap" resultType="int">
+		SELECT count(machine_no)
+		FROM detailmachine
+		WHERE location_no2 = #{locationNo2} AND fm_no = #{fmNo} AND machine_status != '2'
+	</select>
+	
+	<!-- 날짜별 렌탈 다능 대수 -->
+	<select id="rentalMachineCountByDate" parameterType="hashMap" resultType="int">
+		SELECT r.*
+		FROM rental_history r, detailmachine d
+		WHERE r.machine_no = d.machine_no 
+			AND d.fm_no = #{fmNo} 
+			AND r.history_rentaldate != '15/09/01' 
+			AND d.machine_status != '2';
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

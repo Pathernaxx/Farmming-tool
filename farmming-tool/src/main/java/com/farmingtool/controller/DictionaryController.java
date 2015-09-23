@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.farmingtool.dto.FarmMachine;
@@ -32,18 +33,42 @@ public class DictionaryController {
 		ModelAndView mav = new ModelAndView();
 		List<FarmMachine> farmMachineList = farmMachineService.getFarmMachineList();
 		
-	/*	for(FarmMachine fmList :  farmMachineList){
+		/*for(FarmMachine fmList :  farmMachineList){
 			System.out.println(fmList.getFmNo());
 		}*/
-
 		
 		mav.addObject("farmMachineList", farmMachineList);
 		mav.setViewName("dictionary/cover");
-		
-		
- 		return mav;
-		
+
+		return mav;
 	}
+	@RequestMapping(value="showdetail.action", method= RequestMethod.GET)
+	public ModelAndView DictionaryDetail(String fmno){
+		ModelAndView mav = new ModelAndView();
+		FarmMachine farmMachineDetail = farmMachineService.getFarmMachineDetail(fmno);
+		mav.addObject("farmMachineDetail", farmMachineDetail);
+		mav.setViewName("dictionary/coverdetail");
+		return mav;
+	}
+	
+	
+	
+	
+	@RequestMapping(value="ajaxfmList.action", method = RequestMethod.GET)
+	@ResponseBody
+	public List<FarmMachine> ajaxfmList(String typeNo) {
+		List<FarmMachine> fmBytypeNo = farmMachineService.getFarmMachineDetailBytypeNo(typeNo);
+	
+		return fmBytypeNo;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 }

@@ -1,50 +1,50 @@
-package com.farmingtool.repository;
+package com.farmingtool.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.farmingtool.dto.FarmMachine;
 import com.farmingtool.dto.Type;
-import com.farmingtool.mapper.FarmMachineMapper;
+import com.farmingtool.repository.FarmMachineRepository;
 
-@Repository(value="farmMachineRepository")
-public class OracleFarmMachineRepository implements FarmMachineRepository{
-	
-	private FarmMachineMapper farmMachineMapper;
+@Service("farmMachineService")
+public class PlanFarmMachineService implements FarmMachineService{
+
+	private FarmMachineRepository farmMachineRepository;
 	@Autowired
-	@Qualifier("farmMachineMapper")
-	public void setFarmMachineMapper(FarmMachineMapper farmMachineMapper) {
-		this.farmMachineMapper = farmMachineMapper;
+	@Qualifier("farmMachineRepository")
+	public void setFarmMachineRepository(FarmMachineRepository farmMachineRepository) {
+		this.farmMachineRepository = farmMachineRepository;
 	}
 	
 	
 	@Override
 	public List<FarmMachine> getFarmMachineList() {
 		// TODO Auto-generated method stub
-		return farmMachineMapper.getFarmMachineList();
+		return farmMachineRepository.getFarmMachineList();
 	}
 
 
 	@Override
 	public FarmMachine getFarmMachineDetail(String fmno) {
 		// TODO Auto-generated method stub
-		return farmMachineMapper.getFarmMachineDetail(fmno);
+		return farmMachineRepository.getFarmMachineDetail(fmno);
 	}
 
 
 	@Override
 	public List<FarmMachine> getFarmMachineAndTypeName() {
-		List<FarmMachine> farmMachineList = farmMachineMapper.getFarmMachineAndTypeName();
+		List<FarmMachine> farmMachineList = farmMachineRepository.getFarmMachineAndTypeName();
 		return farmMachineList;
 	}
 
 
 	@Override
 	public List<Type> getTypes() {
-		List<Type> types = farmMachineMapper.getTypes();
+		List<Type> types = farmMachineRepository.getTypes();
 		return types;
 	}
 
@@ -52,21 +52,25 @@ public class OracleFarmMachineRepository implements FarmMachineRepository{
 	@Override
 	public List<FarmMachine> searchMachineByLocation(String location2) {
 		List<FarmMachine> farmMachineListByLocation = 
-				farmMachineMapper.searchMachineByLocation(location2);
+				farmMachineRepository.searchMachineByLocation(location2);
 		return farmMachineListByLocation;
 	}
 
+
 	@Override
 	public List<Type> getTypesByLocation(String location2) {
-		List<Type> types = farmMachineMapper.getTypesByLocation(location2);
+		List<Type> types = farmMachineRepository.getTypesByLocation(location2);
 		return types;
-	}
+	}	
 	
 	@Override
 	public List<FarmMachine> getFarmMachineDetailBytypeNo(String typeNo) {
 		// TODO Auto-generated method stub
-		return farmMachineMapper.getFarmMachineDetailBytypeNo(typeNo);
+		return farmMachineRepository.getFarmMachineDetailBytypeNo(typeNo);
 	}
 	
 	
+
+
+
 }

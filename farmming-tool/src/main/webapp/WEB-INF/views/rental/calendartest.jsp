@@ -51,7 +51,7 @@ $(function(){
 	           itemSelector: '.item'
 	       });
         });
-	});
+});
 
 </script>
 </head>
@@ -427,23 +427,28 @@ $(function(){
 				<select id="rental-option" name="tool-small">
 					<option value="" selected="selected">기계선택2-소분류</option>
 					<option value="농용트랙터">농용트랙터</option>
-				</select> &nbsp; <input type="button" id="rental_search" name="search" value="검색" onclick="#"/> <br/><br/>
+				</select> &nbsp; 
+				<input type="button" id="rental_search" name="search" value="검색" /> <br/><br/>
 			</form>
 			
 			<h4 id="rental-condition-title" style="font-weight: bold;color:#006699">대여시 안내사항 및 주의사항</h4>
 			
 			<div id="message">
-				&nbsp;■ 대여가격 : <br/>
+				&nbsp;■ 보유 대수 : <input type="text" id="totalDetailMachine" /><br/>
+				&nbsp;■ 대여가격 : <input type="text" id="rentalCost"/><br/>
 				&nbsp;■ 대여일 / 반납일 : <br/>
 				&nbsp;■ 주의 사항 : <br/>
 				&nbsp;<font style='color:red;font-weight: bold;'>※ 교육을 이수하지 않을 시 예약이 취소될 수 있습니다. ※</font>
 			</div>
 			
 			<div id="date-popover" class="popover top">
-			    <div id="date-popover-content" class="popover-content"></div>
+			    <div id="date-popover-content" class="popover-content">
+			    </div>
 			</div>
 			
-			<div id="my-calendar" style="margin-top:20px"></div>
+			<div id="calendar-area">
+				<!-- <div id="my-calendar" style="margin-top:20px"></div> -->
+			</div>
 			<br/><br/><br/>
 		
 			
@@ -469,57 +474,88 @@ $(function(){
 	<!-- Calendar Theme JavaScript -->
 	<script src="/farmingtool/resources/js/zabuto_calendar.min.js"></script>
 	<script type="application/javascript">
+	
+	$(function() {
+		$("#rental_search").click(function() {
+			
+			var fmNo = 'FA020000';
+			var locationNo2 = 2;
+			
+			$.ajax({
+				url: '/farmingtool/rental/resultCalendar.action',
+				type: 'get',
+				data: {
+					"fmNo" : fmNo,
+					"locationNo2" : locationNo2
+				},
+				success: function(result) {
+					//기계소분류 총 대수
+					var countDetailMachine = result;
+					
+					$("#totalDetailMachine").val(countDetailMachine);
+					$("#calendar-area").html('<div id="my-calendar" style="margin-top:20px"></div>');
+					$("#my-calendar").zabuto_calendar({
+			        	/* ajax: {
+			                url: "/boot2/resources/php/show_data.php",
+			                modal: true
+			            }, */
+			            action: function () {
+			                return myDateFunction(this.id, false);
+			            },
+			            /* action_nav: function () {
+			                return myNavFunction(this.id);
+			            }, */
+			            data: eventData,
+			        	language: "ko",
+			        	year: 2015,
+			            month: 9,
+			            show_previous: true,
+			            show_next: 12,
+			            cell_border: true,
+			            today: true,
+			            show_days: true,
+			            weekstartson: 0,
+			            nav_icon: {
+			              prev: '<i class="fa fa-chevron-circle-left"></i>',
+			              next: '<i class="fa fa-chevron-circle-right"></i>'
+			            }
+
+			        	});
+				},
+				error: function(xhr, status) {
+					alert("error");
+				}
+			});
+			
+			
+		});
 		var eventData = [ //이벤트 있는 날짜 배열로 받아서 사용할 것(JSON)
-		                 {"date":"2015-09-01","badge":false,"title":"Example 1"},
-		                 {"date":"2015-09-15","badge":true,"title":"Example 2"}
-		            	];
+			                 {"date":"2015-09-01","badge":false,"title":"Example 1"},
+			                 {"date":"2015-09-15","badge":true,"title":"Example 2"},
+			                 {"date":"2015-09-20","badge":false,"title":"Example 2"}
+			            	];
 
-	    $(document).ready(function () {
-	        $("#my-calendar").zabuto_calendar({
-	        	/* ajax: {
-	                url: "/boot2/resources/php/show_data.php",
-	                modal: true
-	            }, */
-	            action: function () {
-	                return myDateFunction(this.id, false);
-	            },
-	            /* action_nav: function () {
-	                return myNavFunction(this.id);
-	            }, */
-	            data: eventData,
-	        	language: "ko",
-	        	year: 2015,
-	            month: 9,
-	            show_previous: true,
-	            show_next: 12,
-	            cell_border: true,
-	            today: true,
-	            show_days: true,
-	            weekstartson: 0,
-	            nav_icon: {
-	              prev: '<i class="fa fa-chevron-circle-left"></i>',
-	              next: '<i class="fa fa-chevron-circle-right"></i>'
-	            }
-
-	        	});
-	    });
-	    function myDateFunction(id, fromModal) {
-	        $("#date-popover").hide();
-	        if (fromModal) {
-	            $("#" + id + "_modal").modal("hide");
-	        }
-	        var date = $("#" + id).data("date");
-	        var hasEvent = $("#" + id).data("hasEvent");
-	        if (hasEvent && !fromModal) {
-	            return false;
-	        }
-	        
-	        $("#date-popover-content").html('<br/>선택한 날짜 : ' + date + '<br/>'+'예약하시겠습니까?<br/><br/>'+
-	        								'<input type="button" value="확인" onclick="moveToCheckRental()"/>&nbsp;'+
-	        								'<input type="button" value="취소" onclick="popoverClose()"/><br/>');
-	        $("#date-popover").show();
-	        return true;
-	    }
+		    function myDateFunction(id, fromModal) {
+		        $("#date-popover").hide();
+		        if (fromModal) {
+		            $("#" + id + "_modal").modal("hide");
+		        }
+		        var date = $("#" + id).data("date");
+		        var hasEvent = $("#" + id).data("hasEvent");
+		        if (hasEvent && !fromModal) {
+		            return false;
+		        }
+		        
+		        $("#date-popover-content").html('<br/>선택한 날짜 : ' + date + '<br/>'+'예약하시겠습니까?<br/><br/>'+
+		        								'<input type="hidden" value="'+date+'" id="rentalDate"/>'+
+		        								'<input type="hidden" value="FA020000" id="fmNo"/>'+
+		        								'<input type="button" value="확인" onclick="moveToCheckRental()"/>&nbsp;'+
+		        								'<input type="button" value="취소" onclick="popoverClose()"/><br/>');
+		        $("#date-popover").show();
+		        return true;
+		    }
+	});
+		
 	    
 	    function popoverClose() {
 	    	$("#date-popover").hide();
@@ -527,35 +563,34 @@ $(function(){
 	    
 	    function moveToCheckRental() {
 	    	//컨트롤러에서 예약처리
-	    	var dummy = "apple";
+	    	//alert($("#rentalDate").val());
+	    	var rentalDate = $("#rentalDate").val();
+	    	var fmNo = $("#fmNo").val();
 	    	$.ajax({
-	    		url: "/farmingtool/rental/moveToCheckRental.action",
+	    		url: "/farmingtool/rental/rentalMachine.action",
 	    		type: "get",
 	    		async: true,
-	    		data: {"dummy" : dummy},
+	    		data: {
+	    			"rentalDate" : rentalDate,
+	    			"fmNo" : fmNo
+	    			},
 	    		success: function(result) { //result
 	    			if(result != null)
 					{
-	    				alert("예약 성공 : 확인 페이지로 이동합니다.")
-						var returnurl = '/farmingtool/rental/moveToCheckRental.action';
+	    				alert("예약 성공 : 확인 페이지로 이동합니다."+result)
+						var returnurl = '/farmingtool/rental/moveToCheckRental.action?machineNo='+result;
 						$(location).attr('href', returnurl);
 					} else {
-						alert('예약 실패 : 다시 시도해주세요.');
+						$("#date-popover").hide();
+						alert("예약 실패 : 모든 기계가 대여 중입니다. 다른 날짜를 선택해주세요.");
 					}
 	    		},
-	    		error: function(xhr, status, error) {
-	    			alert(xhr + '/' + status + '/' + error);
+	    		error: function() {
+	    			alert("예약 실패 : 다시 시도해주세요.");
 	    		}
 	    	});
 	    }
 	    
-	    /* function myNavFunction(id) {
-	        $("#date-popover").hide();
-	        var nav = $("#" + id).data("navigation");
-	        var to = $("#" + id).data("to");
-	        //console.log('nav ' + nav + ' to: \ + to.month + '/' + to.year');
-	        console.log('이게뭐냥');
-	    } */
 	</script>
 </body>
 </html>

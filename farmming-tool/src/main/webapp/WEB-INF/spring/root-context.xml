@@ -37,6 +37,14 @@
 		<property name="sqlSessionFactory" ref="sessionFactory" />
 	</bean>
 	
+	<bean id="detailMachineMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.farmingtool.mapper.DetailMachineMapper" />
+		<property name="sqlSessionFactory" ref="sessionFactory" />
+	</bean>
 	
+	<bean id="accountMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.farmingtool.mapper.AccountMapper" />
+		<property name="sqlSessionFactory" ref="sessionFactory" />
+	</bean>
 	
 </beans>
