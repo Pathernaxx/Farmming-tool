@@ -62,6 +62,10 @@ public class DictionaryController {
 		return fmBytypeNo;
 	}
 	
+	@RequestMapping(value="accident.action", method= RequestMethod.GET)
+	public String Accident(){
+		return "dictionary/accident";
+	}	
 	
 	
 	
