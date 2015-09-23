@@ -199,9 +199,9 @@ public class RentalController {
 	public ModelAndView searchMachineByLocation(String location2) {
 		ModelAndView mav = new ModelAndView();
 		
-		List<Type> types = farmMachineService.getTypesByLocation("1");
+		List<Type> types = farmMachineService.getTypesByLocation(location2);
 		List<FarmMachine> farmMachineListByLocation = 
-				farmMachineService.searchMachineByLocation("1");
+				farmMachineService.searchMachineByLocation(location2);
 		
 		mav.addObject("types", types);
 		mav.addObject("farmMachineList", farmMachineListByLocation);
@@ -210,7 +210,7 @@ public class RentalController {
 	}
 	
 	@RequestMapping(value="searchmachine.action", method=RequestMethod.POST)
-	public String searchMachine(String location2, String fmNo) {
+	public ModelAndView searchMachine(String location2, String fmNo) {
 		System.out.println(location2+","+fmNo);
 		int locationNo2 = Integer.parseInt(location2);
 		
@@ -218,19 +218,33 @@ public class RentalController {
 		params.put("locationNo2", locationNo2);
 		params.put("fmNo", fmNo);
 		
-		//1(횡성군),FA010000(농용트랙터)
-		
 		//detailMachine에서 fm_no를통해(FA010000) 해당 머신을 모두 가져온다.
-		// status 0 : 대여가능, 1 : 대여중,  2: 고장
-		// status가 2가 아닌 숫자를 모두 더하면 총 댓수
+		// status 0 : 대여가능,	 1 : 대여불가능
 		int rentalCount = detailMachineService.rentalMachineCount(params);
 		
 		//rentalhistory에서 rentalDate를 통해 DATE별로  
-		//Status가 0인 카운트를 세서 가져온다  (date는 sysdate기준으로 +1, +2, +3까지만 연습)
-		HashMap<Date, String> map = detailMachineService.rentalMachineCountByDate(params);
+		//Status가 0인 카운트를 세서 가져온다  0:대여 예약, 1: 대여중
+		//(date는 sysdate기준으로 +1, +2, +3까지만 연습)
+		Date nowDate = new Date();
+		Date calDate = null;
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(nowDate); 
 		
-		return "rental";
+		HashMap<Date, Integer> rentalCountByDate = new HashMap<Date, Integer>();
+		for (int i = 0; i < 15; i++) {
+			c.add(Calendar.DATE, 1);
+			calDate = c.getTime();
+			params.put("calDate",calDate);
+			int count = detailMachineService.rentalMachineCountByDate(params);
+			System.out.println(calDate +", "+ count);
+			rentalCountByDate.put(calDate, rentalCount-count);
+		}
 		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject(rentalCountByDate);
+		mav.setViewName("rental/rentalcheck");
+		return mav;
 	}
 
 }
