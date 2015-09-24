@@ -14,7 +14,6 @@
     <!-- <script src="//code.jquery.com/jquery-1.11.3.js"></script> -->
     
     <link rel='Stylesheet' href='/farmingtool/resources/styles/rentalmain.css' />
-    <script type="text/javascript" src="/farmingtool/resources/js/address.jsp"></script>
     
     <!-- Bootstrap Core CSS -->
     <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

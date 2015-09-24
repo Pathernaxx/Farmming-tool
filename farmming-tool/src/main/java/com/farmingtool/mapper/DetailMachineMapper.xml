@@ -60,10 +60,11 @@
 	<!-- 날짜별 렌탈 가능 대수 -->
 	<select id="rentalMachineCountByDate" parameterType="hashMap" resultType="int">
 		SELECT count(r.history_no)
-		FROM rental_history r, detailmachine d
-		WHERE r.machine_no = d.machine_no 
+		FROM rental_history r, DETAILMACHINE d
+		WHERE 
+			r.machine_no = d.machine_no 
 			AND d.fm_no = #{fmNo} 
-			AND r.history_rentaldate = #{calDate} 
+			AND r.history_rentaldate = #{calDate}
 			AND d.location_no2 = #{locationNo2}
 			AND d.machine_status  = '0'
 	</select>
