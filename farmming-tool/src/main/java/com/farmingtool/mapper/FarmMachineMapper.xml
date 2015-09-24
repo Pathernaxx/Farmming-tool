@@ -97,5 +97,22 @@
 </select>
 
 
+
+<select id="getFMSearchBySearchword" parameterType="String" resultMap="farmMachineResult">
+	SELECT <include refid="farmMachinecolunms"></include>
+	from farmMachine
+	where fm_Name LIKE '%'||#{searchword}||'%'
+		or  fm_structure LIKE '%'||#{searchword}||'%'
+		or	fm_function	LIKE '%'||#{searchword}||'%'
+		or	fm_kinds LIKE '%'||#{searchword}||'%'
+		or	fm_dimentions LIKE '%'||#{searchword}||'%'
+		or	fm_workingmachine LIKE '%'||#{searchword}||'%'
+		or	fm_characteristic LIKE '%'||#{searchword}||'%'
+		or	fm_outline LIKE '%'||#{searchword}||'%'
+		or	fm_necessity LIKE '%'||#{searchword}||'%'
+</select>
+
+
+
 </mapper>
 

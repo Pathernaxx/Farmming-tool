@@ -21,4 +21,6 @@ public interface FarmMachineService {
 
 	List<FarmMachine> getFarmMachineDetailBytypeNo(String typeNo);
 
+	List<FarmMachine> getFMSearchBySearchword(String searchword);
+
 }
