@@ -24,7 +24,7 @@
 		UPDATE
 			DETAILMACHINE
 		SET
-			machine_rentalcost = #{ rentalcost }
+			machine_rentalcost = #{ rentalCost }
 		WHERE
 			machine_no = #{machineNo}
 	</update>

@@ -11,10 +11,10 @@ import com.farmingtool.dto.RentalHistory;
 // 렌탈 상태 변경, 회원 교육 이수 삽입, 회원 교육 이수 목록 출력
 public interface AdminMachineSettingMapper {
 	void 					insertDetailMachine(DetailMachine detailMachine);
-	void 					updateDetailMachineCost(HashMap<String, String> params);
+	void 					updateDetailMachineCost(HashMap<String, Integer> params);
 	void 					deleteDetailMachine(String machineNo);
 	List<RentalHistory> 	selectRentalHistory(String locationName);
-	void 					updateRentalHistoryStatus(HashMap<String, String> params);
+	void 					updateRentalHistoryStatus(HashMap<String, Integer> params);
 	void 					insertMemberEducation(MemberEducation memberEducation);
 	List<MemberEducation>	selectMemberEducationById(String memberId);
 }

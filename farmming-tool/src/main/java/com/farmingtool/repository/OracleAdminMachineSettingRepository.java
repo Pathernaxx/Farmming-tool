@@ -31,7 +31,7 @@ public class OracleAdminMachineSettingRepository implements AdminMachineSettingR
 	}
 
 	@Override
-	public void updateDetailMachineCost(HashMap<String, String> params) {
+	public void updateDetailMachineCost(HashMap<String, Integer> params) {
 		// TODO Auto-generated method stub
 		adminMachineSettingMapper.updateDetailMachineCost(params);
 	}
@@ -49,7 +49,7 @@ public class OracleAdminMachineSettingRepository implements AdminMachineSettingR
 	}
 
 	@Override
-	public void updateRentalHistoryStatus(HashMap<String, String> params) {
+	public void updateRentalHistoryStatus(HashMap<String, Integer> params) {
 		// TODO Auto-generated method stub
 		adminMachineSettingMapper.updateRentalHistoryStatus(params);
 	}

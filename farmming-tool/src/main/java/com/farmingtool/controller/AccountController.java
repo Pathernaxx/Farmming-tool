@@ -44,10 +44,10 @@ public class AccountController {
 	{
 		String message = "SUCCESS";
 		
-		if(id.contains("ADMIN_"))
+		if(id.contains("#"))
 		{
-			// ADMIN_ 제거
-			id = id.substring(6);
+			// # 제거(ADMIN용)
+			id = id.substring(1);
 			
 			// 예외 처리
 			// ID 불일치
@@ -215,6 +215,64 @@ public class AccountController {
 		member.setLocationName2(address[1]);
 		
 		accountService.setMember(member);
+		
+		return "home";
+	}
+	
+	@RequestMapping(value="updateMember.action", method=RequestMethod.GET)
+	public ModelAndView updateMember(HttpSession session)
+	{
+		ModelAndView mav = new ModelAndView();
+		Member member = (Member)session.getAttribute("loginuser");
+		
+		String[] phone = member.getMemberPhone1().split("-");
+		String[] mobilePhone = member.getMemberPhone2().split("-");
+		
+		mav.addObject(member);
+		mav.addObject(phone);
+		mav.addObject(mobilePhone);
+		
+		mav.setViewName("admin/memberSetting");
+		return mav;
+	}
+	
+	@RequestMapping(value="updateMember.action", method=RequestMethod.POST)
+	public String updateMemberPost(ServletRequest request)
+	{
+		String id = request.getParameter("loginid");
+		String password = request.getParameter("password1");
+
+		String phone = 
+					request.getParameter("phoneNo1") + "-" + 
+					request.getParameter("phoneNo2") + "-" + 
+					request.getParameter("phoneNo3");
+		String mobilePhone = 
+						request.getParameter("mobilePhone1") + "-" + 
+						request.getParameter("mobilePhone2") + "-" + 
+						request.getParameter("mobilePhone3");
+	
+		String postcode = request.getParameter("postcode");
+		String address1 = request.getParameter("address1");
+		String address2 = request.getParameter("address2");
+		String extraInfo = request.getParameter("extra_info").replace("(", "").replace(")", "");	// (xx동)
+
+		String[] address = address1.split(" ");
+		
+		Member member = new Member();
+		member.setMemberId(id);
+		member.setMemberPassword(password);
+		
+		member.setMemberPhone1(phone);
+		member.setMemberPhone2(mobilePhone);
+		member.setMemberAddress1(address1);
+		member.setMemberAddress2(address2);
+		member.setMemberPostcode(postcode);
+		member.setMemberExtraInfo(extraInfo);
+		
+		// location2 입력
+		member.setLocationName2(address[1]);
+		
+		accountService.setMemberInfo(member);
 		
 		return "home";
 	}

@@ -9,10 +9,10 @@ import com.farmingtool.dto.RentalHistory;
 
 public interface AdminMachineSettingRepository {
 	void 					insertDetailMachine(DetailMachine detailMachine);
-	void 					updateDetailMachineCost(HashMap<String, String> params);
+	void 					updateDetailMachineCost(HashMap<String, Integer> params);
 	void 					deleteDetailMachine(String machineNo);
 	List<RentalHistory> 	selectRentalHistory(String locationName);
-	void 					updateRentalHistoryStatus(HashMap<String, String> params);
+	void 					updateRentalHistoryStatus(HashMap<String, Integer> params);
 	void 					insertMemberEducation(MemberEducation memberEducation);
 	List<MemberEducation>	selectMemberEducationById(String memberId);
 }
