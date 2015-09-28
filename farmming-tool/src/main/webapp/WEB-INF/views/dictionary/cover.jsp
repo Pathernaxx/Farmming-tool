@@ -214,7 +214,24 @@ $(function(){
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-				<li><i class="fa fa-user fa-fw"></i></li><li><a href="#"><p>로그인</p></a></li>
+            	
+				<li><i class="fa fa-user fa-fw"></i></li>
+				<c:choose>
+					<c:when test="${ loginuser eq null }">
+						<li><a href="/farmingtool/account/login.action"><p>로그인</p></a></li>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${ USERTYPE eq 'ADMIN' }">
+								<li><p>${ loginuser.adminName }</p></li>
+							</c:when>
+							<c:otherwise>
+								<li><p>${ loginuser.memberName }</p></li>
+							</c:otherwise>
+						</c:choose>
+						
+					</c:otherwise>
+				</c:choose>
             </ul>
             <!-- /.navbar-top-links -->
 
