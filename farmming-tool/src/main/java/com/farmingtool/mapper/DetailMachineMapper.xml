@@ -54,17 +54,19 @@
 	<select id="rentalMachineCount" parameterType="hashMap" resultType="int">
 		SELECT count(machine_no)
 		FROM detailmachine
-		WHERE location_no2 = #{locationNo2} AND fm_no = #{fmNo} AND machine_status != '2'
+		WHERE location_no2 = #{locationNo2} AND fm_no = #{fmNo} AND machine_status != '1'
 	</select>
 	
-	<!-- 날짜별 렌탈 다능 대수 -->
+	<!-- 날짜별 렌탈 가능 대수 -->
 	<select id="rentalMachineCountByDate" parameterType="hashMap" resultType="int">
-		SELECT r.*
-		FROM rental_history r, detailmachine d
-		WHERE r.machine_no = d.machine_no 
+		SELECT count(r.history_no)
+		FROM rental_history r, DETAILMACHINE d
+		WHERE 
+			r.machine_no = d.machine_no 
 			AND d.fm_no = #{fmNo} 
-			AND r.history_rentaldate != '15/09/01' 
-			AND d.machine_status != '2';
+			AND r.history_rentaldate = #{calDate}
+			AND d.location_no2 = #{locationNo2}
+			AND d.machine_status  = '0'
 	</select>
 	
 </mapper>

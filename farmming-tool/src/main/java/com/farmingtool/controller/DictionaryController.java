@@ -62,8 +62,26 @@ public class DictionaryController {
 		return fmBytypeNo;
 	}
 	
+	@RequestMapping(value="accident.action", method= RequestMethod.GET)
+	public ModelAndView Accident(){
+		ModelAndView mav = new ModelAndView();
+		String key ="rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D";
+		mav.addObject("key", key);
+		mav.setViewName("dictionary/accident");
+		return mav;
+	}	
 	
-	
+	@RequestMapping(value="ajaxfmSearch.action", method = RequestMethod.GET)
+	@ResponseBody
+	public List<FarmMachine> ajaxfmSearch(String searchword) {
+		List<FarmMachine> fmSearchList = farmMachineService.getFMSearchBySearchword(searchword);
+
+		/*for(FarmMachine fmList :  fmSearchList){
+		System.out.println(fmList.getFmNo());
+		}*/
+		
+		return fmSearchList;
+	}
 	
 	
 	
