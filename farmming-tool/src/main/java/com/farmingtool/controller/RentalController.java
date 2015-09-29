@@ -60,11 +60,7 @@ public class RentalController {
 	
 	
 	@RequestMapping(value="rentalmain.action", method=RequestMethod.GET)
-	public String rentalView(HttpSession session) {
-		/*if(session.getAttribute("loginuser") == null || session.getAttribute("loginuser") ==""){
-			return "account/login";
-		}*/
-		
+	public String rentalView() {
 		return "rental/rentalmain";
 	}
 	
