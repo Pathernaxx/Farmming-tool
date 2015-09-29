@@ -117,16 +117,6 @@ $(document).ready(function (){
 							}
 							$("#totalDetailMachine").val(data[0]);//보유 대수 찍어주는 것
 							$("#rentalCost").val(data[1]);//렌탈 가격 찍어주는 것
-							/** 이거 어디서 처리해야하나... 이미 찍히는 것 같은데
-							 * 
-							 * 
-							 *
-							 * $(".fmNo").val(selected2);
-							 * 
-							 * 
-							 *
-							 *
-							 */							
 						},
 						error : function(xhr, status, error) {
 							alert('입력이 에러');

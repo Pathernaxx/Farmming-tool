@@ -389,32 +389,42 @@ $(function(){
 
         <div id="page-wrapper">
           <div class="row">
-			<div id="rentalCheck">대여자, 대여기계, 대여일, 반납일, 주의사항
-				<table>
+			<div id="rentalCheck">
+				<table border="solid 1px">
 					<tr>
 						<td>대여자</td>
-						<td>대여자</td>
+						<td>${info.memberId}</td>
 					</tr>
 					<tr>
 						<td>대여기계</td>
-						<td>기계</td>
+						<td>${info.machineName}</td>
+					</tr>
+					<tr>
+						<td>대여금액</td>
+						<td>${info.machineRentalCost}</td>
+					</tr>
+					<tr>
+						<td>대여장소</td>
+						<td>${info.locationNo2}</td>
 					</tr>
 					<tr>
 						<td>대여일</td>
-						<td>일</td>
+						<td>${info.historyRentalDate}</td>
 					</tr>
 					<tr>
 						<td>반납일</td>
-						<td>일</td>
+						<td>${info.historyReturnDate}</td>
 					</tr>
 					<tr>
-						<td>주의사항</td>
+						<td colspan="2">주의사항</td>
 					</tr>
 					<tr>
-						<td>주의사항내용</td>
+						<td style='color:red;font-weight: bold;' colspan="2">
+						${info.machineInformation}
+						※ 교육을 이수하지 않을 시 예약이 취소될 수 있습니다. ※<br/>
+						반납은 대여일 다음날 오전 10시까지 하셔야 불이익이 없습니다.</td>
 					</tr>
 				</table>
-				<input type="text" value="${machineNo}"/>
 			</div>
 		  </div>
         </div>

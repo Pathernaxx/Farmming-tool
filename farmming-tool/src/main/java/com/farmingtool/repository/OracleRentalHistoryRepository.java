@@ -22,10 +22,9 @@ public class OracleRentalHistoryRepository implements RentalHistoryRepository{
 	}
 	
 	@Override
-	public void insertRentalHistory(RentalHistory history) {
-
-		rentalHistoryMapper.insertRentalHistory(history);
-		
+	public int insertRentalHistory(RentalHistory history) {
+		int historyNo = rentalHistoryMapper.insertRentalHistory(history);
+		return historyNo;
 	}
 
 	

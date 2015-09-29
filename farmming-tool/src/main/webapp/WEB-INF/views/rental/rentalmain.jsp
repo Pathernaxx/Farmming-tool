@@ -291,7 +291,10 @@
 				&nbsp;■ 보유 대수 : <input type="text" id="totalDetailMachine" /><br/>
 				&nbsp;■ 대여가격 : <input type="text" id="rentalCost"/><br/>
 				&nbsp;■ 주의 사항 : <br/>
-				&nbsp;<font style='color:red;font-weight: bold;'>※ 교육을 이수하지 않을 시 예약이 취소될 수 있습니다. ※</font>
+				&nbsp;<font style='color:red;font-weight: bold;'>
+				※ 교육을 이수하지 않을 시 예약이 취소될 수 있습니다. ※<br/>
+				반납은 대여일 다음날 오전 10시까지 하셔야 불이익이 없습니다.
+				</font>
 			</div>
 			
 			<div id="date-popover" class="popover top">

@@ -23,10 +23,9 @@ public class PlanRentalHistoryService implements RentalHistoryService {
 	}
 
 	@Override
-	public void insertRentalHistory(RentalHistory history) {
-
-		rentalHistoryRepository.insertRentalHistory(history);
-		
+	public int insertRentalHistory(RentalHistory history) {
+		int historyNo = rentalHistoryRepository.insertRentalHistory(history);
+		return historyNo;
 	}
 
 	

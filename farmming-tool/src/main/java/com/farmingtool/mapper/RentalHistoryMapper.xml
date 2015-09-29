@@ -7,6 +7,9 @@
 <mapper namespace="com.farmingtool.mapper.RentalHistoryMapper">
 
 	<insert id="insertRentalHistory" parameterType="RentalHistory">
+		<selectKey keyProperty="historyNo" order="AFTER" resultType="int">
+			select rental_history_sequence.currval from dual
+		</selectKey>
 		INSERT INTO rental_history(history_no, member_id, history_rentaldate, history_returndate, history_status, machine_no)
 		VALUES (rental_history_sequence.nextval, #{memberId}, #{historyRentalDate}, #{historyReturnDate}, #{historyStatus}, #{machineNo})
 	</insert>
