@@ -44,7 +44,7 @@ public class AdminContorller {
 			rentalHistory = adminMachineSettingService.getRentalHistory(admin.getAdminLocation2());
 		
 		mav.addObject("historys", rentalHistory);
-		mav.setViewName("admin/list");
+		mav.setViewName("admin/rentlist");
 		
 		return mav;
 	}
