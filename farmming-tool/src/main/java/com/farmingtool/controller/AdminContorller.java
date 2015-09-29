@@ -54,7 +54,7 @@ public class AdminContorller {
 	@ResponseBody
 	public void changeStatus(int status, int historyNo)
 	{
-		System.out.println(status + "/" + historyNo);
+		
 		adminMachineSettingService.setRentalHistoryStatus(status+1, historyNo);
 	}
 }
