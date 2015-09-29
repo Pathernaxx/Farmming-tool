@@ -1,6 +1,10 @@
 package com.farmingtool.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
+import com.farmingtool.dto.Accident;
 import com.farmingtool.dto.FarmMachine;
 import com.farmingtool.service.FarmMachineService;
 
@@ -50,6 +57,21 @@ public class DictionaryController {
 		mav.setViewName("dictionary/coverdetail");
 		return mav;
 	}
+	@RequestMapping(value="test.action", method= RequestMethod.GET)
+	public ModelAndView test11(){
+		
+		ModelAndView mav = new ModelAndView();
+		List<FarmMachine> farmMachineList = farmMachineService.getFarmMachineList();
+		
+		/*for(FarmMachine fmList :  farmMachineList){
+			System.out.println(fmList.getFmNo());
+		}*/
+		
+		mav.addObject("farmMachineList", farmMachineList);
+		mav.setViewName("dictionary/test3");
+
+		return mav;
+	}
 	
 	
 	
@@ -62,14 +84,33 @@ public class DictionaryController {
 		return fmBytypeNo;
 	}
 	
-	@RequestMapping(value="accident.action", method= RequestMethod.GET)
-	public ModelAndView Accident(){
-		ModelAndView mav = new ModelAndView();
-		String key ="rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D";
-		mav.addObject("key", key);
-		mav.setViewName("dictionary/accident");
-		return mav;
-	}	
+	   @RequestMapping(value="accident.action", method= RequestMethod.GET)
+	   @ResponseBody
+	   public List<Accident> Accident(String selectVal){
+	      List<Accident> accs = new ArrayList<Accident>();
+	         try{
+	            String path = "http://www.rda.go.kr/openapidata/service/rdamachinesafe_api/rdamachinesafe_list?numOfRows=109&searchword="+selectVal+"&ServiceKey=rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D";   
+	            
+	            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	            DocumentBuilder builder = factory.newDocumentBuilder();
+	            
+	            Document document = builder.parse(path);
+	            NodeList content = document.getElementsByTagName("content");
+	            NodeList downurl = document.getElementsByTagName("downurl");
+	            NodeList pclass = document.getElementsByTagName("PClass");
+	            
+	            for(int i=0; i< content.getLength(); i++){
+	            	Accident acc = new Accident();
+	               acc.setContent(content.item(i).getFirstChild().getNodeValue());  
+	               acc.setDownUrl(downurl.item(i).getFirstChild().getNodeValue());
+	               acc.setpClass(pclass.item(i).getFirstChild().getNodeValue());
+	               accs.add(acc);
+	            }
+	         }catch(Exception e){
+	            e.printStackTrace();
+	         }
+	      return accs;
+	   }   
 	
 	@RequestMapping(value="ajaxfmSearch.action", method = RequestMethod.GET)
 	@ResponseBody

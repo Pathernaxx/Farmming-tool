@@ -104,21 +104,20 @@ public class RentalController {
 	}
 	
 	
-	@RequestMapping(value="rentalMachine.action", method=RequestMethod.GET)
+	@RequestMapping(value="rentalMachine.action", method=RequestMethod.POST)
 	@ResponseBody
 	public String rentalMachine(HttpServletRequest request, HttpSession session) throws ParseException {
 		
 		//String memberId = ((Member)session.getAttribute("loginuser")).getMemberId();
 		String memberId = "user1";
 		int statusNo = 1;
-		int locationNo2 = 2;
+		String locationNo2 = request.getParameter("locationNo2");
 		
 		/* 예약처리는 여기서 페이지 이동은 jsp ajax에서 */
 		String rentalDate = request.getParameter("rentalDate");
 		String machineNo= null;
 							//request.getParameter("machineNo");
 		String fmNo = request.getParameter("fmNo");
-		System.out.println(fmNo);
 		
 		String result = null;
 		

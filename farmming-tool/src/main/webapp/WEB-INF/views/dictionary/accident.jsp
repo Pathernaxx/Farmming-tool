@@ -46,48 +46,36 @@ $(document).ready(function (){
 		  itemSelector: '.item',
 		  isAnimated: true
 	});
-	/* 하아 모르겠다!!!!! */
-	var key = "rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D";
-	alert(key);
+	
+	var selectVal = $("#pClassType").val();
+	
 	$.ajax({
-		url: "http://www.rda.go.kr/openapidata/service/rdamachinesafe_api/rdamachinesafe_list",
-		dataType: "xml",
+        url : "/farmingtool/dictionary/accident.action",
+        async : false,
+        type : "GET",		
+        dataType: "json",
 		contentType: "application/xml; charset=UTF-8",
-		async: false,
-		data: {
-			searchword:"",
-			numOfRows:"109",
-			ServiceKey: key
-		},
-		success : response_parse,
+        data : {
+        	searchword : selectVal
+        },
+        success : 	function(accs){
+    		$.each(accs, function(index, data){
+    			var html = "<div class='item'>"+
+    					    "<p>"+ data.content +"</p>"+
+    					    "<a href="+ data.downUrl +"><p>다운로드링크</p></a>"+
+    					    "<p>"+ data.pClass +"</p>"+
+    				       "</div>";
+    			$(".page-masonry").append(html);
+    		});
+    	},
 		error : function(xhr, ajaxOptions, thrownError){
 			console.log(xhr.status);
 			console.log(thrownError);
 		}
 	});
 	
-	function response_parse(xml){
-		$accident = $(xml).find("item");
-		
-		var count = $accident.length;
-		$(".page-masonry").html("<b>사고사례수: "+ count + "건</b>");
-		
-		$accident.each(function(){
-			var acc_content = $(this).find("content").text();
-			var acc_downurl = $(this).find("downurl").text();
-			var acc_pclass = $(this).find("PClass").text();
-			
-			var html = "<div class='item'>"+
-						"<div>"+
-						"<p>"+acc_content+"</p>"+
-						"<p>"+acc_downurl+"</p>"+
-						"<p>"+acc_pclass+"</p>"+
-						"</div>"+
-			           "</div>";
-		$(".page-masonry").append(html);
-		});
-		
-	}
+
+
 });
 
 </script>
@@ -191,9 +179,29 @@ $(document).ready(function (){
 
         <div id="page-wrapper">
           <div class="row">
+          	<select id="pClassType">
+				<option value="">전체</option>
+			    <option value="교통사고 판례해설">교통사고 판례해설</option>
+			    <option value="교통표지">교통표지</option>
+			    <option value="농기계 사고사례">농기계 사고사례</option>
+			    <option value="농기계 사고실태">농기계 사고실태</option>
+			    <option value="농기계 형식별 안전이용">농기계 형식별 안전이용</option>
+			    <option value="농기계별 안전이용">농기계별 안전이용</option>
+			    <option value="농작업 안전 일반사항">농작업 안전 일반사항</option>
+			    <option value="농작업 안전수칙">농작업 안전수칙</option>
+			    <option value="농작업 안전용품">농작업 안전용품</option>
+			    <option value="도로 상황별 안전사고 예방요령">도로 상황별 안전사고 예방요령</option>
+			    <option value="도로안전 운행요령">도로안전 운행요령</option>
+			    <option value="등화장치부착 및 조작">등화장치부착 및 조작</option>
+			    <option value="안전검정">안전검정</option>
+			    <option value="안전검정 기준 및 방법">안전검정 기준 및 방법</option>
+			    <option value="안전표지">안전표지</option>
+			    <option value="위험지역 작업요령">위험지역 작업요령</option>
+			    <option value="작업환경별 농작업요령">작업환경별 농작업요령</option>
+			</select>
 			<div class="page-masonry">
 			 <div class="item">
-			 
+		       </div>
 			 </div>
 			</div>
 		  </div>
