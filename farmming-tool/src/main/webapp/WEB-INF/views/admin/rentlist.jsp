@@ -12,9 +12,10 @@
 		$('.history').on('click', '.status', function() {
 			var id = $(this).parents('.historyItem').attr('id');
 			var status = $(this).attr('id');
+			var current = $(this);
 			
 			$.ajax({
-				url: 'admin/changeStatus.action',
+				url: 'changeStatus.action',
 				type: 'post',
 				data : {
 					'historyNo' : id,
@@ -22,15 +23,15 @@
 				},
 				success : function() {
 					if(status == 1) {
-						$(this).attr("id", 2);
-						$(this).attr("value", "대여 대기");
+						current.attr('id', '2');
+						current.attr('value', '대여 대기');
 					} else if(status == 2) {
-						$(this).attr("id", 3);
-						$(this).attr("value", "대여 중");
+						current.attr('id', '3');
+						current.attr('value', '대여 중');
 					} else if(status == 3) {
-						$(this).attr("id", 4);
-						$(this).attr("value", "대여 완료");
-						$(this).attr("disabled", "disabled");
+						current.attr('id', '4');
+						current.attr('value', '대여 완료');
+						current.attr('disabled', 'disabled');
 					}
 				}
 			});
@@ -49,7 +50,7 @@
 		<c:forEach var="history" items="${ historys }">
 			<tr class="historyItem" id="${ history.historyNo }">
 				<th>${ history.memberId }</th>
-				<td>${ history.machinNo }</td>
+				<td>${ history.machineNo }</td>
 				<td>${ history.historyRentalDate }</td>
 				<td>
 				<c:choose>

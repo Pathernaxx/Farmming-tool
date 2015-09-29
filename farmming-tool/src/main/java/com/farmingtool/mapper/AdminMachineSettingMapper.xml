@@ -38,7 +38,7 @@
 	
 	<select id="selectRentalHistory" parameterType="string" resultType="rentalHistory">
 		SELECT
-			r.MEMBER_ID "memberId", r.HISTORY_RENTALDATE "historyRentalDate", 
+			r.HISTORY_NO "historyNo", r.MEMBER_ID "memberId", r.HISTORY_RENTALDATE "historyRentalDate", 
 			r.HISTORY_RETURNDATE "historyReturnDate", r.HISTORY_STATUS "historyStatus", 
 			r.MACHINE_NO "machineNo"
 		FROM
