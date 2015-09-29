@@ -30,7 +30,7 @@ public class OracleDetailMachineRepository implements DetailMachineRepository{
 	}
 
 	@Override
-	public List<String> countRentableMachine(Date historyRentalDate, String fmNo, int locationNo2) {
+	public List<String> countRentableMachine(Date historyRentalDate, String fmNo, String locationNo2) {
 		
 		HashMap<Object, Object> params = new HashMap<Object, Object>();
 		params.put("historyRentalDate", historyRentalDate);

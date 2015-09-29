@@ -50,7 +50,7 @@
 	<script src="/farmingtool/resources/js/zabuto_calendar.min.js"></script>
     
     <script type="text/javascript">
-    function myDateFunction(id, fromModal) {
+    function myDateFunction(id, fromModal, selected1, selected2) {
         $("#date-popover").hide();
         if (fromModal) {
             $("#" + id + "_modal").modal("hide");
@@ -63,7 +63,8 @@
         
         $("#date-popover-content").html('<br/>선택한 날짜 : ' + date + '<br/>'+'예약하시겠습니까?<br/><br/>'+
         								'<input type="hidden" value="'+date+'" id="rentalDate"/>'+
-        								'<input type="text" value="'+0+'" class="fmNo"/>'+
+        								'<input type="text" value="'+selected1+'" id="locationNo2"/>'+
+        								'<input type="text" value="'+selected2+'" id="fmNo"/>'+
         								'<input type="button" value="확인" onclick="moveToCheckRental()"/>&nbsp;'+
         								'<input type="button" value="취소" onclick="popoverClose()"/><br/>');
         $("#date-popover").show();
@@ -80,12 +81,14 @@
     	//alert($("#rentalDate").val());
     	var rentalDate = $("#rentalDate").val();
     	var fmNo = $("#fmNo").val();
+    	var locationNo2 = $("#locationNo2").val();
     	$.ajax({
     		url: "/farmingtool/rental/rentalMachine.action",
-    		type: "get",
+    		type: "POST",
     		async: true,
     		data: {
     			"rentalDate" : rentalDate,
+    			"locationNo2" : locationNo2,
     			"fmNo" : fmNo
     			},
     		success: function(result) { //result
