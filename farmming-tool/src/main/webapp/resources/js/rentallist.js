@@ -137,7 +137,7 @@ $(document).ready(function (){
 					$("#calendar-area").html('<div id="my-calendar" style="margin-top:20px"></div>');
 					$("#my-calendar").zabuto_calendar({
 						action: function () {
-							return myDateFunction(this.id, false);
+							return myDateFunction(this.id, false, selected1, selected2);
 						},
 						data: eventData,
 						language: "ko",

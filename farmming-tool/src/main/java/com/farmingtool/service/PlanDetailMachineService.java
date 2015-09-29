@@ -31,7 +31,7 @@ public class PlanDetailMachineService implements DetailMachineService{
 	}
 
 	@Override
-	public List<String> countRentableMachine(Date historyRentalDate,String fmNo,int locationNo2) {
+	public List<String> countRentableMachine(Date historyRentalDate,String fmNo,String locationNo2) {
 
 		return detailMachineRepository.countRentableMachine(historyRentalDate, fmNo, locationNo2);
 		
