@@ -60,7 +60,21 @@
 		<result column="machine_no" property="machineNo"/>
 		<result column="history_rentaldate" property="historyRentalDate"/>
 		<result column="history_returndate" property="historyReturnDate"/>
+		<association column="member_id" property="memberName" select="getMemberName"/>
+		<association column="location_no2" property="locationNo2Name" select="getLocationNo2Name"/>
 	</resultMap>
+	
+	<select id="getMemberName" parameterType="String" resultType="String">
+		SELECT member_name
+		FROM member
+		WHERE member_id = #{member_id}
+	</select>
+	
+	<select id="getLocationNo2Name" parameterType="int" resultType="String">
+		SELECT location_name2
+		FROM location2
+		WHERE location_no2 = #{location_no2}
+	</select>
 	
 	
 	<!-- 전체 렌탈 가능 대수 -->

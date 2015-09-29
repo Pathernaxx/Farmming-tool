@@ -60,7 +60,11 @@ public class RentalController {
 	
 	
 	@RequestMapping(value="rentalmain.action", method=RequestMethod.GET)
-	public String rentalView() {
+	public String rentalView(HttpSession session) {
+		if(session.getAttribute("loginuser") == null || session.getAttribute("loginuser") ==""){
+			return "account/login";
+		}
+		
 		return "rental/rentalmain";
 	}
 	
@@ -173,6 +177,9 @@ public class RentalController {
 		
 		//String memberId = ((Member)session.getAttribute("loginuser")).getMemberId();
 		RentalInfomation info = detailMachineService.rentalCheck(machineNo, historyNo);
+		SimpleDateFormat f = new SimpleDateFormat("yy년 MM월 dd일");
+		info.setHistoryRentalDateToString(f.format(info.getHistoryRentalDate()));
+		info.setHistoryReturnDateToString(f.format(info.getHistoryReturnDate()));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("info", info);

@@ -12,6 +12,39 @@ public class RentalInfomation {
 	private Date historyRentalDate;
 	private Date historyReturnDate;
 	
+	////////////결과창에서 보여주기 위한 필드///////////////////
+	private String memberName;
+	private String historyRentalDateToString;
+	private String historyReturnDateToString;
+	private String locationNo2Name;
+	
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getHistoryRentalDateToString() {
+		return historyRentalDateToString;
+	}
+	public void setHistoryRentalDateToString(String historyRentalDateToString) {
+		this.historyRentalDateToString = historyRentalDateToString;
+	}
+	public String getLocationNo2Name() {
+		return locationNo2Name;
+	}
+	public void setLocationNo2Name(String locationNo2Name) {
+		this.locationNo2Name = locationNo2Name;
+	}
+	////////////////////////////////////////////////
+	
+	
+	public String getHistoryReturnDateToString() {
+		return historyReturnDateToString;
+	}
+	public void setHistoryReturnDateToString(String historyReturnDateToString) {
+		this.historyReturnDateToString = historyReturnDateToString;
+	}
 	public String getMachineNo() {
 		return machineNo;
 	}
