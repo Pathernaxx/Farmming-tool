@@ -59,6 +59,7 @@
         var hasEvent = $("#" + id).data("hasEvent");
         if (hasEvent && !fromModal) {
             return false;
+            
         }
         
         $("#date-popover-content").html('<br/>선택한 날짜 : ' + date + '<br/>'+'예약하시겠습니까?<br/><br/>'+
