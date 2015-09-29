@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
+<link rel="stylesheet" href="/farmingtool/resources/styles/account.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="//cdn.poesis.kr/post/popup.min.js"></script>
 <script type="text/javascript">

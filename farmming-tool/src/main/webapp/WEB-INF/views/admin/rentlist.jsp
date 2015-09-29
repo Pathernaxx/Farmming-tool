@@ -40,6 +40,12 @@
 </head>
 <body>
 	<table class="history">
+	<tr>
+		<th>이름</th>
+		<td>기계</td>
+		<td>대여날짜</td>
+		<td>상태</td>
+	</tr>
 		<c:forEach var="history" items="${ historys }">
 			<tr class="historyItem" id="${ history.historyNo }">
 				<th>${ history.memberId }</th>
