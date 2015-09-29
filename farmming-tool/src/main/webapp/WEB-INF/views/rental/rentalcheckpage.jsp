@@ -389,27 +389,31 @@ $(function(){
 
         <div id="page-wrapper">
           <div class="row">
-			<div id="rentalCheck">이름, 대여기계, 대여일, 반납일 ...
-				<div>
-					<span>대여자</span>
-					<span>이름</span>
-				</div>
-				<div>
-					<span>대여기계</span>
-					<span>기계</span>
-				</div>
-				<div>
-					<span>대여일</span>
-					<span>날짜</span>
-				</div>
-				<div>
-					<span>반납일</span>
-					<span>날짜</span>
-				</div>
-				<div>
-					<span>주의사항</span>
-					<span>사항</span>
-				</div>
+			<div id="rentalCheck">대여자, 대여기계, 대여일, 반납일, 주의사항
+				<table>
+					<tr>
+						<td>대여자</td>
+						<td>대여자</td>
+					</tr>
+					<tr>
+						<td>대여기계</td>
+						<td>기계</td>
+					</tr>
+					<tr>
+						<td>대여일</td>
+						<td>일</td>
+					</tr>
+					<tr>
+						<td>반납일</td>
+						<td>일</td>
+					</tr>
+					<tr>
+						<td>주의사항</td>
+					</tr>
+					<tr>
+						<td>주의사항내용</td>
+					</tr>
+				</table>
 				<input type="text" value="${machineNo}"/>
 			</div>
 		  </div>

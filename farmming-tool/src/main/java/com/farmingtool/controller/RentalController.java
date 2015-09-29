@@ -62,7 +62,7 @@ public class RentalController {
 		return "rental/rentalmain";
 	}
 	
-	@RequestMapping(value="rentalCheck.action", method=RequestMethod.GET)
+	/*@RequestMapping(value="rentalCheck.action", method=RequestMethod.GET)
 	public ModelAndView rentalCheck() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -75,7 +75,7 @@ public class RentalController {
 		mav.setViewName("rental/rentalcheck");
 		
 		return mav;
-	}
+	}*/
 	
 	@RequestMapping(value="calendarTest.action", method=RequestMethod.GET)
 	public String calendarTest() {
@@ -118,6 +118,7 @@ public class RentalController {
 		String machineNo= null;
 							//request.getParameter("machineNo");
 		String fmNo = request.getParameter("fmNo");
+		System.out.println(fmNo);
 		
 		String result = null;
 		
@@ -207,10 +208,27 @@ public class RentalController {
 		return mav;
 	}
 	
+	
+	@RequestMapping(value="searchmachinecount.action", method=RequestMethod.POST)
+	@ResponseBody
+	public String searchMachinecount(String location2, String fmNo) {
+		int locationNo2 = Integer.parseInt(location2);
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("locationNo2", locationNo2);
+		params.put("fmNo", fmNo);
+		
+		//detailMachine에서 fm_no를통해(FA010000) 해당 머신을 모두 가져온다.
+		// status 0 : 대여가능,	 1 : 대여불가능
+		int rentalCount = detailMachineService.rentalMachineCount(params);
+		int rentalCost = detailMachineService.rentalMachineCost(params);
+		
+		return rentalCount+"@"+rentalCost;
+	}
+	
 	@RequestMapping(value="searchmachine.action", method=RequestMethod.POST)
 	@ResponseBody
 	public List<String> searchMachine(String location2, String fmNo) {
-		System.out.println(location2+", "+fmNo);
 		int locationNo2 = Integer.parseInt(location2);
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
@@ -221,7 +239,6 @@ public class RentalController {
 		// status 0 : 대여가능,	 1 : 대여불가능
 		int rentalCount = detailMachineService.rentalMachineCount(params);
 		
-		System.out.println(rentalCount);
 		//rentalhistory에서 rentalDate를 통해 DATE별로  
 		//Status가 0인 카운트를 세서 가져온다  0:대여 예약, 1: 대여중
 		//(date는 sysdate기준으로 +1, +2, +3까지만 연습)
@@ -245,11 +262,9 @@ public class RentalController {
 				String dateForCalendar  = format.format(calDate);
 				results.add(dateForCalendar);
 			}
-			
-			System.out.println(dateForCount+", "+count);
 		}
 
 		return results;
 	}
-
+	
 }

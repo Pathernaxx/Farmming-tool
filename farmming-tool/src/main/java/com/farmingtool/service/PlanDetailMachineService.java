@@ -65,6 +65,12 @@ public class PlanDetailMachineService implements DetailMachineService{
 		return count;
 	}
 
+	@Override
+	public int rentalMachineCost(HashMap<String, Object> params) {
+		int rentalCost = detailMachineRepository.rentalMachineCost(params);
+		return rentalCost;
+	}
+
 
 
 }
