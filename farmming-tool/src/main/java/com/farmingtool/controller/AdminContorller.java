@@ -16,7 +16,7 @@ import com.farmingtool.dto.RentalHistory;
 import com.farmingtool.service.AdminMachineSettingService;
 
 @Controller
-@RequestMapping(value="Admin")
+@RequestMapping(value="admin")
 public class AdminContorller {
 
 	private AdminMachineSettingService adminMachineSettingService;
