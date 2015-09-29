@@ -16,5 +16,6 @@ public interface DetailMachineRepository {
 	List<Location2> searchLocation2(String location1);
 	RentalInfomation rentalCheck(String machineNo, int historyNo);
 	int rentalMachineCount(HashMap<String, Object> params);
-	HashMap<Date, String> rentalMachineCountByDate(HashMap<String, Object> params);
+	int rentalMachineCountByDate(HashMap<String, Object> params);
+	int rentalMachineCost(HashMap<String, Object> params);
 }

@@ -60,9 +60,15 @@ public class PlanDetailMachineService implements DetailMachineService{
 	}
 
 	@Override
-	public HashMap<Date, String> rentalMachineCountByDate(HashMap<String, Object> params) {
-		HashMap<Date, String> map = detailMachineRepository.rentalMachineCountByDate(params);
-		return map;
+	public int rentalMachineCountByDate(HashMap<String, Object> params) {
+		int count = detailMachineRepository.rentalMachineCountByDate(params);
+		return count;
+	}
+
+	@Override
+	public int rentalMachineCost(HashMap<String, Object> params) {
+		int rentalCost = detailMachineRepository.rentalMachineCost(params);
+		return rentalCost;
 	}
 
 

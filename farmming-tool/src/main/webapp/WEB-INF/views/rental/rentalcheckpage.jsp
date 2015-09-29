@@ -13,7 +13,6 @@
     <!-- <script src="//code.jquery.com/jquery-1.11.3.js"></script> -->
     
     <link rel='Stylesheet' href='/farmingtool/resources/styles/rentalmain.css' />
-    <script type="text/javascript" src="/farmingtool/resources/js/address.jsp"></script>
     
     <!-- Bootstrap Core CSS -->
     <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -390,7 +389,31 @@ $(function(){
 
         <div id="page-wrapper">
           <div class="row">
-			<div id="rentalCheck">이름, 대여기계, 대여일, 반납일 ...
+			<div id="rentalCheck">대여자, 대여기계, 대여일, 반납일, 주의사항
+				<table>
+					<tr>
+						<td>대여자</td>
+						<td>대여자</td>
+					</tr>
+					<tr>
+						<td>대여기계</td>
+						<td>기계</td>
+					</tr>
+					<tr>
+						<td>대여일</td>
+						<td>일</td>
+					</tr>
+					<tr>
+						<td>반납일</td>
+						<td>일</td>
+					</tr>
+					<tr>
+						<td>주의사항</td>
+					</tr>
+					<tr>
+						<td>주의사항내용</td>
+					</tr>
+				</table>
 				<input type="text" value="${machineNo}"/>
 			</div>
 		  </div>

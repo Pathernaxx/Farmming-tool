@@ -10,7 +10,7 @@ public class Member {
 	private String memberPhone2;
 	private String memberPostcode;
 	private String memberExtraInfo;
-	private String location2;
+	private String locationName2;
 	private String memberWarningCount;
 	
 	public String getMemberPostcode() {
@@ -25,11 +25,11 @@ public class Member {
 	public void setMemberExtraInfo(String memberExtraInfo) {
 		this.memberExtraInfo = memberExtraInfo;
 	}
-	public String getLocation2() {
-		return location2;
+	public String getLocationName2() {
+		return locationName2;
 	}
-	public void setLocation2(String location2) {
-		this.location2 = location2;
+	public void setLocationName2(String locationName2) {
+		this.locationName2 = locationName2;
 	}
 	public String getMemberId() {
 		return memberId;

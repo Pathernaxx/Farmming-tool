@@ -68,6 +68,13 @@ public class PlanFarmMachineService implements FarmMachineService{
 		// TODO Auto-generated method stub
 		return farmMachineRepository.getFarmMachineDetailBytypeNo(typeNo);
 	}
+
+
+	@Override
+	public List<FarmMachine> getFMSearchBySearchword(String searchword) {
+		// TODO Auto-generated method stub
+		return farmMachineRepository.getFMSearchBySearchword(searchword);
+	}
 	
 	
 

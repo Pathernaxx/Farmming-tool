@@ -74,9 +74,15 @@ public class OracleDetailMachineRepository implements DetailMachineRepository{
 	}
 
 	@Override
-	public HashMap<Date, String> rentalMachineCountByDate(HashMap<String, Object> params) {
-		HashMap<Date, String> map = detailMachineMapper.rentalMachineCountByDate(params);
-		return map;
+	public int rentalMachineCountByDate(HashMap<String, Object> params) {
+		int count = detailMachineMapper.rentalMachineCountByDate(params);
+		return count;
+	}
+
+	@Override
+	public int rentalMachineCost(HashMap<String, Object> params) {
+		int rentalCost = detailMachineMapper.rentalMachineCost(params);
+		return rentalCost;
 	}
 	
 	

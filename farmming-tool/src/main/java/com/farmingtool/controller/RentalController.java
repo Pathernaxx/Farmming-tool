@@ -1,9 +1,9 @@
 package com.farmingtool.controller;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.farmingtool.dto.FarmMachine;
 import com.farmingtool.dto.Location2;
 import com.farmingtool.dto.RentalHistory;
-import com.farmingtool.dto.RentalInfomation;
 import com.farmingtool.dto.Type;
 import com.farmingtool.service.DetailMachineService;
 import com.farmingtool.service.FarmMachineService;
@@ -64,7 +62,7 @@ public class RentalController {
 		return "rental/rentalmain";
 	}
 	
-	@RequestMapping(value="rentalCheck.action", method=RequestMethod.GET)
+	/*@RequestMapping(value="rentalCheck.action", method=RequestMethod.GET)
 	public ModelAndView rentalCheck() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -77,7 +75,7 @@ public class RentalController {
 		mav.setViewName("rental/rentalcheck");
 		
 		return mav;
-	}
+	}*/
 	
 	@RequestMapping(value="calendarTest.action", method=RequestMethod.GET)
 	public String calendarTest() {
@@ -120,6 +118,7 @@ public class RentalController {
 		String machineNo= null;
 							//request.getParameter("machineNo");
 		String fmNo = request.getParameter("fmNo");
+		System.out.println(fmNo);
 		
 		String result = null;
 		
@@ -199,9 +198,9 @@ public class RentalController {
 	public ModelAndView searchMachineByLocation(String location2) {
 		ModelAndView mav = new ModelAndView();
 		
-		List<Type> types = farmMachineService.getTypesByLocation("1");
+		List<Type> types = farmMachineService.getTypesByLocation(location2);
 		List<FarmMachine> farmMachineListByLocation = 
-				farmMachineService.searchMachineByLocation("1");
+				farmMachineService.searchMachineByLocation(location2);
 		
 		mav.addObject("types", types);
 		mav.addObject("farmMachineList", farmMachineListByLocation);
@@ -209,28 +208,63 @@ public class RentalController {
 		return mav;
 	}
 	
-	@RequestMapping(value="searchmachine.action", method=RequestMethod.POST)
-	public String searchMachine(String location2, String fmNo) {
-		System.out.println(location2+","+fmNo);
+	
+	@RequestMapping(value="searchmachinecount.action", method=RequestMethod.POST)
+	@ResponseBody
+	public String searchMachinecount(String location2, String fmNo) {
 		int locationNo2 = Integer.parseInt(location2);
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("locationNo2", locationNo2);
 		params.put("fmNo", fmNo);
 		
-		//1(횡성군),FA010000(농용트랙터)
+		//detailMachine에서 fm_no를통해(FA010000) 해당 머신을 모두 가져온다.
+		// status 0 : 대여가능,	 1 : 대여불가능
+		int rentalCount = detailMachineService.rentalMachineCount(params);
+		int rentalCost = detailMachineService.rentalMachineCost(params);
+		
+		return rentalCount+"@"+rentalCost;
+	}
+	
+	@RequestMapping(value="searchmachine.action", method=RequestMethod.POST)
+	@ResponseBody
+	public List<String> searchMachine(String location2, String fmNo) {
+		int locationNo2 = Integer.parseInt(location2);
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("locationNo2", locationNo2);
+		params.put("fmNo", fmNo);
 		
 		//detailMachine에서 fm_no를통해(FA010000) 해당 머신을 모두 가져온다.
-		// status 0 : 대여가능, 1 : 대여중,  2: 고장
-		// status가 2가 아닌 숫자를 모두 더하면 총 댓수
+		// status 0 : 대여가능,	 1 : 대여불가능
 		int rentalCount = detailMachineService.rentalMachineCount(params);
 		
 		//rentalhistory에서 rentalDate를 통해 DATE별로  
-		//Status가 0인 카운트를 세서 가져온다  (date는 sysdate기준으로 +1, +2, +3까지만 연습)
-		HashMap<Date, String> map = detailMachineService.rentalMachineCountByDate(params);
+		//Status가 0인 카운트를 세서 가져온다  0:대여 예약, 1: 대여중
+		//(date는 sysdate기준으로 +1, +2, +3까지만 연습)
+		Date nowDate = new Date();
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(nowDate); 
+		Date calDate = null;
 		
-		return "rental";
-		
-	}
+		//HashMap<Date, Integer> rentalCountByDate = new HashMap<Date, Integer>();
+		List<String> results = new ArrayList<String>();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); //dateForCalendar
+		SimpleDateFormat format2 = new SimpleDateFormat("yy/MM/dd");  //dateForCount
+		for (int i = 0; i < 14; i++) {
+			c.add(Calendar.DATE, 1);
+			calDate = c.getTime();
+			String dateForCount = format2.format(calDate);
+			params.put("calDate",dateForCount);
+			int count = detailMachineService.rentalMachineCountByDate(params);
+			
+			if(rentalCount > count){ //해당 날짜별 대여대수와 총 렌탈가능 대수 비교
+				String dateForCalendar  = format.format(calDate);
+				results.add(dateForCalendar);
+			}
+		}
 
+		return results;
+	}
+	
 }

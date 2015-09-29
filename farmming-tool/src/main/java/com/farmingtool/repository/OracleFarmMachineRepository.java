@@ -67,6 +67,13 @@ public class OracleFarmMachineRepository implements FarmMachineRepository{
 		// TODO Auto-generated method stub
 		return farmMachineMapper.getFarmMachineDetailBytypeNo(typeNo);
 	}
+
+
+	@Override
+	public List<FarmMachine> getFMSearchBySearchword(String searchword) {
+		// TODO Auto-generated method stub
+		return farmMachineMapper.getFMSearchBySearchword(searchword);
+	}
 	
 	
 }
