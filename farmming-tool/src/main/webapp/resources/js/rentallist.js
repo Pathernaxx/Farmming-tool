@@ -84,6 +84,15 @@ $(document).ready(function (){
 		selected1 = $("#location2 option:selected").val();
 		selected2 = $("#machine2 option:selected").val();
 		
+		if(selected1 ==null || selected1 == ""){
+			alert("대여 장소를 선택해 주세요")
+			return;
+		}
+		if(selected2 ==null || selected1 == ""){
+			alert("대여 농기계를 선택해 주세요")
+			return;
+		}
+		
 		$.ajax({
 			url : "/farmingtool/rental/searchmachine.action",
 			async : false,

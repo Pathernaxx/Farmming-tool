@@ -51,6 +51,12 @@
     
     <script type="text/javascript">
     function myDateFunction(id, fromModal, selected1, selected2) {
+    	
+    	if('${loginuser}' == null || '${loginuser}' == ""){
+    		alert("대여는 로그인 후 이용가능 합니다.");
+    		$(location).attr("href", "/farmingtool/account/login.action");
+    	}
+    	
         $("#date-popover").hide();
         if (fromModal) {
             $("#" + id + "_modal").modal("hide");
@@ -79,7 +85,6 @@
     
     function moveToCheckRental() {
     	//컨트롤러에서 예약처리
-    	//alert($("#rentalDate").val());
     	var rentalDate = $("#rentalDate").val();
     	var fmNo = $("#fmNo").val();
     	var locationNo2 = $("#locationNo2").val();
