@@ -42,52 +42,10 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function (){
-	var $masry = $('.page-masonry').masonry({
+ 	var $masry = $('.page-masonry').masonry({
 		  itemSelector: '.item',
 		  isAnimated: true
 	});
-	/* 하아 모르겠다!!!!! */
-	var key = "rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D";
-	alert(key);
-	$.ajax({
-		url: "http://www.rda.go.kr/openapidata/service/rdamachinesafe_api/rdamachinesafe_list",
-		dataType: "xml",
-		contentType: "application/xml; charset=UTF-8",
-		async: false,
-		data: {
-			searchword:"",
-			numOfRows:"109",
-			ServiceKey: key
-		},
-		success : response_parse,
-		error : function(xhr, ajaxOptions, thrownError){
-			console.log(xhr.status);
-			console.log(thrownError);
-		}
-	});
-	
-	function response_parse(xml){
-		$accident = $(xml).find("item");
-		
-		var count = $accident.length;
-		$(".page-masonry").html("<b>사고사례수: "+ count + "건</b>");
-		
-		$accident.each(function(){
-			var acc_content = $(this).find("content").text();
-			var acc_downurl = $(this).find("downurl").text();
-			var acc_pclass = $(this).find("PClass").text();
-			
-			var html = "<div class='item'>"+
-						"<div>"+
-						"<p>"+acc_content+"</p>"+
-						"<p>"+acc_downurl+"</p>"+
-						"<p>"+acc_pclass+"</p>"+
-						"</div>"+
-			           "</div>";
-		$(".page-masonry").append(html);
-		});
-		
-	}
 });
 
 </script>
@@ -192,9 +150,13 @@ $(document).ready(function (){
         <div id="page-wrapper">
           <div class="row">
 			<div class="page-masonry">
+			<c:forEach var="Accident" items="${ accs }">
 			 <div class="item">
-			 
+			 	<p>${ Accident.content }</p>
+			 	<p>${ Accident.downurl }</p>
+			 	<p>${ Accident.pclass }</p>
 			 </div>
+			 </c:forEach>
 			</div>
 		  </div>
 		  </div>
