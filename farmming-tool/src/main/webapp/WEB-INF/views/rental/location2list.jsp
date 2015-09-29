@@ -11,6 +11,6 @@
 	<c:forEach var="location2" items="${location2s}" >
 		<option value="${location2.locationNo2}" class="" >${location2.locationName2}</option>
 	</c:forEach>
-</select>
+</select><br/><br/>
 
 

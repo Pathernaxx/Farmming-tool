@@ -51,6 +51,12 @@
     
     <script type="text/javascript">
     function myDateFunction(id, fromModal, selected1, selected2) {
+    	
+    	if('${loginuser}' == null || '${loginuser}' == ""){
+    		alert("대여는 로그인 후 이용가능 합니다.");
+    		$(location).attr("href", "/farmingtool/account/login.action");
+    	}
+    	
         $("#date-popover").hide();
         if (fromModal) {
             $("#" + id + "_modal").modal("hide");
@@ -79,7 +85,6 @@
     
     function moveToCheckRental() {
     	//컨트롤러에서 예약처리
-    	//alert($("#rentalDate").val());
     	var rentalDate = $("#rentalDate").val();
     	var fmNo = $("#fmNo").val();
     	var locationNo2 = $("#locationNo2").val();
@@ -268,7 +273,9 @@
 			</div>
 		
 			<h2 class="rental-condition-title2">기계선택</h2>
+			
 			<div id="ac2">
+			<h6 style="color: red">지역 선택 후에도 기계목록이 보이지 않는 경우 해당 지역에서 기계 대여가능 품종이 없는 것입니다.</h6>
 				<select id="machine1" name="machine1" class="rental_option2">
 					<option value="" selected="selected">기계선택1-대분류</option>
 					<c:forEach var="type" items="${types}" >
@@ -291,7 +298,12 @@
 				&nbsp;■ 보유 대수 : <input type="text" id="totalDetailMachine" /><br/>
 				&nbsp;■ 대여가격 : <input type="text" id="rentalCost"/><br/>
 				&nbsp;■ 주의 사항 : <br/>
-				&nbsp;<font style='color:red;font-weight: bold;'>※ 교육을 이수하지 않을 시 예약이 취소될 수 있습니다. ※</font>
+				&nbsp;<font style='color:red;font-weight: bold;'>
+				※ 교육을 이수하지 않을 시 예약이 취소될 수 있습니다. ※<br/>
+						반납은 대여일 오후 5시까지 하시거나 <br/>
+						다음날 오전 10시까지 하셔야 불이익이 없습니다.<br/>
+						기타 자세한 사항은 02-556-2231 로 문의해 주세요
+				</font>
 			</div>
 			
 			<div id="date-popover" class="popover top">

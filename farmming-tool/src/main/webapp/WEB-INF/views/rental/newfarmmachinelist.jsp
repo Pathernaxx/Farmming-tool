@@ -7,6 +7,7 @@
 <script src="/farmingtool/resources/js/rentallist.js"></script>
 
 <div id="ac2">
+<h6 style="color: blue">대여 희망 기계를 선택해주세요</h6>
 	<select id="machine1" name="machine1" class="rental_option2">
 		<option value="" selected="selected">기계선택1-대분류</option>
 		<c:forEach var="type" items="${types}" >

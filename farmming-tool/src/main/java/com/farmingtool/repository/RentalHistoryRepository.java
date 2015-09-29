@@ -6,6 +6,5 @@ import com.farmingtool.dto.FarmMachine;
 import com.farmingtool.dto.RentalHistory;
 
 public interface RentalHistoryRepository {
-
-	void insertRentalHistory(RentalHistory history);
+	int insertRentalHistory(RentalHistory history);
 }
