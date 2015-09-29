@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.farmingtool.mapper.AdminMachineSettingMapper">
+
+	<resultMap type="MemberEducation" id="resultMemberEducation">
+		<id column="education_no" property="educationNo" />
+		<result column="fm_no" property="fmNo"/>
+		<result column="member_id" property="memberId"/>
+		<result column="education_name" property="educationName"/>
+		<result column="education_date" property="educationDate"/>
+		<result column="education_expiredate" property="educationExpireDate"/>
+	</resultMap>
+	
+	<insert id="insertDetailMachine" parameterType="DetailMachine">
+		INSERT INTO DETAILMACHINE(MACHINE_NO, FM_NO, MACHINE_NAME, MACHINE_INFORMATION, MACHINE_RENTALCOST, LOCATION_NO2)
+		VALUES(#{machineNo}, #{fmNo}, #{machineName}, #{machineInformation}, #{machineRentalCost}, #{locationNo2})
+	</insert>
+	
+	<update id="updateDetailMachineCost" parameterType="hashmap">
+		UPDATE
+			DETAILMACHINE
+		SET
+			machine_rentalcost = #{ rentalCost }
+		WHERE
+			machine_no = #{machineNo}
+	</update>
+	
+	<delete id="deleteDetailMachine" parameterType="string">
+		DELETE FROM
+			DETAILMACHINE
+		WHERE
+			machine_no = #{ machineNo }
+	</delete>
+	
+	<select id="selectRentalHistory" parameterType="string" resultType="rentalHistory">
+		SELECT
+			r.HISTORY_NO "historyNo", r.MEMBER_ID "memberId", r.HISTORY_RENTALDATE "historyRentalDate", 
+			r.HISTORY_RETURNDATE "historyReturnDate", r.HISTORY_STATUS "historyStatus", 
+			r.MACHINE_NO "machineNo"
+		FROM
+			RENTAL_HISTORY r, MEMBER m
+		WHERE
+			r.member_id = m.member_id AND m.location_name2 = #{ locationName }
+	</select>
+	
+	<update id="updateRentalHistoryStatus" parameterType="hashmap">
+		UPDATE
+			RENTAL_HISTORY
+		SET
+			HISTORY_STATUS = #{ status }
+		WHERE
+			HISTORY_NO = #{ historyNo }
+	</update>
+	
+	<insert id="insertMemberEducation" parameterType="MemberEducation">
+		INSERT INTO MEMBER_EDUCATION(education_no, fm_no, member_id, education_name, education_expiredate)
+		VALUES(member_education_sequence.nextval, #{fmNo}, #{memberId}, #{educationName}, #{educationExpireDate})
+	</insert>
+	
+	<select id="selectMemberEducationById" parameterType="string" resultMap="resultMemberEducation">
+		SELECT
+			education_no, fm_no, member_id, education_data, education_name, education_expiredate
+		FROM
+			MEMBER_EDUCATION
+		WHERE
+			member_id = #{ memberId }
+	</select>
+</mapper>

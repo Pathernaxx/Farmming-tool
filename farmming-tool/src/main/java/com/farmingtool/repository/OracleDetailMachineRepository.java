@@ -30,7 +30,7 @@ public class OracleDetailMachineRepository implements DetailMachineRepository{
 	}
 
 	@Override
-	public List<String> countRentableMachine(Date historyRentalDate, String fmNo, int locationNo2) {
+	public List<String> countRentableMachine(Date historyRentalDate, String fmNo, String locationNo2) {
 		
 		HashMap<Object, Object> params = new HashMap<Object, Object>();
 		params.put("historyRentalDate", historyRentalDate);
@@ -77,6 +77,12 @@ public class OracleDetailMachineRepository implements DetailMachineRepository{
 	public int rentalMachineCountByDate(HashMap<String, Object> params) {
 		int count = detailMachineMapper.rentalMachineCountByDate(params);
 		return count;
+	}
+
+	@Override
+	public int rentalMachineCost(HashMap<String, Object> params) {
+		int rentalCost = detailMachineMapper.rentalMachineCost(params);
+		return rentalCost;
 	}
 	
 	

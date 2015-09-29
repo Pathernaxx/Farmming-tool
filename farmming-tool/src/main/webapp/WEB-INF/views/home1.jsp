@@ -35,6 +35,10 @@
 				onclick="location.href='/farmingtool/rental/calendarTest.action'"/>
 		<input type="button" value="로그인" 
 		onclick="location.href='/farmingtool/account/login.action'"/>
+		<input type="button" value="관리자 가입" 
+		onclick="location.href='/farmingtool/account/registerAdmin.action'"/>
+		<input type="button" value="???" 
+		onclick="location.href='/farmingtool/admin/rentallist.action'"/>
     </div>
   </div>
 </div>

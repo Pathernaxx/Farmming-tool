@@ -23,7 +23,9 @@
     <!-- Custom Fonts -->
     <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"> 
     
+
 <style>
+
 .item {
     width: 200px;
     height: 205px;
@@ -80,6 +82,7 @@ $(document).ready(function (){
 		               if (fmBytypeNo != null){
 		                  $.each(fmBytypeNo, function(index, listitem){
 		                     var html=
+
 				       			  "<div class='item' >"+
 				  					"<div class='detail1' style='float: left; border: .3em'>"+
 				  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
@@ -231,7 +234,24 @@ $(document).ready(function (){
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-				<li><i class="fa fa-user fa-fw"></i></li><li><a href="#"><p>로그인</p></a></li>
+            	
+				<li><i class="fa fa-user fa-fw"></i></li>
+				<c:choose>
+					<c:when test="${ loginuser eq null }">
+						<li><a href="/farmingtool/account/login.action"><p>로그인</p></a></li>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${ USERTYPE eq 'ADMIN' }">
+								<li><p>${ loginuser.adminName }</p></li>
+							</c:when>
+							<c:otherwise>
+								<li><p>${ loginuser.memberName }</p></li>
+							</c:otherwise>
+						</c:choose>
+						
+					</c:otherwise>
+				</c:choose>
             </ul>
             <!-- /.navbar-top-links -->
 
@@ -295,11 +315,8 @@ $(document).ready(function (){
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
-                                <li>
-                                    <a href="#">농기계안전정보</a>
-                                </li>
-                                <li>
-                                    <a href="accident.action">농기계사고사례</a>
+                                 <li>
+                                    <a href="accident.action">농기계 안전·사고사례</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

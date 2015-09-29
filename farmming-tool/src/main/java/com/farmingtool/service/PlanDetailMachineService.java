@@ -31,7 +31,7 @@ public class PlanDetailMachineService implements DetailMachineService{
 	}
 
 	@Override
-	public List<String> countRentableMachine(Date historyRentalDate,String fmNo,int locationNo2) {
+	public List<String> countRentableMachine(Date historyRentalDate,String fmNo,String locationNo2) {
 
 		return detailMachineRepository.countRentableMachine(historyRentalDate, fmNo, locationNo2);
 		
@@ -63,6 +63,12 @@ public class PlanDetailMachineService implements DetailMachineService{
 	public int rentalMachineCountByDate(HashMap<String, Object> params) {
 		int count = detailMachineRepository.rentalMachineCountByDate(params);
 		return count;
+	}
+
+	@Override
+	public int rentalMachineCost(HashMap<String, Object> params) {
+		int rentalCost = detailMachineRepository.rentalMachineCost(params);
+		return rentalCost;
 	}
 
 

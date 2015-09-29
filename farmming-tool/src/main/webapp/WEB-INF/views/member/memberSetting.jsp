@@ -5,56 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="/farmingtool/resources/styles/account.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="//cdn.poesis.kr/post/popup.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#post_button").postcodifyPopUp();
 		
-		$("#idcheck").click(function(event) {
-			if($("input[name='loginid']").val() == "")
-			{
-				alert("아이디 입력 후 중복 체크 해주세요.");
-				$("input[name='loginid']").focus();
-				return false;
-			}
-			else
-			{
-				var loginid = $("input[name='loginid']").val();
-				$.ajax({
-					url : 'idcheck.action',
-					async : false,
-					data : { 
-						'id' : loginid 
-					},
-					success : function(result) {
-						if(result == "good")
-						{
-							alert("사용 가능한 아이디입니다.");
-						}
-						else
-						{
-							alert("중복 된 아이디입니다.");
-							$("input[name='loginid']").focus();
-						}
-					}
-				});
-			}
-			
-			event.preventDefault();
-		});
-		
 		$('#doSubmit').click(function(event) {
-			if( $( "input[name='loginid']" ).val() == "" ) {
-				alert( "아이디 입력후 중복 체크 해주세요." );
-				$( "input[name='loginid']" ).focus();
-				return false;
-			} else if( $( "input[name='name']").val() == "" ) {
-				alert("이름을 입력해주세요.");
-				$( "input[name='name']").focus();
-				return false;
-			} else if( $( "input[name='password1']" ).val() == "" ) {
+			if( $( "input[name='password1']" ).val() == "" ) {
 				alert( "비밀번호를 입력 해주세요." );
 				$( "input[name='password1']" ).focus();
 				return false;
@@ -165,10 +123,9 @@
 </head>
 <body>
 
-	<form id="registbox" method="post" action="registerMember.action" >
+	<form id="registbox" method="post" action="updateMember.action" >
 		<label for="id">* 아이디</label>
-		<input type="text" id="loginid" name="loginid" class="id" value title="회원 아이디" maxlength="20" />
-		<a href="javascript:;" id="idcheck" name="idcheck">아이디 중복검색</a>
+		<input type="text" id="loginid" name="loginid" class="id" value="${ member.memberId }" readonly="readonly" title="회원 아이디" maxlength="20" />
 		<br />
 		<label for="password1">* 비밀번호</label>
 		<input type="password" id="password1" name="password1" class="password1" value maxlength="20" />
@@ -177,56 +134,56 @@
 		<input type="password" id="password2" name="password2" class="password2" value maxlength="20" />
 		<br />
 		<label for="name">* 이름</label>
-		<input type="text" id="name" name="name" class="name" value />
+		<input type="text" id="name" name="name" class="name" value="${ member.memberName }" readonly="readonly" />
 		<br />
 		<label for="phone1">전화번호</label>
 		<span id="phone1">
 			<select id="phoneNo1" class="input_drop" name="phoneNo1" title="국번">
-				<option value="02">02</option>
-				<option value="031">031</option>
-				<option value="032">032</option>
-				<option value="033">033</option>
-				<option value="041">041</option>
-				<option value="042">042</option>
-				<option value="043">043</option>
-				<option value="051">051</option>
-				<option value="052">052</option>
-				<option value="053">053</option>
-				<option value="054">054</option>
-				<option value="055">055</option>
-				<option value="061">061</option>
-				<option value="062">062</option>
-				<option value="063">063</option>
-				<option value="064">064</option>
-				<option value="070">070</option>
+				<option value="02" ${ phone[0] eq '02' ? 'selected' : '' }>02</option>
+				<option value="031" ${ phone[0] eq '031' ? 'selected' : '' } >031</option>
+				<option value="032" ${ phone[0] eq '032' ? 'selected' : '' } >032</option>
+				<option value="033" ${ phone[0] eq '033' ? 'selected' : '' } >033</option>
+				<option value="041" ${ phone[0] eq '041' ? 'selected' : '' } >041</option>
+				<option value="042" ${ phone[0] eq '042' ? 'selected' : '' } >042</option>
+				<option value="043" ${ phone[0] eq '043' ? 'selected' : '' } >043</option>
+				<option value="051" ${ phone[0] eq '051' ? 'selected' : '' } >051</option>
+				<option value="052" ${ phone[0] eq '052' ? 'selected' : '' } >052</option>
+				<option value="053" ${ phone[0] eq '053' ? 'selected' : '' } >053</option>
+				<option value="054" ${ phone[0] eq '054' ? 'selected' : '' } >054</option>
+				<option value="055" ${ phone[0] eq '055' ? 'selected' : '' } >055</option>
+				<option value="061" ${ phone[0] eq '061' ? 'selected' : '' } >061</option>
+				<option value="062" ${ phone[0] eq '062' ? 'selected' : '' } >062</option>
+				<option value="063" ${ phone[0] eq '063' ? 'selected' : '' } >063</option>
+				<option value="064" ${ phone[0] eq '064' ? 'selected' : '' } >064</option>
+				<option value="070" ${ phone[0] eq '070' ? 'selected' : '' } >070</option>
 			</select>&nbsp;-&nbsp;
-			<input type="text" id="phoneNo2" name="phoneNo2" class="phone1" value maxlength="4" title="전화번호 앞자리"/>&nbsp;-&nbsp;
-			<input type="text" id="phoneNo3" name="phoneNo3" class="phone1" value maxlength="4" title="전화번호 뒷자리"/>
+			<input type="text" id="phoneNo2" name="phoneNo2" class="phone1" value="${ phone[1] ne null : phone[1] : '' }" maxlength="4" title="전화번호 앞자리"/>&nbsp;-&nbsp;
+			<input type="text" id="phoneNo3" name="phoneNo3" class="phone1" value="${ phone[2] ne null : phone[2] : '' }" maxlength="4" title="전화번호 뒷자리"/>
 		</span>
 		<br />
 		<label for="phone2">* 휴대폰</label>
 		<span id="phone2">
 			<select id="mobilePhone1" class="input_drop" name="mobilePhone1" title="휴대폰 국번">
-				<option value="010">010</option>
-				<option value="011">011</option>
-				<option value="016">016</option>
-				<option value="017">017</option>
-				<option value="018">018</option>
-				<option value="019">019</option>
+				<option value="010" ${ mobilePhone[0] eq '010' ? 'selected' : '' }>010</option>
+				<option value="011" ${ mobilePhone[0] eq '011' ? 'selected' : '' }>011</option>
+				<option value="016" ${ mobilePhone[0] eq '016' ? 'selected' : '' }>016</option>
+				<option value="017" ${ mobilePhone[0] eq '017' ? 'selected' : '' }>017</option>
+				<option value="018" ${ mobilePhone[0] eq '018' ? 'selected' : '' }>018</option>
+				<option value="019" ${ mobilePhone[0] eq '019' ? 'selected' : '' }>019</option>
 			</select>&nbsp;-&nbsp;
-			<input type="text" id="mobilePhone2" name="mobilePhone2" class="phone2" value maxlength="4" title="전화번호 앞자리"/>&nbsp;-&nbsp;
-			<input type="text" id="mobilePhone3" name="mobilePhone3" class="phone2" value maxlength="4" title="전화번호 뒷자리"/>
+			<input type="text" id="mobilePhone2" name="mobilePhone2" class="phone2" value="${ mobilePhone[1] }" maxlength="4" title="전화번호 앞자리"/>&nbsp;-&nbsp;
+			<input type="text" id="mobilePhone3" name="mobilePhone3" class="phone2" value="${ mobilePhone[2] }" maxlength="4" title="전화번호 뒷자리"/>
 		</span>
 		<br />
 		<label for="postcode" >우편번호</label>
-		<input type="text" id="postcode" name="postcode" class="postcodify_postcode6" value readonly="readonly"/>
+		<input type="text" id="postcode" name="postcode" class="postcodify_postcode6" value="${ member.memberPostCode }" readonly="readonly"/>
 		<a href="javascript:;" id="post_button" class="post_button">검색</a>
 		<br />
 		<label for="address_input1">* 도로명 주소</label>
-		<input type="text" id="address_input1" name="address1" class="postcodify_address" value readonly="readonly" />
+		<input type="text" id="address_input1" name="address1" class="postcodify_address" value="${ member.memberAddress1 }" readonly="readonly" />
 		<br />
 		<label for="address_input2">상세 주소</label>
-		<input type="text" id="address_input2" name="address2" class="postcodify_details" value />
+		<input type="text" id="address_input2" name="address2" class="postcodify_details" value="${ member.memberAddress2 }" />
 		<input type="hidden" id="extra_info" name="extra_info" class="postcodify_extra_info">
 		<br />
 	</form>

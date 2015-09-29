@@ -1,6 +1,7 @@
 package com.farmingtool.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.farmingtool.commons.Util;
 import com.farmingtool.dto.Admin;
+import com.farmingtool.dto.Location1;
+import com.farmingtool.dto.Location2;
 import com.farmingtool.dto.Member;
 import com.farmingtool.repository.AccountRepository;
 
@@ -23,6 +26,18 @@ public class PlanAccountService implements AccountService {
 		this.accountRepository = accountRepository;
 	}
 	
+	@Override
+	public List<Location1> getLocation1() {
+		
+		return accountRepository.getLocation1();
+	}
+
+	@Override
+	public List<Location2> getLocation2() {
+		
+		return accountRepository.getLocation2();
+	}
+
 	@Override
 	public Member getMemberByIdAndPassword(String id, String password) {
 		HashMap<String, String> params = new HashMap<String, String>();
@@ -81,6 +96,42 @@ public class PlanAccountService implements AccountService {
 		
 		accountRepository.setAdmin(admin);
 		
+	}
+
+	@Override
+	public List<Member> getMemberList() {
+		// TODO Auto-generated method stub
+		return accountRepository.getMemberList();
+	}
+
+	@Override
+	public List<Admin> getAdminList() {
+		// TODO Auto-generated method stub
+		return accountRepository.getAdminList();
+	}
+
+	@Override
+	public void setMemberInfo(Member member) {
+		// TODO Auto-generated method stub
+		accountRepository.setMemberInfo(member);
+	}
+
+	@Override
+	public void setAdminInfo(Admin admin) {
+		// TODO Auto-generated method stub
+		accountRepository.setAdminInfo(admin);
+	}
+
+	@Override
+	public void setAdminLocationInfo(String adminId, String location1,
+			String location2) {
+		// TODO Auto-generated method stub
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("adminId", adminId);
+		params.put("adminLocation1", location1);
+		params.put("adminLocation2", location2);
+		
+		accountRepository.setAdminLocationInfo(params);
 	}
 
 }

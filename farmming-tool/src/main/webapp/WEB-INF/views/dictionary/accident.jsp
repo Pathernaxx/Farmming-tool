@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.js"></script>
     <title>FARM MACHINE</title>
     <!-- Bootstrap Core CSS -->
@@ -46,6 +46,36 @@ $(document).ready(function (){
 		  itemSelector: '.item',
 		  isAnimated: true
 	});
+	
+ 	$("#pClassType").change(function(event){
+ 	$(".page-masonry").empty;
+    var selectVal = $("#pClassType option:selected").val();
+	$.ajax({
+        url : "/farmingtool/dictionary/accident.action",
+        async : false,
+        type : "POST",		
+        data : {
+        	searchword : selectVal
+        },
+        success : function(accs){
+        	
+    		$.each(accs, function(index, data){
+    			var html = "<div class='item'>"+
+    					    "<p>"+ data.content +"</p>"+
+    					    "<a href="+ data.downUrl +"><p>다운로드링크</p></a>"+
+    					    "<p>"+ data.pClass +"</p>"+
+    				       "</div>";
+    			$(".page-masonry").append(html);
+    		});
+    	},
+		error : function(xhr, ajaxOptions, thrownError){
+			console.log(xhr.status);
+			console.log(thrownError);
+		}
+	});
+	 event.preventDefault();
+ });
+
 });
 
 </script>
@@ -62,12 +92,27 @@ $(document).ready(function (){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">농기계</a>
+                <a class="navbar-brand" href="home.action">농기계</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-				<li><i class="fa fa-user fa-fw"></i></li><li><a href="#"><p>로그인</p></a></li>
+				<li><i class="fa fa-user fa-fw"></i></li>
+				<c:choose>
+					<c:when test="${ loginuser eq null }">
+						<li><a href="/farmingtool/account/login.action"><p>로그인</p></a></li>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${ USERTYPE eq 'ADMIN' }">
+								<li><p>${ loginuser.adminName }</p></li>
+							</c:when>
+							<c:otherwise>
+								<li><p>${ loginuser.memberName }</p></li>
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+				</c:choose>
             </ul>
             <!-- /.navbar-top-links -->
 
@@ -86,11 +131,11 @@ $(document).ready(function (){
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
+                            <a href="/farmingtool/rental/rentalmain.action"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                           <ul class="nav nav-second-level">
 
                                 <li>
                                     <a href="#">사용/분류 <span class="fa arrow"></span></a>
@@ -131,11 +176,8 @@ $(document).ready(function (){
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
-                                <li>
-                                    <a href="#">농기계안전정보</a>
-                                </li>
-                                <li>
-                                    <a href="accident.action">농기계사고사례</a>
+                                 <li>
+                                    <a href="accident.action">농기계 안전·사고사례</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -149,14 +191,33 @@ $(document).ready(function (){
 
         <div id="page-wrapper">
           <div class="row">
+          	<select id="pClassType">
+				<option value="" selected="selected">전체</option>
+			    <option value="교통사고 판례해설">교통사고 판례해설</option>
+			    <option value="교통표지">교통표지</option>
+			    <option value="농기계 사고사례">농기계 사고사례</option>
+			    <option value="농기계 사고실태">농기계 사고실태</option>
+			    <option value="농기계 형식별 안전이용">농기계 형식별 안전이용</option>
+			    <option value="농기계별 안전이용">농기계별 안전이용</option>
+			    <option value="농작업 안전 일반사항">농작업 안전 일반사항</option>
+			    <option value="농작업 안전수칙">농작업 안전수칙</option>
+			    <option value="농작업 안전용품">농작업 안전용품</option>
+			    <option value="도로 상황별 안전사고 예방요령">도로 상황별 안전사고 예방요령</option>
+			    <option value="도로안전 운행요령">도로안전 운행요령</option>
+			    <option value="등화장치부착 및 조작">등화장치부착 및 조작</option>
+			    <option value="안전검정">안전검정</option>
+			    <option value="안전검정 기준 및 방법">안전검정 기준 및 방법</option>
+			    <option value="안전표지">안전표지</option>
+			    <option value="위험지역 작업요령">위험지역 작업요령</option>
+			    <option value="작업환경별 농작업요령">작업환경별 농작업요령</option>
+			</select>
 			<div class="page-masonry">
-			<c:forEach var="Accident" items="${ accs }">
 			 <div class="item">
-			 	<p>${ Accident.content }</p>
-			 	<p>${ Accident.downurl }</p>
-			 	<p>${ Accident.pclass }</p>
+<%-- 			 	 <p>${ acc.content}</p>
+    			 <a href="${acc.downUrl}"><p>다운로드링크</p></a>
+    			 <p>${acc.pClass} </p> --%>
+		     </div>
 			 </div>
-			 </c:forEach>
 			</div>
 		  </div>
 		  </div>

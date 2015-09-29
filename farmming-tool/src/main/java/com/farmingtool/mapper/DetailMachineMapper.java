@@ -16,4 +16,5 @@ public interface DetailMachineMapper {
 	RentalInfomation rentalCheck(HashMap<String, Object> params);
 	int rentalMachineCount(HashMap<String, Object> params);
 	int rentalMachineCountByDate(HashMap<String, Object> params);
+	int rentalMachineCost(HashMap<String, Object> params);
 }
