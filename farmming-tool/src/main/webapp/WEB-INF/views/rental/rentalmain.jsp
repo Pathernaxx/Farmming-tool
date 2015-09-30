@@ -268,8 +268,8 @@
         
         $("#date-popover-content").html('<br/>선택한 날짜 : ' + date + '<br/>'+'예약하시겠습니까?<br/><br/>'+
         								'<input type="hidden" value="'+date+'" id="rentalDate"/>'+
-        								'<input type="text" value="'+selected1+'" id="locationNo2"/>'+
-        								'<input type="text" value="'+selected2+'" id="fmNo"/>'+
+        								'<input type="hidden" value="'+selected1+'" id="locationNo2"/>'+
+        								'<input type="hidden" value="'+selected2+'" id="fmNo"/>'+
         								'<input type="button" value="확인" onclick="moveToCheckRental()"/>&nbsp;'+
         								'<input type="button" value="취소" onclick="popoverClose()"/><br/>');
         $("#date-popover").show();
@@ -298,7 +298,7 @@
     		success: function(result) { //result
     			if(result != null)
 				{
-    				alert("예약 성공 : 확인 페이지로 이동합니다."+result)
+    				alert("예약 성공 : 확인 페이지로 이동합니다.")
 					var returnurl = '/farmingtool/rental/moveToCheckRental.action?machineNo='+result;
 					$(location).attr('href', returnurl);
 				} else {
