@@ -15,11 +15,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.js"></script>
     <title>FARM MACHINE</title>
     <!-- Bootstrap Core CSS -->
-    <link rel='Stylesheet' href='/farmingtool/resources/styles/bootstrap.css' />
+    <link rel='Stylesheet' href='resources/styles/bootstrap.css' />
     <!-- MetisMenu CSS -->
-    <link rel='Stylesheet' href='/farmingtool/resources/styles/metisMenu.css' />
+    <link rel='Stylesheet' href='../resources/styles/metisMenu.css' />
     <!-- Custom CSS -->
-    <link rel='Stylesheet' href='/farmingtool/resources/styles/sb-admin-2.css' />
+    <link rel='Stylesheet' href='../resources/styles/sb-admin-2.css' />
     <!-- Custom Fonts -->
     <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"> 
     
@@ -72,7 +72,7 @@ $(document).ready(function (){
 		         $("#sp1").empty();
 		         
 		         $.ajax({
-		            url : "/farmingtool/dictionary/ajaxfmList.action",
+		            url : "../dictionary/ajaxfmList.action",
 		            async : false,
 		            type : "GET",
 		            data : {
@@ -85,7 +85,7 @@ $(document).ready(function (){
 
 				       			  "<div class='item' >"+
 				  					"<div class='detail1' style='float: left; border: .3em'>"+
-				  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+				  					  "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 				  					    "<p>"+listitem.fmName+"</p>"+
 				  						"<hr />"+
 				  					    "<button>대여하기</button>"+
@@ -148,7 +148,7 @@ $(document).ready(function (){
 		         $("#sp1").empty();
 		         
 		         $.ajax({
-		            url : "/farmingtool/dictionary/ajaxfmSearch.action",
+		            url : "../dictionary/ajaxfmSearch.action",
 		            async : false,
 		            type : "GET",
 		            data : {
@@ -161,7 +161,7 @@ $(document).ready(function (){
 				                     var html=
 						       			  "<div class='item' >"+
 						  					"<div class='detail1' style='float: left; border: .3em'>"+
-						  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+						  					  "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 						  					    "<p>"+listitem.fmName+"</p>"+
 						  						"<hr />"+
 						  					    "<button>대여하기</button>"+
@@ -238,7 +238,7 @@ $(document).ready(function (){
 				<li><i class="fa fa-user fa-fw"></i></li>
 				<c:choose>
 					<c:when test="${ loginuser eq null }">
-						<li><a href="/farmingtool/account/login.action"><p>로그인</p></a></li>
+						<li><a href="../account/login.action"><p>로그인</p></a></li>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
@@ -316,7 +316,7 @@ $(document).ready(function (){
                                     <!-- /.nav-third-level -->
                                 </li>
                                  <li>
-                                    <a href="accident.action">농기계 안전·사고사례</a>
+                                    <a href="../accident.action">농기계 안전·사고사례</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -334,7 +334,7 @@ $(document).ready(function (){
 			    <c:forEach var="farmMachine" items="${ farmMachineList }">
 			      <div class="item" >
 					<div class="detail1" style="float: left; border: .3em">
-					  <img src="/farmingtool/resources/images/fmimage/${ farmMachine.fmPicture }" width="200px" height="180px" style="padding-right: 4px">
+					  <img src="../resources/images/fmimage/${ farmMachine.fmPicture }" width="200px" height="180px" style="padding-right: 4px">
 	
 					    <p>${ farmMachine.fmName }</p>
 						<hr />

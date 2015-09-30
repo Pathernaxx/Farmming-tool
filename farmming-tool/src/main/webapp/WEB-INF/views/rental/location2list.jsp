@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<script src="/farmingtool/resources/js/rentallist.js"></script>
+<script src="../resources/js/rentallist.js"></script>
 
 <select id="location2" class="rental_option">
 	<option value="" class="" selected="selected">지역선택2-시/군/구</option>

@@ -123,7 +123,7 @@
 </head>
 <body>
 
-	<form id="registbox" method="post" action="updateMember.action" >
+	<form id="registbox" method="post" action="../updateMember.action" >
 		<label for="id">* 아이디</label>
 		<input type="text" id="loginid" name="loginid" class="id" value="${ member.memberId }" readonly="readonly" title="회원 아이디" maxlength="20" />
 		<br />

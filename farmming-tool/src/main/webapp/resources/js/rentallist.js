@@ -5,7 +5,7 @@ $(document).ready(function (){
 			return;
 		}
 		$.ajax({
-			url : "/farmingtool/rental/searchlocation2.action",
+			url : "../rental/searchlocation2.action",
 			async : true,
 			method : "POST",
 			data : {
@@ -37,7 +37,7 @@ $(document).ready(function (){
 				return;
 			}
 			$.ajax({
-				url : "/farmingtool/rental/searchmachinebylocation.action",
+				url : "../rental/searchmachinebylocation.action",
 				async : true,
 				method : "POST",
 				data : {
@@ -92,7 +92,7 @@ $(document).ready(function (){
 		}
 		
 		$.ajax({
-			url : "/farmingtool/rental/searchmachine.action",
+			url : "../rental/searchmachine.action",
 			async : false,
 			method : "POST",
 			data : {
@@ -109,7 +109,7 @@ $(document).ready(function (){
 					});
 					
 					$.ajax({
-						url : "/farmingtool/rental/searchmachinecount.action",
+						url : "../rental/searchmachinecount.action",
 						async : false,
 						method : "POST",
 						data : {

@@ -10,12 +10,8 @@
     <meta name="author" content="">
     <title>FARM MACHINE</title>
     
-    <!-- Calendar jQuery -->
-    <!-- <script src="//code.jquery.com/jquery-1.11.3.js"></script> -->
     
-    <link rel='Stylesheet' href='/farmingtool/resources/styles/rentalmain.css' />
-    
-    <!-- Bootstrap Core CSS -->
+     <!-- Bootstrap Core CSS -->
     <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
@@ -28,10 +24,25 @@
     <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
     <!-- Calendar CSS -->
-	<link rel="stylesheet" href="/farmingtool/resources/styles/zabuto_calendar.min.css">
-	<link rel="stylesheet" href="/farmingtool/resources/styles/bootstrap.min.css">
+	<link rel="stylesheet" href="../resources/styles/zabuto_calendar.min.css">
+	<link rel="stylesheet" href="../resources/styles/bootstrap.min.css">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- jQuery -->
+    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+
+	<!-- Calendar Theme JavaScript -->
+	<script src="../resources/js/zabuto_calendar.min.js"></script>
+    
 <style>
 .item {
     width: 200px;
@@ -49,17 +60,160 @@
 	font-size: 20px;
 }	
 </style>
-<script type="text/javascript">
-$(function(){
-	var container = $('.page-masonry');
-	$container.imagesLoaded( function () {
-	       $container.masonry({
-	           columnWidth: '.item',
-	           itemSelector: '.item'
-	       });
-        });
-	});
 
+<script type="text/javascript">
+$(document).ready(function (){
+
+var $masry = $('.page-masonry').masonry({
+    itemSelector: '.item',
+    isAnimated: true,
+    
+});
+  $masry.on( 'click', '.item', function() {
+	    // change size of item by toggling gigante class
+	    $( this ).toggleClass('item--gigante');
+	    $masry.masonry('layout');
+	  });
+     $(".ajaxfarmlist").click(function( event ) {
+         var fmID = $(this).attr('id'); 
+            $("#page-wrapper").empty();
+            $(".page-masonry").empty();
+            $.ajax({
+               url : "../dictionary/ajaxfmList.action",
+               async : false,
+               type : "GET",
+               data : {
+                  typeNo : fmID
+               },
+               success : function(fmBytypeNo){
+                  if (fmBytypeNo != null){
+                     $.each(fmBytypeNo, function(index, listitem){
+                        var html=
+
+                           "<div class='item2' >"+
+                          "<div class='detail1' style='float: left; border: .3em'>"+
+                            "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+                              "<p>"+listitem.fmName+"</p>"+
+                             "<hr />"+
+                          "</div>"+
+                          "<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
+                           "<table>"+
+                            "<tr>"+
+                          "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
+                          "</tr>"+                 
+                         "</table>"+
+                        "</div>"+
+                        "</div>";
+                           
+                     $("#page-wrapper").append($(html)); 
+                        
+                     });
+                     
+                  }
+                  else{
+                     alert("success but exception");
+                  }
+                  
+               },
+               error : function(){
+                  alert("error");
+               }
+            });
+            event.preventDefault(); 
+            
+         });
+$("#searchbutton").click(function( event ) {
+  var searchword = $("#searchword").val();
+  	
+     $("#sp1").empty();
+     
+     $.ajax({
+        url : "../dictionary/ajaxfmSearch.action",
+        async : false,
+        type : "GET",
+        data : {
+        	searchword : searchword
+        },
+        success : function(fmSearchList){
+        	
+        	 if (fmSearchList != null && fmSearchList.length > 0){
+                  $.each(fmSearchList, function(index, listitem){
+	                     var html=
+			       			  "<div class='item' >"+
+			  					"<div class='detail1' style='float: left; border: .3em'>"+
+			  					  "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+			  					    "<p>"+listitem.fmName+"</p>"+
+			  						"<hr />"+
+			  					"</div>"+
+			  					"<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
+			  					 "<table>"+
+			  					  "<tr>"+
+								  "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
+								  "</tr>"+					  
+								 "</table>"+
+								"</div>"+
+						      "</div>";
+	                  	$("#sp1").append($(html)); 
+	                     
+	                  });		            		 
+        	 }else{
+        		 var html = "<div>"+
+  					"<div class='detail1'>"+
+  					"올바른 검색어를 입력하세요."+
+  					"</div>"+
+				      "</div>";
+        		 $("#sp1").append($(html)); 
+        	 }
+        },
+        error : function(){
+               alert("error");
+        }
+      });
+});
+
+});
 </script>
 </head>
 <body>
@@ -74,7 +228,7 @@ $(function(){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/farmingtool/home.action" >대여통</a>
+                <a class="navbar-brand" href="../home.action" >대여통</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -82,7 +236,7 @@ $(function(){
 				<li><i class="fa fa-user fa-fw"></i></li>
 				<c:choose>
 					<c:when test="${ loginuser eq null }">
-						<li><a href="/farmingtool/account/login.action"><p>로그인</p></a></li>
+						<li><a href="../account/login.action"><p>로그인</p></a></li>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
@@ -92,9 +246,9 @@ $(function(){
 									  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">${ loginuser.adminName }
 									  <span class="caret"></span></button>
 									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-									    <li role="presentation"><a role="menuitem" href="/farmingtool/admin/rentallist.action">관리자페이지</a></li>
+									    <li role="presentation"><a role="menuitem" href="../admin/rentallist.action">관리자페이지</a></li>
 									    <li role="presentation" class="divider"></li>
-									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
+									    <li role="presentation"><a role="menuitem" href="../account/logout.action">로그아웃</a></li>
 									  </ul>
 									</div>								
 								</li>
@@ -107,7 +261,7 @@ $(function(){
 									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 									    <li role="presentation"><a role="menuitem" href="#">회원정보</a></li>
 									    <li role="presentation" class="divider"></li>
-									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
+									    <li role="presentation"><a role="menuitem" href="../account/logout.action">로그아웃</a></li>
 									  </ul>
 									</div>
 								</li>
@@ -133,7 +287,7 @@ $(function(){
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="/farmingtool/rental/rentalmain.action"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
+                            <a href="../rental/rentalmain.action"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
                         </li>
                         <li>
                             <a href="#" class="mainview"><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
@@ -179,7 +333,7 @@ $(function(){
                                     <!-- /.nav-third-level -->
                                 </li>
                                  <li>
-                                    <a href="/farmingtool/dictionary/accident.action">농기계 안전·사고사례</a>
+                                    <a href="../dictionary/accident.action">농기계 안전·사고사례</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -242,21 +396,6 @@ $(function(){
 
     </div>
     <!-- /#wrapper -->
-	
-    <!-- jQuery -->
-    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/jquery/dist/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
-
-	<!-- Calendar Theme JavaScript -->
-	<script src="/farmingtool/resources/js/zabuto_calendar.min.js"></script>
 	
 </body>
 </html>

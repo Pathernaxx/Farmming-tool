@@ -10,16 +10,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.js"></script>
     <title>Rental List</title>
     <!-- Bootstrap Core CSS -->
-    <link rel='Stylesheet' href='/farmingtool/resources/styles/bootstrap.css' />
+    <link rel='Stylesheet' href='../resources/styles/bootstrap.css' />
     <!-- MetisMenu CSS -->
-    <link rel='Stylesheet' href='/farmingtool/resources/styles/metisMenu.css' />
+    <link rel='Stylesheet' href='../resources/styles/metisMenu.css' />
     <!-- Custom CSS -->
-    <link rel='Stylesheet' href='/farmingtool/resources/styles/sb-admin-2.css' />
+    <link rel='Stylesheet' href='../resources/styles/sb-admin-2.css' />
     <!-- Custom Fonts -->
     <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"> 
+	<!-- Bootstrap Core JavaScript -->
+    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <style>
 .item {
     width: 260px;
@@ -49,7 +56,7 @@ $(document).ready(function (){
 	         $("#sp1").empty();
 	         
 	         $.ajax({
-	            url : "/farmingtool/dictionary/ajaxfmList.action",
+	            url : "../dictionary/ajaxfmList.action",
 	            async : false,
 	            type : "GET",
 	            data : {
@@ -62,7 +69,7 @@ $(document).ready(function (){
 
 			       			  "<div class='item' >"+
 			  					"<div class='detail1' style='float: left; border: .3em'>"+
-			  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+			  					  "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 			  					    "<p>"+listitem.fmName+"</p>"+
 			  						"<hr />"+
 			  					"</div>"+
@@ -124,7 +131,7 @@ $(document).ready(function (){
 	         $("#sp1").empty();
 	         
 	         $.ajax({
-	            url : "/farmingtool/dictionary/ajaxfmSearch.action",
+	            url : "../dictionary/ajaxfmSearch.action",
 	            async : false,
 	            type : "GET",
 	            data : {
@@ -137,7 +144,7 @@ $(document).ready(function (){
 			                     var html=
 					       			  "<div class='item' >"+
 					  					"<div class='detail1' style='float: left; border: .3em'>"+
-					  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+					  					  "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 					  					    "<p>"+listitem.fmName+"</p>"+
 					  						"<hr />"+
 					  					"</div>"+
@@ -191,7 +198,7 @@ $(document).ready(function (){
  		$(".page-masonry").empty();
     var selectVal = $("#pClassType option:selected").val();
 	$.ajax({
-        url : "/farmingtool/dictionary/accident.action",
+        url : "../dictionary/accident.action",
         async : false,
         type : "POST",		
         data : {
@@ -231,7 +238,7 @@ $(document).ready(function (){
 			var current = $(this);
 			
 			$.ajax({
-				url: 'changeStatus.action',
+				url: '../admin/changeStatus.action',
 				type: 'post',
 				data : {
 					'historyNo' : id,
@@ -269,7 +276,7 @@ $(document).ready(function (){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/farmingtool/home.action" >대여통</a>
+                <a class="navbar-brand" href="../home.action" >대여통</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -277,7 +284,7 @@ $(document).ready(function (){
 				<li><i class="fa fa-user fa-fw"></i></li>
 				<c:choose>
 					<c:when test="${ loginuser eq null }">
-						<li><a href="/farmingtool/account/login.action"><p>로그인</p></a></li>
+						<li><a href="../account/login.action"><p>로그인</p></a></li>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
@@ -287,9 +294,9 @@ $(document).ready(function (){
 									  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">${ loginuser.adminName }
 									  <span class="caret"></span></button>
 									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-									    <li role="presentation"><a role="menuitem" href="/farmingtool/admin/rentallist.action">관리자페이지</a></li>
+									    <li role="presentation"><a role="menuitem" href="../admin/rentallist.action">관리자페이지</a></li>
 									    <li role="presentation" class="divider"></li>
-									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
+									    <li role="presentation"><a role="menuitem" href="../account/logout.action">로그아웃</a></li>
 									  </ul>
 									</div>								
 								</li>
@@ -302,7 +309,7 @@ $(document).ready(function (){
 									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 									    <li role="presentation"><a role="menuitem" href="#">회원정보</a></li>
 									    <li role="presentation" class="divider"></li>
-									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
+									    <li role="presentation"><a role="menuitem" href="../account/logout.action">로그아웃</a></li>
 									  </ul>
 									</div>
 								</li>
@@ -328,7 +335,7 @@ $(document).ready(function (){
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="/farmingtool/rental/rentalmain.action"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
+                            <a href="../rental/rentalmain.action"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
                         </li>
                         <li>
                             <a href="#" class="mainview"><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
@@ -374,7 +381,7 @@ $(document).ready(function (){
                                     <!-- /.nav-third-level -->
                                 </li>
                                  <li>
-                                    <a href="/farmingtool/dictionary/accident.action">농기계 안전·사고사례</a>
+                                    <a href="../dictionary/accident.action">농기계 안전·사고사례</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -390,7 +397,6 @@ $(document).ready(function (){
 		<div id="page-wrapper" style="padding: 10px">
 		<h1>대여목록</h1>
         <hr/>
-		
 			<table  border="1" class="history" style=" width: 80%; min-width: 550px;font-size: 11pt">
 			<tr style=" text-align: center;font-weight:bold; ; height: 30px; border-bottom: double; ">
 				<td >대여번호</td>

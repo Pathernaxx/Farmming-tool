@@ -280,10 +280,9 @@ public class AccountController {
 	
 	@RequestMapping(value="logout.action", method=RequestMethod.GET)
 	public String logout(HttpSession session){
-		System.out.println("logout");
 		session.removeAttribute("loginuser");
 		session.removeAttribute("USERTYPE");
-		return "home";
+		return "redirect:../home.action";
 	}
 	
 	

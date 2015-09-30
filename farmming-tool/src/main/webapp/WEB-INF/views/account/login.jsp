@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="/farmingtool/resources/styles/account.css" />
+<link rel="stylesheet" href="../resources/styles/account.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <title>로그인</title>
 <script type="text/javascript">
@@ -23,7 +23,7 @@
 			}
 			
 			$.ajax({
-				url : '/farmingtool/account/login.action',
+				url : '../account/login.action',
 				async : false,
 				type : 'post',
 				data : {
@@ -49,7 +49,7 @@
 						
 						// returnurl이 없다면 홈으로
 						if( returnurl == '' || returnurl.length == 0 )
-							returnurl = '/farmingtool/home.action';
+							returnurl = '../home.action';
 						
 						$(location).attr('href', returnurl);
 					}
@@ -73,7 +73,7 @@
 			</div>
 		</div>
 		<div>
-			<a href="/farmingtool/account/registerMember.action">회원가입</a>
+			<a href="../account/registerMember.action">회원가입</a>
 		</div>
 	</section>
 </body>

@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<script src="/farmingtool/resources/js/rentallist.js"></script>
+<script src="../resources/js/rentallist.js"></script>
 
 <div id="ac2">
 	<select id="machine1" name="machine1" class="rental_option">

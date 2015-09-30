@@ -14,8 +14,8 @@
     <title>FARM MACHINE</title>
 	<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
  
-    <link rel='Stylesheet' href='/farmingtool/resources/styles/rentalmain.css' />
-    <script src="/farmingtool/resources/js/rentallist.js"></script>
+    <link rel='Stylesheet' href='../resources/styles/rentalmain.css' />
+    <script src="../resources/js/rentallist.js"></script>
     
     <!-- Bootstrap Core CSS -->
     <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,8 +30,8 @@
     <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
     <!-- Calendar CSS -->
-	<link rel="stylesheet" href="/farmingtool/resources/styles/zabuto_calendar.min.css">
-	<link rel="stylesheet" href="/farmingtool/resources/styles/bootstrap.min.css">
+	<link rel="stylesheet" href="../resources/styles/zabuto_calendar.min.css">
+	<link rel="stylesheet" href="../resources/styles/bootstrap.min.css">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
     
     <!-- jQuery -->
@@ -47,7 +47,7 @@
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
 
 	<!-- Calendar Theme JavaScript -->
-	<script src="/farmingtool/resources/js/zabuto_calendar.min.js"></script>
+	<script src="../resources/js/zabuto_calendar.min.js"></script>
     <style>
 .item {
     width: 260px;
@@ -114,7 +114,7 @@
 		            $("#page-wrapper").empty();
 		            $(".page-masonry").empty();
 		            $.ajax({
-		               url : "/farmingtool/dictionary/ajaxfmList.action",
+		               url : "../dictionary/ajaxfmList.action",
 		               async : false,
 		               type : "GET",
 		               data : {
@@ -127,7 +127,7 @@
 
 		                           "<div class='item2' >"+
 		                          "<div class='detail1' style='float: left; border: .3em'>"+
-		                            "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+		                            "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 		                              "<p>"+listitem.fmName+"</p>"+
 		                             "<hr />"+
 		                          "</div>"+
@@ -184,7 +184,7 @@
 	         $("#sp1").empty();
 	         
 	         $.ajax({
-	            url : "/farmingtool/dictionary/ajaxfmSearch.action",
+	            url : "../dictionary/ajaxfmSearch.action",
 	            async : false,
 	            type : "GET",
 	            data : {
@@ -197,7 +197,7 @@
 			                     var html=
 					       			  "<div class='item' >"+
 					  					"<div class='detail1' style='float: left; border: .3em'>"+
-					  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+					  					  "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 					  					    "<p>"+listitem.fmName+"</p>"+
 					  						"<hr />"+
 					  					"</div>"+
@@ -252,7 +252,7 @@
     	
     	if('${loginuser}' == null || '${loginuser}' == ""){
     		alert("대여는 로그인 후 이용가능 합니다.");
-    		$(location).attr("href", "/farmingtool/account/login.action");
+    		$(location).attr("href", "../account/login.action");
     	}
     	
         $("#date-popover").hide();
@@ -287,7 +287,7 @@
     	var fmNo = $("#fmNo").val();
     	var locationNo2 = $("#locationNo2").val();
     	$.ajax({
-    		url: "/farmingtool/rental/rentalMachine.action",
+    		url: "../rental/rentalMachine.action",
     		type: "POST",
     		async: true,
     		data: {
@@ -299,7 +299,7 @@
     			if(result != null)
 				{
     				alert("예약 성공 : 확인 페이지로 이동합니다.")
-					var returnurl = '/farmingtool/rental/moveToCheckRental.action?machineNo='+result;
+					var returnurl = '../rental/moveToCheckRental.action?machineNo='+result;
 					$(location).attr('href', returnurl);
 				} else {
 					$("#date-popover").hide();
@@ -338,7 +338,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/farmingtool/home.action" >대여통</a>
+                <a class="navbar-brand" href="../home.action" >대여통</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -346,7 +346,7 @@
 				<li><i class="fa fa-user fa-fw"></i></li>
 				<c:choose>
 					<c:when test="${ loginuser eq null }">
-						<li><a href="/farmingtool/account/login.action"><p>로그인</p></a></li>
+						<li><a href="../account/login.action"><p>로그인</p></a></li>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
@@ -356,9 +356,9 @@
 									  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">${ loginuser.adminName }
 									  <span class="caret"></span></button>
 									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-									    <li role="presentation"><a role="menuitem" href="/farmingtool/admin/rentallist.action">관리자페이지</a></li>
+									    <li role="presentation"><a role="menuitem" href="../admin/rentallist.action">관리자페이지</a></li>
 									    <li role="presentation" class="divider"></li>
-									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
+									    <li role="presentation"><a role="menuitem" href="../account/logout.action">로그아웃</a></li>
 									  </ul>
 									</div>								
 								</li>
@@ -371,7 +371,7 @@
 									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 									    <li role="presentation"><a role="menuitem" href="#">회원정보</a></li>
 									    <li role="presentation" class="divider"></li>
-									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
+									    <li role="presentation"><a role="menuitem" href="../account/logout.action">로그아웃</a></li>
 									  </ul>
 									</div>
 								</li>
@@ -397,7 +397,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="/farmingtool/rental/rentalmain.action"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
+                            <a href="../rental/rentalmain.action"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
                         </li>
                         <li>
                             <a href="#" class="mainview"><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
@@ -443,7 +443,7 @@
                                     <!-- /.nav-third-level -->
                                 </li>
                                  <li>
-                                    <a href="/farmingtool/dictionary/accident.action">농기계 안전·사고사례</a>
+                                    <a href="../dictionary/accident.action">농기계 안전·사고사례</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
