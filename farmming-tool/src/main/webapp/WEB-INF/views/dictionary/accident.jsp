@@ -141,7 +141,7 @@ $(document).ready(function (){
             
          });
      
-     $("#mainview").click(function( event ) {
+     $(".mainview").click(function( event ) {
          $("#page-wrapper").empty();
          $(".page-masonry").empty();
             $.ajax({
@@ -467,7 +467,7 @@ $(document).ready(function (){
                             <a href="/farmingtool/rental/rentalmain.action"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
                         </li>
                         <li>
-                            <a href="/farmingtool/dictionary/ajaxfmList.action"><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
+                            <a href="#" class="mainview"><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level">
 
                                 <li>

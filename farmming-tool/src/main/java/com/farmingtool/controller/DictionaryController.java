@@ -39,21 +39,21 @@ public class DictionaryController {
 	}
 	
 	
-	@RequestMapping(value="view.action", method= RequestMethod.GET)
-	public ModelAndView DictionaryApp(){
-		
-		ModelAndView mav = new ModelAndView();
-		List<FarmMachine> farmMachineList = farmMachineService.getFarmMachineList();
-		
-		/*for(FarmMachine fmList :  farmMachineList){
-			System.out.println(fmList.getFmNo());
-		}*/
-		
-		mav.addObject("farmMachineList", farmMachineList);
-		mav.setViewName("dictionary/cover");
-
-		return mav;
-	}
+	   @RequestMapping(value="view.action", method= RequestMethod.GET)
+	   @ResponseBody
+	   public List<FarmMachine> DictionaryApp(){
+	      
+	      List<FarmMachine> farmMachineList = farmMachineService.getFarmMachineList();
+	      
+	      /*for(FarmMachine fmList :  farmMachineList){
+	         System.out.println(fmList.getFmNo());
+	      }*/
+	      
+	      /*mav.addObject("farmMachineList", farmMachineList);
+	      mav.setViewName("dictionary/cover");
+	*/
+	      return farmMachineList;
+	   }
 	@RequestMapping(value="showdetail.action", method= RequestMethod.GET)
 	public ModelAndView DictionaryDetail(String fmno){
 		ModelAndView mav = new ModelAndView();
