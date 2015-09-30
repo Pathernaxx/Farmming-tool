@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.farmingtool.dto.Admin;
@@ -276,4 +277,15 @@ public class AccountController {
 		
 		return "home";
 	}
+	
+	@RequestMapping(value="logout.action", method=RequestMethod.GET)
+	public String logout(HttpSession session){
+		System.out.println("logout");
+		session.removeAttribute("loginuser");
+		session.removeAttribute("USERTYPE");
+		return "home";
+	}
+	
+	
+	
 }
