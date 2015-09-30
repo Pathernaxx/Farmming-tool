@@ -37,191 +37,358 @@
 	border-top-right-radius: 5px;
 	overflow: hidden;
  }
+  .item2 {
+    width: 200px;
+    height: 205px;
+    border: 3px solid;
+    margin: 5px;
+    float: left;
+    color : #BDBDBD;
+    border-bottom-left-radius: 5px;
+   border-bottom-right-radius: 5px;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+   overflow: hidden;
+ }
  
+.item2--gigante{
+    width: 800px;
+    height: 500px;
+}
+
+
+.item2--gigante img{
+    width: 290px;
+    height: 400px;
+}
  
 </style>
 <script type="text/javascript">
 $(document).ready(function (){
- 	var $masry = $('.page-masonry').masonry({
-		  itemSelector: '.item',
-		  isAnimated: true,
-		  
-	});
- 	
-	  $(".ajaxfarmlist").click(function( event ) {
-	      var fmID = $(this).attr('id'); 
-	         $("#sp1").empty();
-	         
-	         $.ajax({
-	            url : "/farmingtool/dictionary/ajaxfmList.action",
-	            async : false,
-	            type : "GET",
-	            data : {
-	               typeNo : fmID
-	            },
-	            success : function(fmBytypeNo){
-	               if (fmBytypeNo != null){
-	                  $.each(fmBytypeNo, function(index, listitem){
-	                     var html=
+    var $masry = $('.page-masonry').masonry({
+        itemSelector: '.item',
+        isAnimated: true,
+        
+   });
+    
+     $(".ajaxfarmlist").click(function( event ) {
+         var fmID = $(this).attr('id'); 
+            $("#page-wrapper").empty();
+            $(".page-masonry").empty();
+            $.ajax({
+               url : "/farmingtool/dictionary/ajaxfmList.action",
+               async : false,
+               type : "GET",
+               data : {
+                  typeNo : fmID
+               },
+               success : function(fmBytypeNo){
+                  if (fmBytypeNo != null){
+                     $.each(fmBytypeNo, function(index, listitem){
+                        var html=
 
-			       			  "<div class='item' >"+
-			  					"<div class='detail1' style='float: left; border: .3em'>"+
-			  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
-			  					    "<p>"+listitem.fmName+"</p>"+
-			  						"<hr />"+
-			  					"</div>"+
-			  					"<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
-			  					 "<table>"+
-			  					  "<tr>"+
-								  "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
-								  "</tr>"+					  
-								 "</table>"+
-								"</div>"+
-						      "</div>";
-	                        
-	                  $("#sp1").append($(html)); 
-	                     
-	                  });
-	                  
-	               }
-	               else{
-	                  alert("success but exception");
-	               }
-	               
-	            },
-	            error : function(){
-	               alert("error");
-	            }
-	         });
-	         event.preventDefault(); 
-	         
-	      });
-	  
-	  
-	  
-	  
-	  
-	  $("#searchbutton").click(function( event ) {
-		  var searchword = $("#searchword").val();
-		  	
-	         $("#sp1").empty();
-	         
-	         $.ajax({
-	            url : "/farmingtool/dictionary/ajaxfmSearch.action",
-	            async : false,
-	            type : "GET",
-	            data : {
-	            	searchword : searchword
-	            },
-	            success : function(fmSearchList){
-	            	
-	            	 if (fmSearchList != null && fmSearchList.length > 0){
-		                  $.each(fmSearchList, function(index, listitem){
-			                     var html=
-					       			  "<div class='item' >"+
-					  					"<div class='detail1' style='float: left; border: .3em'>"+
-					  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
-					  					    "<p>"+listitem.fmName+"</p>"+
-					  						"<hr />"+
-					  					"</div>"+
-					  					"<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
-					  					 "<table>"+
-					  					  "<tr>"+
-										  "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
-										  "</tr>"+
-										  "<tr>"+
-										   "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
-										  "</tr>"+
-										  "<tr>"+
-										   "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
-										  "</tr>"+
-										  "<tr>"+
-										   "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
-										  "</tr>"+
-										  "<tr>"+
-										   "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
-										  "</tr>"+
-										  "<tr>"+
-										   "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
-										  "</tr>"+
-										  "<tr>"+
-										   "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
-										  "</tr>"+
-										  "<tr>"+
-										   "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
-										  "</tr>"+					  
-										 "</table>"+
-										"</div>"+
-								      "</div>";
-			                  	$("#sp1").append($(html)); 
-			                     
-			                  });		            		 
-	            	 }else{
-	            		 var html = "<div>"+
-		  					"<div class='detail1'>"+
-		  					"올바른 검색어를 입력하세요."+
-		  					"</div>"+
-						      "</div>";
-	            		 $("#sp1").append($(html)); 
-	            	 }
-	            },
-	            error : function(){
-		               alert("error");
-		        }
-	          });
-	  });	
- 	$("#pClassType").change(function(event){
- 		$(".page-masonry").empty();
+                           "<div class='item2' >"+
+                          "<div class='detail1' style='float: left; border: .3em'>"+
+                            "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+                              "<p>"+listitem.fmName+"</p>"+
+                             "<hr />"+
+                          "</div>"+
+                          "<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
+                           "<table>"+
+                            "<tr>"+
+                          "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
+                          "</tr>"+                 
+                         "</table>"+
+                        "</div>"+
+                        "</div>";
+                           
+                     $("#page-wrapper").append($(html)); 
+                        
+                     });
+                     
+                  }
+                  else{
+                     alert("success but exception");
+                  }
+                  
+               },
+               error : function(){
+                  alert("error");
+               }
+            });
+            event.preventDefault(); 
+            
+         });
+     
+     $(".mainview").click(function( event ) {
+         $("#page-wrapper").empty();
+         $(".page-masonry").empty();
+            $.ajax({
+               url : "/farmingtool/dictionary/view.action",
+               async : false,
+               type : "GET",
+               
+               success : function(farmMachineList){
+                  if (farmMachineList != null){
+                     $.each(farmMachineList, function(index, listitem){
+                        var html=
+
+                           "<div class='item2' >"+
+                          "<div class='detail1' style='float: left; border: .3em'>"+
+                            "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+                              "<p>"+listitem.fmName+"</p>"+
+                             "<hr />"+
+                              "<button>대여하기</button>"+
+                          "</div>"+
+                          "<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
+                           "<table>"+
+                            "<tr>"+
+                          "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
+                          "</tr>"+
+                          "<tr>"+
+                           "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
+                          "</tr>"+                 
+                         "</table>"+
+                        "</div>"+
+                        "</div>";
+                           
+                        $("#page-wrapper").append($(html)); 
+                           
+                        
+                     });
+                     
+                  }
+                  else{
+                     alert("success but exception");
+                  }
+                  
+               },
+               error : function(){
+                  alert("error");
+               }
+            });
+            event.preventDefault(); 
+            
+         });  
+   
+     
+     
+     $("#searchbutton").click(function( event ) {
+        var searchword = $("#searchword").val();
+        $(".page-masonry").empty();
+        $("#page-wrapper").empty();
+            
+            $.ajax({
+               url : "/farmingtool/dictionary/ajaxfmSearch.action",
+               async : false,
+               type : "GET",
+               data : {
+                  searchword : searchword
+               },
+               success : function(fmSearchList){
+                  
+                   if (fmSearchList != null && fmSearchList.length > 0){
+                        $.each(fmSearchList, function(index, listitem){
+                              var html=
+                                 "<div class='item' >"+
+                                "<div class='detail1' style='float: left; border: .3em'>"+
+                                  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+                                    "<p>"+listitem.fmName+"</p>"+
+                                   "<hr />"+
+                                "</div>"+
+                                "<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
+                                 "<table>"+
+                                  "<tr>"+
+                                "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
+                                "</tr>"+                 
+                               "</table>"+
+                              "</div>"+
+                              "</div>";
+                              $("#page-wrapper").append($(html)); 
+                              
+                           });                         
+                   }else{
+                      var html = "<div>"+
+                       "<div class='detail1'>"+
+                       "올바른 검색어를 입력하세요."+
+                       "</div>"+
+                        "</div>";
+                        $("#page-wrapper").append($(html)); 
+                   }
+               },
+               error : function(){
+                     alert("error");
+              }
+             });
+     });   
+    $("#pClassType").change(function(event){
+       $(".page-masonry").empty();
+         });
+     
+     
+     
+     
+     
+     $("#searchbutton").click(function( event ) {
+        var searchword = $("#searchword").val();
+        $(".page-masonry").empty();
+            $("#page-wrapper").empty();
+            
+            $.ajax({
+               url : "/farmingtool/dictionary/ajaxfmSearch.action",
+               async : false,
+               type : "GET",
+               data : {
+                  searchword : searchword
+               },
+               success : function(fmSearchList){
+                  
+                   if (fmSearchList != null && fmSearchList.length > 0){
+                        $.each(fmSearchList, function(index, listitem){
+                              var html=
+                                 "<div class='item' >"+
+                                "<div class='detail1' style='float: left; border: .3em'>"+
+                                  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+                                    "<p>"+listitem.fmName+"</p>"+
+                                   "<hr />"+
+                                "</div>"+
+                                "<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
+                                 "<table>"+
+                                  "<tr>"+
+                                "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
+                                "</tr>"+
+                                "<tr>"+
+                                 "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
+                                "</tr>"+                 
+                               "</table>"+
+                              "</div>"+
+                              "</div>";
+                              $("#sp1").append($(html)); 
+                              
+                           });                         
+                   }else{
+                      var html = "<div>"+
+                       "<div class='detail1'>"+
+                       "올바른 검색어를 입력하세요."+
+                       "</div>"+
+                        "</div>";
+                      $("#page-wrapper").append($(html)); 
+                   }
+               },
+               error : function(){
+                     alert("error");
+              }
+             });
+     });   
+    $("#pClassType").change(function(event){
+       $(".page-masonry").empty();
+       
     var selectVal = $("#pClassType option:selected").val();
-	$.ajax({
+   $.ajax({
         url : "/farmingtool/dictionary/accident.action",
         async : false,
-        type : "POST",		
+        type : "POST",      
         data : {
-        	searchword : selectVal
+           searchword : selectVal
         },
         success : function(accs){
-        	
-    		$.each(accs, function(index, data){
-    			var html = "<div class='item'>"+
-    					    "<p>제목 : "+ data.content +"</p>"+
-    					    "<a href="+ data.downUrl +"><p>다운로드</p></a>"+
-    					    "<p>분류 : "+ data.pClass +"</p>"+
-    				       "</div>";
-    			$(".page-masonry").append(html);
-    		});
-    	},
-		error : function(xhr, ajaxOptions, thrownError){
-			console.log(xhr.status);
-			console.log(thrownError);
-		}
-	});
-	 
-	 event.preventDefault();
-	
+           
+          $.each(accs, function(index, data){
+             var html = "<div class='item'>"+
+                       "<p>제목 : "+ data.content +"</p>"+
+                       "<a href="+ data.downUrl +"><p>다운로드</p></a>"+
+                       "<p>분류 : "+ data.pClass +"</p>"+
+                       "</div>";
+             $(".page-masonry").append(html);
+          });
+       },
+      error : function(xhr, ajaxOptions, thrownError){
+         console.log(xhr.status);
+         console.log(thrownError);
+      }
+   });
+    
+    event.preventDefault();
  });
- 	
+    
 });
 
 </script>
@@ -238,7 +405,7 @@ $(document).ready(function (){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/farmingtool/home.action">대여통</a>
+                <a class="navbar-brand" href="/farmingtool/home.action" >대여통</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -300,7 +467,7 @@ $(document).ready(function (){
                             <a href="/farmingtool/rental/rentalmain.action"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
+                            <a href="#" class="mainview"><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level">
 
                                 <li>
