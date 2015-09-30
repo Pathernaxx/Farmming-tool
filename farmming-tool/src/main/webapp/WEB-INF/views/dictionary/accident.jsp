@@ -464,7 +464,7 @@ $(document).ready(function (){
         </nav>
 
         <div id="page-wrapper">
-        	<h1>대여</h1>
+        	<h1>농기계 안전·사고사례</h1>
         <hr/>
         
           <div class="row">

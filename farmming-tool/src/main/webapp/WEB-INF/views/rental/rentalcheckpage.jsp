@@ -65,8 +65,8 @@ $(function(){
 <body>
     <div id="wrapper">
 
-        <!-- Navigation -->
-       <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -74,12 +74,11 @@ $(function(){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="home.action">대여통</a>
+                <a class="navbar-brand" href="/farmingtool/home.action" >대여통</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-            	
 				<li><i class="fa fa-user fa-fw"></i></li>
 				<c:choose>
 					<c:when test="${ loginuser eq null }">
@@ -95,7 +94,7 @@ $(function(){
 									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 									    <li role="presentation"><a role="menuitem" href="/farmingtool/admin/rentallist.action">관리자페이지</a></li>
 									    <li role="presentation" class="divider"></li>
-									    <li role="presentation"><a role="menuitem" href="#">로그아웃</a></li>
+									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
 									  </ul>
 									</div>								
 								</li>
@@ -108,13 +107,12 @@ $(function(){
 									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 									    <li role="presentation"><a role="menuitem" href="#">회원정보</a></li>
 									    <li role="presentation" class="divider"></li>
-									    <li role="presentation"><a role="menuitem" href="#">로그아웃</a></li>
+									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
 									  </ul>
 									</div>
 								</li>
 							</c:otherwise>
 						</c:choose>
-						
 					</c:otherwise>
 				</c:choose>
             </ul>
@@ -125,9 +123,9 @@ $(function(){
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" id="searchword" class="form-control" placeholder="Search...">
+                                <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" id="searchbutton" type="button">
+                                <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -138,8 +136,8 @@ $(function(){
                             <a href="/farmingtool/rental/rentalmain.action"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
                         </li>
                         <li>
-                            <a href="#" class="ajaxfarmlist" id=""><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                            <a href="#" class="mainview"><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
+                           <ul class="nav nav-second-level">
 
                                 <li>
                                     <a href="#">사용/분류 <span class="fa arrow"></span></a>
@@ -192,7 +190,8 @@ $(function(){
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-
+        
+        
         <div id="page-wrapper">
         	<h1>대여 확인</h1>
         	<hr/>

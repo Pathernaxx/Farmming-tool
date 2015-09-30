@@ -259,6 +259,7 @@ $(document).ready(function (){
 
 <body>
 	<div id="wrapper">
+		
 		<!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -268,7 +269,7 @@ $(document).ready(function (){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/farmingtool/home.action">대여통</a>
+                <a class="navbar-brand" href="/farmingtool/home.action" >대여통</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -330,7 +331,7 @@ $(document).ready(function (){
                             <a href="/farmingtool/rental/rentalmain.action"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
+                            <a href="#" class="mainview"><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level">
 
                                 <li>
