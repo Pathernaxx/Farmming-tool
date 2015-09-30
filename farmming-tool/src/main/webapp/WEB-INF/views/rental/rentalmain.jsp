@@ -498,7 +498,7 @@
                                     <!-- /.nav-third-level -->
                                 </li>
                                  <li>
-                                    <a href="accident.action">농기계 안전·사고사례</a>
+                                    <a href="/farmingtool/dictionary/accident.action">농기계 안전·사고사례</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
