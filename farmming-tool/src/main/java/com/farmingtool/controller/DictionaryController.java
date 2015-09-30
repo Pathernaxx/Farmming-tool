@@ -86,7 +86,7 @@ public class DictionaryController {
 	
 	   @RequestMapping(value="accident.action", method= RequestMethod.GET)
 	   @ResponseBody
-	   public List<Accident> Accident(String selectVal){
+	   public ModelAndView Accident(String selectVal){
 	      List<Accident> accs = new ArrayList<Accident>();
 	         try{
 	            String path = "http://www.rda.go.kr/openapidata/service/rdamachinesafe_api/rdamachinesafe_list?numOfRows=109&searchword="+selectVal+"&ServiceKey=rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D";   
@@ -109,7 +109,10 @@ public class DictionaryController {
 	         }catch(Exception e){
 	            e.printStackTrace();
 	         }
-	      return accs;
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("accs", accs);
+	      mav.setViewName("dictionary/accident");
+	      return mav;
 	   }   
 	
 	@RequestMapping(value="ajaxfmSearch.action", method = RequestMethod.GET)

@@ -53,8 +53,6 @@ $(document).ready(function (){
         url : "/farmingtool/dictionary/accident.action",
         async : false,
         type : "GET",		
-        dataType: "json",
-		contentType: "application/xml; charset=UTF-8",
         data : {
         	searchword : selectVal
         },
