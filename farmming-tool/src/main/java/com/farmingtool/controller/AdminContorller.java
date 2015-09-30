@@ -1,5 +1,6 @@
 package com.farmingtool.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -43,6 +44,13 @@ public class AdminContorller {
 		
 		if(admin != null)
 			rentalHistory = adminMachineSettingService.getRentalHistory(admin.getAdminLocation2());
+		
+		SimpleDateFormat f = new SimpleDateFormat("yyyy년 MM월 dd일");
+		
+		for (RentalHistory rentalHistory2 : rentalHistory) {
+			rentalHistory2.setHistoryRentalDateToString(f.format(rentalHistory2.getHistoryRentalDate()));
+			rentalHistory2.setHistoryReturnDateToString(f.format(rentalHistory2.getHistoryReturnDate()));
+		}
 		
 		mav.addObject("historys", rentalHistory);
 		mav.setViewName("admin/rentlist");

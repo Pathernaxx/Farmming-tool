@@ -248,7 +248,7 @@ $(document).ready(function (){
 									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 									    <li role="presentation"><a role="menuitem" href="/farmingtool/admin/rentallist.action">관리자페이지</a></li>
 									    <li role="presentation" class="divider"></li>
-									    <li role="presentation"><a role="menuitem" href="#">로그아웃</a></li>
+									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
 									  </ul>
 									</div>								
 								</li>
@@ -261,7 +261,7 @@ $(document).ready(function (){
 									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 									    <li role="presentation"><a role="menuitem" href="#">회원정보</a></li>
 									    <li role="presentation" class="divider"></li>
-									    <li role="presentation"><a role="menuitem" href="#">로그아웃</a></li>
+									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
 									  </ul>
 									</div>
 								</li>
@@ -348,8 +348,8 @@ $(document).ready(function (){
 
         <div id="page-wrapper">
           <div class="row">
-			<div class="page-masonry" id="sp1">
-				<p><h1>어서오세요!!!!!!</h1></p>
+			<div class="page-masonry" id="sp1" >
+				<img alt="" src="/farmingtool/resources/images/main.jpg" style="width: 100%; margin: 10px auto">
 			</div>
 			</div>
 		  </div>

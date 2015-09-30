@@ -9,6 +9,38 @@ public class RentalHistory {
 	private Date historyRentalDate;
 	private Date historyReturnDate;
 	private int historyStatus;
+
+	////////////결과창에서 보여주기 위한 필드///////////////////
+	private String machineName;
+	private String memberName;
+	private String historyRentalDateToString;
+	private String historyReturnDateToString;
+	
+	public String getMachineName() {
+		return machineName;
+	}
+	public void setMachineName(String machineName) {
+		this.machineName = machineName;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getHistoryRentalDateToString() {
+		return historyRentalDateToString;
+	}
+	public void setHistoryRentalDateToString(String historyRentalDateToString) {
+		this.historyRentalDateToString = historyRentalDateToString;
+	}
+	public String getHistoryReturnDateToString() {
+		return historyReturnDateToString;
+	}
+	public void setHistoryReturnDateToString(String historyReturnDateToString) {
+		this.historyReturnDateToString = historyReturnDateToString;
+	}
+	////////////////////////////////////////////////
 	
 	public int getHistoryNo() {
 		return historyNo;
