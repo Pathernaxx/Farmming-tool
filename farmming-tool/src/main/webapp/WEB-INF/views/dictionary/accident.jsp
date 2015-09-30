@@ -25,8 +25,8 @@
     
 <style>
 .item {
-    width: 200px;
-    height: 205px;
+    width: 260px;
+    height: 130px;
     border: 3px solid;
     margin: 5px;
     float: left;
@@ -144,7 +144,6 @@ $(document).ready(function (){
 					  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 					  					    "<p>"+listitem.fmName+"</p>"+
 					  						"<hr />"+
-					  					    "<button>대여하기</button>"+
 					  					"</div>"+
 					  					"<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
 					  					 "<table>"+
@@ -206,9 +205,9 @@ $(document).ready(function (){
         	
     		$.each(accs, function(index, data){
     			var html = "<div class='item'>"+
-    					    "<p>"+ data.content +"</p>"+
-    					    "<a href="+ data.downUrl +"><p>다운로드링크</p></a>"+
-    					    "<p>"+ data.pClass +"</p>"+
+    					    "<p>제목 : "+ data.content +"</p>"+
+    					    "<a href="+ data.downUrl +"><p>다운로드</p></a>"+
+    					    "<p>분류 : "+ data.pClass +"</p>"+
     				       "</div>";
     			$(".page-masonry").append(html);
     		});
@@ -358,7 +357,14 @@ $(document).ready(function (){
 
         <div id="page-wrapper">
           <div class="row">
-          	<select id="pClassType">
+          </br>
+            <table>
+              <tr>
+              	<td>          	
+              	분류  
+				</td>
+              	<td>
+              	<select id="pClassType">
 				<option value="" selected="selected">전체</option>
 			    <option value="교통사고 판례해설">교통사고 판례해설</option>
 			    <option value="교통표지">교통표지</option>
@@ -377,13 +383,16 @@ $(document).ready(function (){
 			    <option value="안전표지">안전표지</option>
 			    <option value="위험지역 작업요령">위험지역 작업요령</option>
 			    <option value="작업환경별 농작업요령">작업환경별 농작업요령</option>
-			</select>
+				</select>
+              	</td>
+              </tr>
+            </table>
 			<div class="page-masonry">
 			<c:forEach var="acc" items="${ accs }">
 			 <div class="item">
- 			 	 <p>${ acc.content}</p>
-    			 <a href="${acc.downUrl}"><p>다운로드링크</p></a>
-    			 <p>${acc.pClass} </p> 
+ 			 	 <p>제목 : ${ acc.content}</p>
+    			 <a href="${acc.downUrl}"><p>다운로드</p></a>
+    			 <p>분류 : ${acc.pClass} </p> 
 		     </div>
 		     </c:forEach>
 			 </div>

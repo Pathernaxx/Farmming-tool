@@ -88,7 +88,6 @@ $(document).ready(function (){
 				  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 				  					    "<p>"+listitem.fmName+"</p>"+
 				  						"<hr />"+
-				  					    "<button>대여하기</button>"+
 				  					"</div>"+
 				  					"<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
 				  					 "<table>"+
@@ -350,7 +349,7 @@ $(document).ready(function (){
         <div id="page-wrapper">
           <div class="row">
 			<div class="page-masonry" id="sp1">
-				<p><h5>어서오세요 농기계 입니다.!!</h5></p>
+				<p><h1>어서오세요!!!!!!</h1></p>
 			</div>
 			</div>
 		  </div>

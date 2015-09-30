@@ -72,7 +72,6 @@
 			  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 			  					    "<p>"+listitem.fmName+"</p>"+
 			  						"<hr />"+
-			  					    "<button>대여하기</button>"+
 			  					"</div>"+
 			  					"<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
 			  					 "<table>"+
