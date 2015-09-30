@@ -330,7 +330,7 @@ $(document).ready(function (){
         <div id="page-wrapper">
           <div class="row">
 			<div class="page-masonry" id="sp1">
-				<p><h5>어서오세요 농기계 입니다.!!</h5></p>
+				<p><h1>어서오세요 농기계를 편리하게 대여할 수 있는 대여통입니다.</h1></p>
 			</div>
 			</div>
 		  </div>
