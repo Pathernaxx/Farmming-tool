@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.farmingtool.dto.Admin;
@@ -50,8 +51,10 @@ public class AdminContorller {
 	}
 	
 	@RequestMapping(value="changeStatus.action", method=RequestMethod.POST)
+	@ResponseBody
 	public void changeStatus(int status, int historyNo)
 	{
+		
 		adminMachineSettingService.setRentalHistoryStatus(status+1, historyNo);
 	}
 }

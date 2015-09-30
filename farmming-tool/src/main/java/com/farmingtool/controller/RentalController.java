@@ -22,7 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.farmingtool.dto.FarmMachine;
 import com.farmingtool.dto.Location2;
+import com.farmingtool.dto.Member;
 import com.farmingtool.dto.RentalHistory;
+import com.farmingtool.dto.RentalInfomation;
 import com.farmingtool.dto.Type;
 import com.farmingtool.service.DetailMachineService;
 import com.farmingtool.service.FarmMachineService;
@@ -108,15 +110,13 @@ public class RentalController {
 	@ResponseBody
 	public String rentalMachine(HttpServletRequest request, HttpSession session) throws ParseException {
 		
-		//String memberId = ((Member)session.getAttribute("loginuser")).getMemberId();
-		String memberId = "user1";
+		String memberId = ((Member)session.getAttribute("loginuser")).getMemberId();
 		int statusNo = 1;
 		String locationNo2 = request.getParameter("locationNo2");
 		
 		/* 예약처리는 여기서 페이지 이동은 jsp ajax에서 */
 		String rentalDate = request.getParameter("rentalDate");
-		String machineNo= null;
-							//request.getParameter("machineNo");
+		String machineNo= null;//request.getParameter("machineNo");
 		String fmNo = request.getParameter("fmNo");
 		
 		String result = null;
@@ -153,9 +153,8 @@ public class RentalController {
 				history.setMachineNo(machineNo); //select 결과
 				
 				rentalHistoryService.insertRentalHistory(history);
-				detailMachineService.updateDetailMachineStatus(machineNo);
-				
-				result = machineNo;
+				//detailMachineService.updateDetailMachineStatus(machineNo);
+				result = machineNo+"&historyNo="+history.getHistoryNo();
 			} else {
 				/* 대여 가능한 기게가 없을 경우 */
 				result = null;
@@ -170,14 +169,16 @@ public class RentalController {
 	
 	//예약 확인창으로 이동
 	@RequestMapping(value="moveToCheckRental.action", method=RequestMethod.GET)
-	public ModelAndView moveToCheckRental(HttpSession session, String machineNo) {
+	public ModelAndView moveToCheckRental(HttpSession session, String machineNo, int historyNo) {
 		
 		//String memberId = ((Member)session.getAttribute("loginuser")).getMemberId();
-		
-		//RentalInfomation info = detailMachineService.rentalCheck(machineNo, historyNo);
+		RentalInfomation info = detailMachineService.rentalCheck(machineNo, historyNo);
+		SimpleDateFormat f = new SimpleDateFormat("yy년 MM월 dd일");
+		info.setHistoryRentalDateToString(f.format(info.getHistoryRentalDate()));
+		info.setHistoryReturnDateToString(f.format(info.getHistoryReturnDate()));
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("machineNo", machineNo);
+		mav.addObject("info", info);
 		mav.setViewName("rental/rentalcheckpage");
 		
 		return mav;

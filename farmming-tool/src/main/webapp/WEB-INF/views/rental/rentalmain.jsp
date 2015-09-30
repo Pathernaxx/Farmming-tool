@@ -50,7 +50,159 @@
 	<script src="/farmingtool/resources/js/zabuto_calendar.min.js"></script>
     
     <script type="text/javascript">
+    $(document).ready(function (){
+	  $(".ajaxfarmlist").click(function( event ) {
+	      var fmID = $(this).attr('id'); 
+	         $("#sp1").empty();
+	         
+	         $.ajax({
+	            url : "/farmingtool/dictionary/ajaxfmList.action",
+	            async : false,
+	            type : "GET",
+	            data : {
+	               typeNo : fmID
+	            },
+	            success : function(fmBytypeNo){
+	               if (fmBytypeNo != null){
+	                  $.each(fmBytypeNo, function(index, listitem){
+	                     var html=
+
+			       			  "<div class='item' >"+
+			  					"<div class='detail1' style='float: left; border: .3em'>"+
+			  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+			  					    "<p>"+listitem.fmName+"</p>"+
+			  						"<hr />"+
+			  					    "<button>대여하기</button>"+
+			  					"</div>"+
+			  					"<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
+			  					 "<table>"+
+			  					  "<tr>"+
+								  "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
+								  "</tr>"+
+								  "<tr>"+
+								   "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
+								  "</tr>"+					  
+								 "</table>"+
+								"</div>"+
+						      "</div>";
+	                        
+	                  $("#sp1").append($(html)); 
+	                     
+	                  });
+	                  
+	               }
+	               else{
+	                  alert("success but exception");
+	               }
+	               
+	            },
+	            error : function(){
+	               alert("error");
+	            }
+	         });
+	         event.preventDefault(); 
+	         
+	      });
+	  
+	  
+	  
+	  
+	  
+	  $("#searchbutton").click(function( event ) {
+		  var searchword = $("#searchword").val();
+		  	
+	         $("#sp1").empty();
+	         
+	         $.ajax({
+	            url : "/farmingtool/dictionary/ajaxfmSearch.action",
+	            async : false,
+	            type : "GET",
+	            data : {
+	            	searchword : searchword
+	            },
+	            success : function(fmSearchList){
+	            	
+	            	 if (fmSearchList != null && fmSearchList.length > 0){
+		                  $.each(fmSearchList, function(index, listitem){
+			                     var html=
+					       			  "<div class='item' >"+
+					  					"<div class='detail1' style='float: left; border: .3em'>"+
+					  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+					  					    "<p>"+listitem.fmName+"</p>"+
+					  						"<hr />"+
+					  					"</div>"+
+					  					"<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
+					  					 "<table>"+
+					  					  "<tr>"+
+										  "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
+										  "</tr>"+					  
+										 "</table>"+
+										"</div>"+
+								      "</div>";
+			                  	$("#sp1").append($(html)); 
+			                     
+			                  });		            		 
+	            	 }else{
+	            		 var html = "<div>"+
+		  					"<div class='detail1'>"+
+		  					"올바른 검색어를 입력하세요."+
+		  					"</div>"+
+						      "</div>";
+	            		 $("#sp1").append($(html)); 
+	            	 }
+	            },
+	            error : function(){
+		               alert("error");
+		        }
+	          });
+	  });
+    });
     function myDateFunction(id, fromModal, selected1, selected2) {
+    	
+    	if('${loginuser}' == null || '${loginuser}' == ""){
+    		alert("대여는 로그인 후 이용가능 합니다.");
+    		$(location).attr("href", "/farmingtool/account/login.action");
+    	}
+    	
         $("#date-popover").hide();
         if (fromModal) {
             $("#" + id + "_modal").modal("hide");
@@ -79,7 +231,6 @@
     
     function moveToCheckRental() {
     	//컨트롤러에서 예약처리
-    	//alert($("#rentalDate").val());
     	var rentalDate = $("#rentalDate").val();
     	var fmNo = $("#fmNo").val();
     	var locationNo2 = $("#locationNo2").val();
@@ -135,7 +286,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">농기계</a>
+                <a class="navbar-brand" href="/farmingtool/home.action">대여통</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -149,10 +300,30 @@
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${ USERTYPE eq 'ADMIN' }">
-								<li><p>${ loginuser.adminName }</p></li>
+								<li>
+								  <div class="dropdown">
+									  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">${ loginuser.adminName }
+									  <span class="caret"></span></button>
+									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+									    <li role="presentation"><a role="menuitem" href="#">관리자페이지</a></li>
+									    <li role="presentation" class="divider"></li>
+									    <li role="presentation"><a role="menuitem" href="#">로그아웃</a></li>
+									  </ul>
+									</div>								
+								</li>
 							</c:when>
 							<c:otherwise>
-								<li><p>${ loginuser.memberName }</p></li>
+								<li>
+								  <div class="dropdown">
+									  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">${ loginuser.memberName }
+									  <span class="caret"></span></button>
+									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+									    <li role="presentation"><a role="menuitem" href="#">회원정보</a></li>
+									    <li role="presentation" class="divider"></li>
+									    <li role="presentation"><a role="menuitem" href="#">로그아웃</a></li>
+									  </ul>
+									</div>
+								</li>
 							</c:otherwise>
 						</c:choose>
 						
@@ -176,10 +347,10 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
+                            <a href="/farmingtool/rental/rentalmain.action"><i class="fa fa-dashboard fa-fw"></i> 대여</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
+                            <a href="#" class="ajaxfarmlist" id=""><i class="fa fa-wrench fa-fw"></i>농기계<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
 
                                 <li>
@@ -221,11 +392,8 @@
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
-                                <li>
-                                    <a href="#">농기계안전정보</a>
-                                </li>
-                                <li>
-                                    <a href="accident.action">농기계사고사례</a>
+                                 <li>
+                                    <a href="/farmingtool/dictionary/accident.action">농기계 안전·사고사례</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -268,7 +436,9 @@
 			</div>
 		
 			<h2 class="rental-condition-title2">기계선택</h2>
+			
 			<div id="ac2">
+			<h6 style="color: red">지역 선택 후에도 기계목록이 보이지 않는 경우 해당 지역에서 기계 대여가능 품종이 없는 것입니다.</h6>
 				<select id="machine1" name="machine1" class="rental_option2">
 					<option value="" selected="selected">기계선택1-대분류</option>
 					<c:forEach var="type" items="${types}" >
@@ -291,7 +461,12 @@
 				&nbsp;■ 보유 대수 : <input type="text" id="totalDetailMachine" /><br/>
 				&nbsp;■ 대여가격 : <input type="text" id="rentalCost"/><br/>
 				&nbsp;■ 주의 사항 : <br/>
-				&nbsp;<font style='color:red;font-weight: bold;'>※ 교육을 이수하지 않을 시 예약이 취소될 수 있습니다. ※</font>
+				&nbsp;<font style='color:red;font-weight: bold;'>
+				※ 교육을 이수하지 않을 시 예약이 취소될 수 있습니다. ※<br/>
+						반납은 대여일 오후 5시까지 하시거나 <br/>
+						다음날 오전 10시까지 하셔야 불이익이 없습니다.<br/>
+						기타 자세한 사항은 02-556-2231 로 문의해 주세요
+				</font>
 			</div>
 			
 			<div id="date-popover" class="popover top">

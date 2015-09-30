@@ -1,11 +1,15 @@
 package com.farmingtool.controller;
 
+import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.jasper.tagplugins.jstl.core.Url;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -18,6 +22,7 @@ import org.w3c.dom.NodeList;
 
 import com.farmingtool.dto.Accident;
 import com.farmingtool.dto.FarmMachine;
+import com.farmingtool.dto.Accident;
 import com.farmingtool.service.FarmMachineService;
 
 
@@ -84,36 +89,66 @@ public class DictionaryController {
 		return fmBytypeNo;
 	}
 	
-	   @RequestMapping(value="accident.action", method= RequestMethod.GET)
-	   @ResponseBody
-	   public ModelAndView Accident(String selectVal){
-	      List<Accident> accs = new ArrayList<Accident>();
-	         try{
-	            String path = "http://www.rda.go.kr/openapidata/service/rdamachinesafe_api/rdamachinesafe_list?numOfRows=109&searchword="+selectVal+"&ServiceKey=rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D";   
-	            
-	            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	            DocumentBuilder builder = factory.newDocumentBuilder();
-	            
-	            Document document = builder.parse(path);
-	            NodeList content = document.getElementsByTagName("content");
-	            NodeList downurl = document.getElementsByTagName("downurl");
-	            NodeList pclass = document.getElementsByTagName("PClass");
-	            
-	            for(int i=0; i< content.getLength(); i++){
-	            	Accident acc = new Accident();
-	               acc.setContent(content.item(i).getFirstChild().getNodeValue());  
-	               acc.setDownUrl(downurl.item(i).getFirstChild().getNodeValue());
-	               acc.setpClass(pclass.item(i).getFirstChild().getNodeValue());
-	               accs.add(acc);
-	            }
-	         }catch(Exception e){
-	            e.printStackTrace();
-	         }
-	      ModelAndView mav = new ModelAndView();
-	      mav.addObject("accs", accs);
-	      mav.setViewName("dictionary/accident");
-	      return mav;
-	   }   
+
+	@RequestMapping(value="accident.action", method= RequestMethod.GET)
+	public ModelAndView Accident(){
+		List<Accident> accs = new ArrayList<Accident>();
+		   try{
+			   String path = "http://www.rda.go.kr/openapidata/service/rdamachinesafe_api/rdamachinesafe_list?searchtype=1&numOfRows=109&searchword&ServiceKey=rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D";	
+			   
+			   DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			   DocumentBuilder builder = factory.newDocumentBuilder();
+			   Document document = builder.parse(path);
+			   NodeList content = document.getElementsByTagName("content");
+			   NodeList downurl = document.getElementsByTagName("downurl");
+			   NodeList pclass = document.getElementsByTagName("PClass");
+			   
+			   
+			   for(int i=0; i< content.getLength(); i++){
+				   Accident acc = new Accident();
+				   acc.setContent(content.item(i).getFirstChild().getNodeValue());  
+				   acc.setDownUrl(downurl.item(i).getFirstChild().getNodeValue());
+				   acc.setpClass(pclass.item(i).getFirstChild().getNodeValue());
+				   accs.add(acc);
+			   }
+		   }catch(Exception e){
+			   e.printStackTrace();
+		   }
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("accs",accs);
+		mav.setViewName("dictionary/accident");
+		return mav;
+	}	
+	@RequestMapping(value="accident.action", method= RequestMethod.POST)
+	@ResponseBody
+	public List<Accident> AccidentPost(String searchword){
+		List<Accident> accs = new ArrayList<Accident>();
+		   try{
+			   String path = "http://www.rda.go.kr/openapidata/service/rdamachinesafe_api/rdamachinesafe_list?searchtype=1&numOfRows=109&searchword=&ServiceKey=rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D";
+			   DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			   DocumentBuilder builder = factory.newDocumentBuilder();
+			   
+			   Document document = builder.parse(path);
+			   NodeList content = document.getElementsByTagName("content");
+			   NodeList downurl = document.getElementsByTagName("downurl");
+			   NodeList pclass = document.getElementsByTagName("PClass");
+			   
+			   
+			   for(int i=0; i< content.getLength(); i++){
+				  if(pclass.item(i).getFirstChild().getNodeValue().equals(searchword) || searchword == ""){
+				   Accident acc = new Accident();
+				   acc.setContent(content.item(i).getFirstChild().getNodeValue());  
+				   acc.setDownUrl(downurl.item(i).getFirstChild().getNodeValue());
+				   acc.setpClass(pclass.item(i).getFirstChild().getNodeValue());
+				   accs.add(acc);
+				  }
+			   }
+		   }catch(Exception e){
+			   e.printStackTrace();
+		   }
+		   return accs;
+	}
+
 	
 	@RequestMapping(value="ajaxfmSearch.action", method = RequestMethod.GET)
 	@ResponseBody

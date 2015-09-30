@@ -77,11 +77,11 @@
 	<result column="type_name" property="typeName"/>
 </resultMap>
 
-
+<!--  삭제 대기
 <select id="getFarmMachineAndTypeName" resultMap="farmMachineAndTypeName">
 	SELECT fm_no, type_no, fm_name
 	FROM farmMachine
-</select>
+</select> -->
 
 <resultMap id="farmMachineAndTypeName" type="FarmMachine">
 	<id column="fm_no" property="fmNo"/>

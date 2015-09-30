@@ -315,12 +315,8 @@ $(document).ready(function (){
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
-                                <li>
-                                    <a href="#">농기계안전정보</a>
-                                </li>
                                  <li>
-                                    <a href="test.action">연습용링크</a>
-                                    <a href="accident.action">농기계사고사례</a>
+                                    <a href="accident.action">농기계 안전·사고사례</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

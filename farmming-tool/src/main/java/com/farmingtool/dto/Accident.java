@@ -1,6 +1,7 @@
 package com.farmingtool.dto;
 
 public class Accident {
+
 	private String content;
 	private String downUrl;
 	private String pClass;

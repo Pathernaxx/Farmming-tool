@@ -4,5 +4,5 @@ import com.farmingtool.dto.RentalHistory;
 
 public interface RentalHistoryService {
 
-	void insertRentalHistory(RentalHistory history);
+	int insertRentalHistory(RentalHistory history);
 }
