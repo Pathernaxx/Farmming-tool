@@ -349,8 +349,8 @@ $(document).ready(function (){
 
         <div id="page-wrapper">
           <div class="row">
-			<div class="page-masonry" id="sp1">
-				<p><h5>어서오세요 농기계 입니다.!!</h5></p>
+			<div class="page-masonry" id="sp1" >
+				<img alt="" src="/farmingtool/resources/images/main.jpg" style="width: 100%; margin: 10px auto">
 			</div>
 			</div>
 		  </div>

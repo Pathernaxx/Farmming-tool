@@ -30,6 +30,13 @@ public class RentalInfomation {
 	public void setHistoryRentalDateToString(String historyRentalDateToString) {
 		this.historyRentalDateToString = historyRentalDateToString;
 	}
+	public String getHistoryReturnDateToString() {
+		return historyReturnDateToString;
+	}
+	public void setHistoryReturnDateToString(String historyReturnDateToString) {
+		this.historyReturnDateToString = historyReturnDateToString;
+	}
+	
 	public String getLocationNo2Name() {
 		return locationNo2Name;
 	}
@@ -38,13 +45,6 @@ public class RentalInfomation {
 	}
 	////////////////////////////////////////////////
 	
-	
-	public String getHistoryReturnDateToString() {
-		return historyReturnDateToString;
-	}
-	public void setHistoryReturnDateToString(String historyReturnDateToString) {
-		this.historyReturnDateToString = historyReturnDateToString;
-	}
 	public String getMachineNo() {
 		return machineNo;
 	}
