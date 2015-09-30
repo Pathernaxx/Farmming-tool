@@ -194,6 +194,8 @@ $(function(){
         </nav>
 
         <div id="page-wrapper">
+        	<h1>대여 확인</h1>
+        	<hr/>
           <div class="row">
 			<div id="rentalCheck">
 			<h1>대여정보</h1>

@@ -356,6 +356,9 @@ $(document).ready(function (){
         </nav>
 
         <div id="page-wrapper">
+        	<h1>대여</h1>
+        <hr/>
+        
           <div class="row">
           </br>
             <table>
