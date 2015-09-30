@@ -197,8 +197,6 @@ $(function(){
         	<hr/>
           <div class="row">
 			<div id="rentalCheck">
-			<h1>대여정보</h1>
-			  <hr>
 			  </br>
 				<table class='rentalInfo' border="1">
 					<tr>
