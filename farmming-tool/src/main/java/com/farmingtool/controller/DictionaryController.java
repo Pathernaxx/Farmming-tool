@@ -122,7 +122,6 @@ public class DictionaryController {
 	@RequestMapping(value="accident.action", method= RequestMethod.POST)
 	@ResponseBody
 	public List<Accident> AccidentPost(String searchword){
-		System.out.println(searchword);
 		List<Accident> accs = new ArrayList<Accident>();
 		   try{
 			   String path = "http://www.rda.go.kr/openapidata/service/rdamachinesafe_api/rdamachinesafe_list?searchtype=1&numOfRows=109&searchword=&ServiceKey=rqAjAvGfqCjlp1VVOTV2bozxgaidcSO6NWGRlJqpOmnY0VoUixTQcSxqoLPGDnSqWcqepGMeQKPFZog7UiaIJg%3D%3D";
@@ -136,7 +135,7 @@ public class DictionaryController {
 			   
 			   
 			   for(int i=0; i< content.getLength(); i++){
-				  if(pclass.item(i).getFirstChild().getNodeValue().equals(searchword)){
+				  if(pclass.item(i).getFirstChild().getNodeValue().equals(searchword) || searchword == ""){
 				   Accident acc = new Accident();
 				   acc.setContent(content.item(i).getFirstChild().getNodeValue());  
 				   acc.setDownUrl(downurl.item(i).getFirstChild().getNodeValue());

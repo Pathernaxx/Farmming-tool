@@ -79,8 +79,6 @@ $(document).ready(function (){
 	}
 	
 	$('#search').click(function(){
-		alert("검색");
-		
 		selected1 = $("#location2 option:selected").val();
 		selected2 = $("#machine2 option:selected").val();
 		

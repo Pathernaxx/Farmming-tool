@@ -53,8 +53,8 @@
     $(document).ready(function (){
 	  $(".ajaxfarmlist").click(function( event ) {
 	      var fmID = $(this).attr('id'); 
-	         $("#sp1").empty();
-	         
+	      $("#page-wrapper").empty();
+          $(".page-masonry").empty();
 	         $.ajax({
 	            url : "/farmingtool/dictionary/ajaxfmList.action",
 	            async : false,
@@ -72,7 +72,6 @@
 			  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 			  					    "<p>"+listitem.fmName+"</p>"+
 			  						"<hr />"+
-			  					    "<button>대여하기</button>"+
 			  					"</div>"+
 			  					"<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
 			  					 "<table>"+
@@ -300,10 +299,30 @@
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${ USERTYPE eq 'ADMIN' }">
-								<li><p>${ loginuser.adminName }</p></li>
+								<li>
+								  <div class="dropdown">
+									  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">${ loginuser.adminName }
+									  <span class="caret"></span></button>
+									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+									    <li role="presentation"><a role="menuitem" href="/farmingtool/admin/rentallist.action">관리자페이지</a></li>
+									    <li role="presentation" class="divider"></li>
+									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
+									  </ul>
+									</div>								
+								</li>
 							</c:when>
 							<c:otherwise>
-								<li><p>${ loginuser.memberName }</p></li>
+								<li>
+								  <div class="dropdown">
+									  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">${ loginuser.memberName }
+									  <span class="caret"></span></button>
+									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+									    <li role="presentation"><a role="menuitem" href="#">회원정보</a></li>
+									    <li role="presentation" class="divider"></li>
+									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
+									  </ul>
+									</div>
+								</li>
 							</c:otherwise>
 						</c:choose>
 						
@@ -385,10 +404,12 @@
             <!-- /.navbar-static-side -->
         </nav>
         
-        <div id="page-wrapper"> 
-          <div class="row">
+        <div id="page-wrapper" > 
+        	<h1>대여</h1>
+        	<hr/>
+          <div class="row" style="margin-left: 10px">
 			
-			<h2 id="rental-condition-title1">지역선택</h2>
+			<h3 id="rental-condition-title1">지역선택</h3>
 			<select id="location1" name="location1" class="rental_option">
 				<option value="" selected="selected">지역선택1-도/시</option>
 				<option value="1">강원도</option>
@@ -415,38 +436,52 @@
 				</select><br/><br/>
 			</div>
 		
-			<h2 class="rental-condition-title2">기계선택</h2>
-			
+			<h3 class="rental-condition-title2">기계선택</h3>
+			<h5 style="color: red">지역 선택 후에도 기계목록이 보이지 않는 경우 <br/>해당 지역에서 기계 대여가능 품종이 없는 것입니다.</h5>
 			<div id="ac2">
-			<h6 style="color: red">지역 선택 후에도 기계목록이 보이지 않는 경우 해당 지역에서 기계 대여가능 품종이 없는 것입니다.</h6>
-				<select id="machine1" name="machine1" class="rental_option2">
+				<select id="machine1" name="machine1" class="rental_option">
 					<option value="" selected="selected">기계선택1-대분류</option>
 					<c:forEach var="type" items="${types}" >
 						<option value="${type.typeNo}">${type.typeName}</option>
 					</c:forEach>
 				</select> &nbsp;
-				<select id="machine2" class="rental_option2">
+				<br/>
+				<select id="machine2" class="rental_option">
 					<option value="" class="basic_type" selected="selected">기계선택2-소분류</option>
 					<c:forEach var="farmMachine" items="${farmMachineList}" >
 						<option value="${farmMachine.fmNo}" class="${farmMachine.typeNo}" style="display: none">${farmMachine.fmName}</option>
 					</c:forEach>
 				</select> &nbsp;
 			</div>
-			
-			<input type="button" id="search" value="검색" /> <br/><br/>
+			<br/>
+			<input type="button" id="search" value="대여 가능일 검색" style="width: 150px; padding: 5px;font-size: 11pt"/> 
+			<br/><br/>
+			<br/><br/>
 			
 			<h4 id="rental-condition-title" style="font-weight: bold;color:#006699">대여시 안내사항 및 주의사항</h4>
-			
-			<div id="message">
-				&nbsp;■ 보유 대수 : <input type="text" id="totalDetailMachine" /><br/>
-				&nbsp;■ 대여가격 : <input type="text" id="rentalCost"/><br/>
-				&nbsp;■ 주의 사항 : <br/>
-				&nbsp;<font style='color:red;font-weight: bold;'>
-				※ 교육을 이수하지 않을 시 예약이 취소될 수 있습니다. ※<br/>
+			<div id="message" style="font-size: 11pt;padding: 5px" >
+				<table>
+					<tr style="height: 30px">
+						<td style="width:100px">■ 보유 대수 :</td>
+						<td ><input type="text" id="totalDetailMachine" readonly="readonly"/></td>
+					</tr>
+					<tr style="height: 30px"> 
+						<td>■ 대여 가격 :</td>
+						<td><input type="text" id="rentalCost" readonly="readonly"/></td>
+					</tr>
+					<tr style="height: 30px">
+						<td colspan="2">■ 주의 사항 :</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="color:red; font-weight: bold;">
+						※ 교육을 이수하지 않을 시 예약이 취소될 수 있습니다. ※<br/>
 						반납은 대여일 오후 5시까지 하시거나 <br/>
 						다음날 오전 10시까지 하셔야 불이익이 없습니다.<br/>
 						기타 자세한 사항은 02-556-2231 로 문의해 주세요
-				</font>
+						</td>
+					</tr>
+				</table>
+				
 			</div>
 			
 			<div id="date-popover" class="popover top">

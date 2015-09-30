@@ -88,7 +88,6 @@ $(document).ready(function (){
 				  					  "<img src='/farmingtool/resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 				  					    "<p>"+listitem.fmName+"</p>"+
 				  						"<hr />"+
-				  					    "<button>대여하기</button>"+
 				  					"</div>"+
 				  					"<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
 				  					 "<table>"+
@@ -242,10 +241,30 @@ $(document).ready(function (){
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${ USERTYPE eq 'ADMIN' }">
-								<li><p>${ loginuser.adminName }</p></li>
+								<li>
+								  <div class="dropdown">
+									  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">${ loginuser.adminName }
+									  <span class="caret"></span></button>
+									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+									    <li role="presentation"><a role="menuitem" href="/farmingtool/admin/rentallist.action">관리자페이지</a></li>
+									    <li role="presentation" class="divider"></li>
+									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
+									  </ul>
+									</div>								
+								</li>
 							</c:when>
 							<c:otherwise>
-								<li><p>${ loginuser.memberName }</p></li>
+								<li>
+								  <div class="dropdown">
+									  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">${ loginuser.memberName }
+									  <span class="caret"></span></button>
+									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+									    <li role="presentation"><a role="menuitem" href="#">회원정보</a></li>
+									    <li role="presentation" class="divider"></li>
+									    <li role="presentation"><a role="menuitem" href="/farmingtool/account/logout.action">로그아웃</a></li>
+									  </ul>
+									</div>
+								</li>
 							</c:otherwise>
 						</c:choose>
 						
@@ -329,8 +348,8 @@ $(document).ready(function (){
 
         <div id="page-wrapper">
           <div class="row">
-			<div class="page-masonry" id="sp1">
-				<p><h1>어서오세요 농기계를 편리하게 대여할 수 있는 대여통입니다.</h1></p>
+			<div class="page-masonry" id="sp1" >
+				<img alt="" src="/farmingtool/resources/images/main.jpg" style="width: 100%; margin: 10px auto">
 			</div>
 			</div>
 		  </div>

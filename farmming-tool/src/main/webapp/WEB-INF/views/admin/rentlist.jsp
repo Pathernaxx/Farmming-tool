@@ -40,18 +40,22 @@
 </script>
 </head>
 <body>
-	<table class="history">
+	<table class="history" style="border: solid 1px">
 	<tr>
+		<th>대여번호</th>
 		<th>이름</th>
-		<td>기계</td>
+		<th>아이디</th>
+		<td>기계명</td>
 		<td>대여날짜</td>
 		<td>상태</td>
 	</tr>
 		<c:forEach var="history" items="${ historys }">
 			<tr class="historyItem" id="${ history.historyNo }">
+				<th>${ history.historyNo }</th>
+				<th>${ history.memberName }</th>
 				<th>${ history.memberId }</th>
-				<td>${ history.machineNo }</td>
-				<td>${ history.historyRentalDate }</td>
+				<td>${ history.machineName }</td>
+				<td>${ history.historyRentalDateToString }</td>
 				<td>
 				<c:choose>
 					<c:when test="${ history.historyStatus == 1 }">
