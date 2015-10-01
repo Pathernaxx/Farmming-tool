@@ -86,7 +86,7 @@ $(document).ready(function (){
 			alert("대여 장소를 선택해 주세요")
 			return;
 		}
-		if(selected2 ==null || selected1 == ""){
+		if(selected2 ==null || selected2 == ""){
 			alert("대여 농기계를 선택해 주세요")
 			return;
 		}

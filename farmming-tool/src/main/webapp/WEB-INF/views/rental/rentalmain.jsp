@@ -12,92 +12,37 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>FARM MACHINE</title>
-	<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
- 
+	
+	<!-- jQuery -->
+    <script src="http://code.jquery.com/jquery-2.1.3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.js"></script>
+    
+    <!-- Bootstrap Core CSS -->
+    <link rel='Stylesheet' href='../resources/styles/bootstrap.css' />
+    <!-- MetisMenu CSS -->
+    <link rel='Stylesheet' href='../resources/styles/metisMenu.css' />
+    <!-- Custom CSS -->
+    <link rel='Stylesheet' href='../resources/styles/sb-admin-2.css' />
+    <!-- Custom Fonts -->
+    <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"> 
+    <!-- Bootstrap Core JavaScript -->
+    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+	
+	<!-- 렌탈용 -->
     <link rel='Stylesheet' href='../resources/styles/rentalmain.css' />
     <script src="../resources/js/rentallist.js"></script>
     
-    <!-- Bootstrap Core CSS -->
-    <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
-    <!-- Calendar CSS -->
-	<link rel="stylesheet" href="../resources/styles/zabuto_calendar.min.css">
-	<link rel="stylesheet" href="../resources/styles/bootstrap.min.css">
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-    
-    <!-- jQuery -->
-    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
-
 	<!-- Calendar Theme JavaScript -->
 	<script src="../resources/js/zabuto_calendar.min.js"></script>
-    <style>
-.item {
-    width: 260px;
-    height: 130px;
-    border: 3px solid;
-    margin: 5px;
-    float: left;
-    color : #BDBDBD;
-    border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	overflow: hidden;
- }
- .item--gigante{
-    width: 800px;
-    height: 500px;
-}
-
-
-.item--gigante img{
- 	width: 290px;
- 	height: 400px;
-}
- .item2 {
-    width: 200px;
-    height: 205px;
-    border: 3px solid;
-    margin: 5px;
-    float: left;
-    color : #BDBDBD;
-    border-bottom-left-radius: 5px;
-   border-bottom-right-radius: 5px;
-   border-top-left-radius: 5px;
-   border-top-right-radius: 5px;
-   overflow: hidden;
- }
- 
-.item2--gigante{
-    width: 800px;
-    height: 500px;
-}
-
-
-.item2--gigante img{
-    width: 290px;
-    height: 400px;
-}
-</style>
-    <script type="text/javascript">
+    <!-- Calendar CSS -->
+	<link rel="stylesheet" href="../resources/styles/zabuto_calendar.min.css">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+	
+<script type="text/javascript">
     $(document).ready(function (){
         var $masry = $('.page-masonry').masonry({
             itemSelector: '.item',
@@ -180,7 +125,7 @@
 		         });
 	  $("#searchbutton").click(function( event ) {
 		  var searchword = $("#searchword").val();
-		  	
+		  	alert(searchword);
 	         $("#sp1").empty();
 	         
 	         $.ajax({
@@ -193,7 +138,8 @@
 	            success : function(fmSearchList){
 	            	
 	            	 if (fmSearchList != null && fmSearchList.length > 0){
-		                  $.each(fmSearchList, function(index, listitem){
+	            		 $("#sp1").empty();  
+	            		 $.each(fmSearchList, function(index, listitem){
 			                     var html=
 					       			  "<div class='item' >"+
 					  					"<div class='detail1' style='float: left; border: .3em'>"+
@@ -230,6 +176,7 @@
 										 "</table>"+
 										"</div>"+
 								      "</div>";
+			                  	
 			                  	$("#sp1").append($(html)); 
 			                     
 			                  });		            		 
@@ -254,6 +201,9 @@
     		alert("대여는 로그인 후 이용가능 합니다.");
     		$(location).attr("href", "../account/login.action");
     	}
+    	var height = window.outerWidth;
+    	var wid = (height/2)-130;
+    	$('#date-popover').css("left", wid);
     	
         $("#date-popover").hide();
         if (fromModal) {
@@ -263,7 +213,6 @@
         var hasEvent = $("#" + id).data("hasEvent");
         if (hasEvent && !fromModal) {
             return false;
-            
         }
         
         $("#date-popover-content").html('<br/>선택한 날짜 : ' + date + '<br/>'+'예약하시겠습니까?<br/><br/>'+
@@ -311,22 +260,82 @@
     		}
     	});
     }
-    
     </script>
     
-    
-    
 <style>
+ 
+ .popover {
+	position: absolute;
+	top: 1020px;
+	z-index: 1060;
+	display: none;
+	width: 400px;
+	max-width: 276px;
+	padding: 1px;
+	text-align: center;
+	white-space: normal;
+	background-color: #fff;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 6px;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, .2)
+}
+    
 .item {
-    width: 200px;
-    height: 250px;
+   	width: 200px;
+    height: 205px;
     border: 3px solid;
     margin: 5px;
     float: left;
+    color : #BDBDBD;
+    border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	overflow: hidden;
  }
+ .item--gigante{
+    width: 800px;
+    height: 500px;
+}
+
+
+.item--gigante img{
+ 	width: 290px;
+ 	height: 400px;
+}
+ .item2 {
+    width: 200px;
+    height: 205px;
+    border: 3px solid;
+    margin: 5px;
+    float: left;
+    color : #BDBDBD;
+    border-bottom-left-radius: 5px;
+   border-bottom-right-radius: 5px;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+   overflow: hidden;
+ }
+ 
+.item2--gigante{
+    width: 800px;
+    height: 500px;
+}
+
+
+.item2--gigante img{
+    width: 290px;
+    height: 400px;
+}
+ 
 </style>
 
 </head>
+
 <body>
        <div id="wrapper">
         <!-- Navigation -->
@@ -387,9 +396,9 @@
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input type="text" id="searchword" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button class="btn btn-default" id="searchbutton" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -456,10 +465,10 @@
         </nav>
         
         <div id="page-wrapper" > 
-        	<h1>대여</h1>
-        	<hr/>
           <div class="row" style="margin-left: 10px">
-			<div class="page-masonry" id="sp1" ></div>
+			<div class="page-masonry" id="sp1" style="padding-top: 20px;">
+        	<h1 style="margin: 0">대여</h1>
+        	<hr/>
 			<h3 id="rental-condition-title1">지역선택</h3>
 			<select id="location1" name="location1" class="rental_option">
 				<option value="" selected="selected">지역선택1-도/시</option>
@@ -545,6 +554,8 @@
 			</div>
 			<br/><br/><br/>
 		
+		  </div>
+		  
 		  </div>
         </div>
         <!-- /#page-wrapper -->

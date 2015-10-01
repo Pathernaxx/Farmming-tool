@@ -10,211 +10,317 @@
     <meta name="author" content="">
     <title>FARM MACHINE</title>
     
-    
-     <!-- Bootstrap Core CSS -->
-    <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
-    <!-- Calendar CSS -->
-	<link rel="stylesheet" href="../resources/styles/zabuto_calendar.min.css">
-	<link rel="stylesheet" href="../resources/styles/bootstrap.min.css">
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-    
     <!-- jQuery -->
-    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.js"></script>
+    
+    <!-- Bootstrap Core CSS -->
+    <link rel='Stylesheet' href='../resources/styles/bootstrap.css' />
+    <!-- MetisMenu CSS -->
+    <link rel='Stylesheet' href='../resources/styles/metisMenu.css' />
+    <!-- Custom CSS -->
+    <link rel='Stylesheet' href='../resources/styles/sb-admin-2.css' />
+    <!-- Custom Fonts -->
+    <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"> 
     <!-- Bootstrap Core JavaScript -->
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
     <!-- Metis Menu Plugin JavaScript -->
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+	
+    <script type="text/javascript">
+    $(document).ready(function (){
+        var $masry = $('.page-masonry').masonry({
+            itemSelector: '.item',
+            isAnimated: true,
+            
+       });
+		  $masry.on( 'click', '.item', function() {
+			    // change size of item by toggling gigante class
+			    $( this ).toggleClass('item--gigante');
+			    $masry.masonry('layout');
+			  });
+		     $(".ajaxfarmlist").click(function( event ) {
+		         var fmID = $(this).attr('id'); 
+		            $("#page-wrapper").empty();
+		            $(".page-masonry").empty();
+		            $.ajax({
+		               url : "../dictionary/ajaxfmList.action",
+		               async : false,
+		               type : "GET",
+		               data : {
+		                  typeNo : fmID
+		               },
+		               success : function(fmBytypeNo){
+		                  if (fmBytypeNo != null){
+		                     $.each(fmBytypeNo, function(index, listitem){
+		                        var html=
 
-	<!-- Calendar Theme JavaScript -->
-	<script src="../resources/js/zabuto_calendar.min.js"></script>
+		                           "<div class='item2' >"+
+		                          "<div class='detail1' style='float: left; border: .3em'>"+
+		                            "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+		                              "<p>"+listitem.fmName+"</p>"+
+		                             "<hr />"+
+		                          "</div>"+
+		                          "<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
+		                           "<table>"+
+		                            "<tr>"+
+		                          "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
+		                          "</tr>"+
+		                          "<tr>"+
+		                           "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
+		                          "</tr>"+
+		                          "<tr>"+
+		                           "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
+		                          "</tr>"+
+		                          "<tr>"+
+		                           "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
+		                          "</tr>"+
+		                          "<tr>"+
+		                           "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
+		                          "</tr>"+
+		                          "<tr>"+
+		                           "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
+		                          "</tr>"+
+		                          "<tr>"+
+		                           "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
+		                          "</tr>"+
+		                          "<tr>"+
+		                           "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
+		                          "</tr>"+                 
+		                         "</table>"+
+		                        "</div>"+
+		                        "</div>";
+		                           
+		                     $("#page-wrapper").append($(html)); 
+		                        
+		                     });
+		                     
+		                  }
+		                  else{
+		                     alert("success but exception");
+		                  }
+		                  
+		               },
+		               error : function(){
+		                  alert("error");
+		               }
+		            });
+		            event.preventDefault(); 
+		            
+		         });
+	  $("#searchbutton").click(function( event ) {
+		  var searchword = $("#searchword").val();
+		  	alert(searchword);
+	         $("#sp1").empty();
+	         
+	         $.ajax({
+	            url : "../dictionary/ajaxfmSearch.action",
+	            async : false,
+	            type : "GET",
+	            data : {
+	            	searchword : searchword
+	            },
+	            success : function(fmSearchList){
+	            	
+	            	 if (fmSearchList != null && fmSearchList.length > 0){
+	            		 $("#sp1").empty();  
+	            		 $.each(fmSearchList, function(index, listitem){
+			                     var html=
+					       			  "<div class='item' >"+
+					  					"<div class='detail1' style='float: left; border: .3em'>"+
+					  					  "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
+					  					    "<p>"+listitem.fmName+"</p>"+
+					  						"<hr />"+
+					  					"</div>"+
+					  					"<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
+					  					 "<table>"+
+					  					  "<tr>"+
+										  "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
+										  "</tr>"+
+										  "<tr>"+
+										   "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
+										  "</tr>"+					  
+										 "</table>"+
+										"</div>"+
+								      "</div>";
+			                  	
+			                  	$("#sp1").append($(html)); 
+			                     
+			                  });		            		 
+	            	 }else{
+	            		 var html = "<div>"+
+		  					"<div class='detail1'>"+
+		  					"올바른 검색어를 입력하세요."+
+		  					"</div>"+
+						      "</div>";
+	            		 $("#sp1").append($(html)); 
+	            	 }
+	            },
+	            error : function(){
+		               alert("error");
+		        }
+	          });
+	  });
+    });
+    function myDateFunction(id, fromModal, selected1, selected2) {
+    	
+    	if('${loginuser}' == null || '${loginuser}' == ""){
+    		alert("대여는 로그인 후 이용가능 합니다.");
+    		$(location).attr("href", "../account/login.action");
+    	}
+    	var height = window.outerWidth;
+    	var wid = (height/2)-130;
+    	$('#date-popover').css("left", wid);
+    	
+        $("#date-popover").hide();
+        if (fromModal) {
+            $("#" + id + "_modal").modal("hide");
+        }
+        var date = $("#" + id).data("date");
+        var hasEvent = $("#" + id).data("hasEvent");
+        if (hasEvent && !fromModal) {
+            return false;
+        }
+        
+        $("#date-popover-content").html('<br/>선택한 날짜 : ' + date + '<br/>'+'예약하시겠습니까?<br/><br/>'+
+        								'<input type="hidden" value="'+date+'" id="rentalDate"/>'+
+        								'<input type="hidden" value="'+selected1+'" id="locationNo2"/>'+
+        								'<input type="hidden" value="'+selected2+'" id="fmNo"/>'+
+        								'<input type="button" value="확인" onclick="moveToCheckRental()"/>&nbsp;'+
+        								'<input type="button" value="취소" onclick="popoverClose()"/><br/>');
+        $("#date-popover").show();
+        return true;
+    }
+	
+    
+    function popoverClose() {
+    	$("#date-popover").hide();
+    }
+    
+    function moveToCheckRental() {
+    	//컨트롤러에서 예약처리
+    	var rentalDate = $("#rentalDate").val();
+    	var fmNo = $("#fmNo").val();
+    	var locationNo2 = $("#locationNo2").val();
+    	$.ajax({
+    		url: "../rental/rentalMachine.action",
+    		type: "POST",
+    		async: true,
+    		data: {
+    			"rentalDate" : rentalDate,
+    			"locationNo2" : locationNo2,
+    			"fmNo" : fmNo
+    			},
+    		success: function(result) { //result
+    			if(result != null)
+				{
+    				alert("예약 성공 : 확인 페이지로 이동합니다.")
+					var returnurl = '../rental/moveToCheckRental.action?machineNo='+result;
+					$(location).attr('href', returnurl);
+				} else {
+					$("#date-popover").hide();
+					alert("예약 실패 : 모든 기계가 대여 중입니다. 다른 날짜를 선택해주세요.");
+				}
+    		},
+    		error: function() {
+    			alert("예약 실패 : 다시 시도해주세요.");
+    		}
+    	});
+    }
+    </script>
     
 <style>
+ 
+ .popover {
+	position: absolute;
+	top: 1020px;
+	z-index: 1060;
+	display: none;
+	width: 400px;
+	max-width: 276px;
+	padding: 1px;
+	text-align: center;
+	white-space: normal;
+	background-color: #fff;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 6px;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, .2)
+}
+    
 .item {
-    width: 200px;
-    height: 250px;
+   	width: 200px;
+    height: 205px;
     border: 3px solid;
     margin: 5px;
     float: left;
+    color : #BDBDBD;
+    border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	overflow: hidden;
  }
-.rentalInfo{
-    border-collapse:collapse;
- 	width: 700px;
- 	height: 600px;
-	margin: 0 20px auto;
-	padding:0px;
-	font-size: 20px;
-}	
+ .item--gigante{
+    width: 800px;
+    height: 500px;
+}
+
+
+.item--gigante img{
+ 	width: 290px;
+ 	height: 400px;
+}
+ .item2 {
+    width: 200px;
+    height: 205px;
+    border: 3px solid;
+    margin: 5px;
+    float: left;
+    color : #BDBDBD;
+    border-bottom-left-radius: 5px;
+   border-bottom-right-radius: 5px;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+   overflow: hidden;
+ }
+ 
+.item2--gigante{
+    width: 800px;
+    height: 500px;
+}
+
+
+.item2--gigante img{
+    width: 290px;
+    height: 400px;
+}
+ 
 </style>
 
-<script type="text/javascript">
-$(document).ready(function (){
-
-var $masry = $('.page-masonry').masonry({
-    itemSelector: '.item',
-    isAnimated: true,
-    
-});
-  $masry.on( 'click', '.item', function() {
-	    // change size of item by toggling gigante class
-	    $( this ).toggleClass('item--gigante');
-	    $masry.masonry('layout');
-	  });
-     $(".ajaxfarmlist").click(function( event ) {
-         var fmID = $(this).attr('id'); 
-            $("#page-wrapper").empty();
-            $(".page-masonry").empty();
-            $.ajax({
-               url : "../dictionary/ajaxfmList.action",
-               async : false,
-               type : "GET",
-               data : {
-                  typeNo : fmID
-               },
-               success : function(fmBytypeNo){
-                  if (fmBytypeNo != null){
-                     $.each(fmBytypeNo, function(index, listitem){
-                        var html=
-
-                           "<div class='item2' >"+
-                          "<div class='detail1' style='float: left; border: .3em'>"+
-                            "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
-                              "<p>"+listitem.fmName+"</p>"+
-                             "<hr />"+
-                          "</div>"+
-                          "<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
-                           "<table>"+
-                            "<tr>"+
-                          "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
-                          "</tr>"+
-                          "<tr>"+
-                           "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
-                          "</tr>"+
-                          "<tr>"+
-                           "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
-                          "</tr>"+
-                          "<tr>"+
-                           "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
-                          "</tr>"+
-                          "<tr>"+
-                           "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
-                          "</tr>"+
-                          "<tr>"+
-                           "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
-                          "</tr>"+
-                          "<tr>"+
-                           "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
-                          "</tr>"+
-                          "<tr>"+
-                           "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
-                          "</tr>"+                 
-                         "</table>"+
-                        "</div>"+
-                        "</div>";
-                           
-                     $("#page-wrapper").append($(html)); 
-                        
-                     });
-                     
-                  }
-                  else{
-                     alert("success but exception");
-                  }
-                  
-               },
-               error : function(){
-                  alert("error");
-               }
-            });
-            event.preventDefault(); 
-            
-         });
-$("#searchbutton").click(function( event ) {
-  var searchword = $("#searchword").val();
-  	
-     $("#sp1").empty();
-     
-     $.ajax({
-        url : "../dictionary/ajaxfmSearch.action",
-        async : false,
-        type : "GET",
-        data : {
-        	searchword : searchword
-        },
-        success : function(fmSearchList){
-        	
-        	 if (fmSearchList != null && fmSearchList.length > 0){
-                  $.each(fmSearchList, function(index, listitem){
-	                     var html=
-			       			  "<div class='item' >"+
-			  					"<div class='detail1' style='float: left; border: .3em'>"+
-			  					  "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
-			  					    "<p>"+listitem.fmName+"</p>"+
-			  						"<hr />"+
-			  					"</div>"+
-			  					"<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
-			  					 "<table>"+
-			  					  "<tr>"+
-								  "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
-								  "</tr>"+
-								  "<tr>"+
-								   "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
-								  "</tr>"+					  
-								 "</table>"+
-								"</div>"+
-						      "</div>";
-	                  	$("#sp1").append($(html)); 
-	                     
-	                  });		            		 
-        	 }else{
-        		 var html = "<div>"+
-  					"<div class='detail1'>"+
-  					"올바른 검색어를 입력하세요."+
-  					"</div>"+
-				      "</div>";
-        		 $("#sp1").append($(html)); 
-        	 }
-        },
-        error : function(){
-               alert("error");
-        }
-      });
-});
-
-});
-</script>
 </head>
 <body>
     <div id="wrapper">
@@ -345,11 +451,11 @@ $("#searchbutton").click(function( event ) {
             <!-- /.navbar-static-side -->
         </nav>
         
-        
-        <div id="page-wrapper">
-        	<h1>대여 확인</h1>
+        <div id="page-wrapper" style="padding: 10px">
+        <div class="row" style="margin-left: 10px">
+        <div class="page-masonry" id="sp1" style="padding-top: 20px;">
+        	<h1 style="margin: 0">대여목록</h1>
         	<hr/>
-          <div class="row">
 			<div id="rentalCheck">
 			  </br>
 				<table class='rentalInfo' border="1">
@@ -391,9 +497,10 @@ $("#searchbutton").click(function( event ) {
 				</table>
 			</div>
 		  </div>
+		  
+		  </div>
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
 	
