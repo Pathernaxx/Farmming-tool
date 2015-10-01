@@ -62,7 +62,7 @@
 	border-top-right-radius: 5px;
 	overflow: hidden;
  }
-  .item--gigante{
+ .item--gigante{
     width: 800px;
     height: 500px;
 }
