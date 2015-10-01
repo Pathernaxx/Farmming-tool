@@ -24,15 +24,10 @@
     <link href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"> 
     <!-- Bootstrap Core JavaScript -->
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
     <!-- Metis Menu Plugin JavaScript -->
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
-
-	<!-- Calendar Theme JavaScript -->
-	<script src="../resources/js/zabuto_calendar.min.js"></script>
 <style>
 .item {
     width: 260px;
@@ -234,111 +229,33 @@ $(document).ready(function (){
      });   
     $("#pClassType").change(function(event){
        $(".page-masonry").empty();
-         });
-     
-     
-     
-     
-     
-     $("#searchbutton").click(function( event ) {
-        var searchword = $("#searchword").val();
-        $(".page-masonry").empty();
-            $("#page-wrapper").empty();
-            
-            $.ajax({
-               url : "../dictionary/ajaxfmSearch.action",
-               async : false,
-               type : "GET",
-               data : {
-                  searchword : searchword
-               },
-               success : function(fmSearchList){
-                  
-                   if (fmSearchList != null && fmSearchList.length > 0){
-                        $.each(fmSearchList, function(index, listitem){
-                              var html=
-                                 "<div class='item' >"+
-                                "<div class='detail1' style='float: left; border: .3em'>"+
-                                  "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
-                                    "<p>"+listitem.fmName+"</p>"+
-                                   "<hr />"+
-                                "</div>"+
-                                "<div class='detail2' style='float: left; border: .3em; width: 500px;height: 498px; overflow: auto;'>"+
-                                 "<table>"+
-                                  "<tr>"+
-                                "<td><br>⊙ 구조 <br>"+listitem.fmStructure+"</td>"+
-                                "</tr>"+
-                                "<tr>"+
-                                 "<td><br>⊙ 기능및용도 <br>"+listitem.fmFunction+"</td>"+
-                                "</tr>"+
-                                "<tr>"+
-                                 "<td><br>⊙ 종류 <br>"+listitem.fmKinds+"</td>"+
-                                "</tr>"+
-                                "<tr>"+
-                                 "<td><br>⊙ 보급과정 <br>"+listitem.fmDimentions+"</td>"+
-                                "</tr>"+
-                                "<tr>"+
-                                 "<td><br>⊙ 부착용작업기 <br>"+listitem.fmWorkingMachine+"</td>"+
-                                "</tr>"+
-                                "<tr>"+
-                                 "<td><br>⊙ 특징 <br>"+listitem.fmCharacteristic+"</td>"+
-                                "</tr>"+
-                                "<tr>"+
-                                 "<td><br>⊙ 개요 <br>"+listitem.fmOutline+"</td>"+
-                                "</tr>"+
-                                "<tr>"+
-                                 "<td><br>⊙ 필요성 <br>"+listitem.fmNecessity+"</td>"+
-                                "</tr>"+                 
-                               "</table>"+
-                              "</div>"+
-                              "</div>";
-                              $("#sp1").append($(html)); 
-                              
-                           });                         
-                   }else{
-                      var html = "<div>"+
-                       "<div class='detail1'>"+
-                       "올바른 검색어를 입력하세요."+
-                       "</div>"+
-                        "</div>";
-                      $("#page-wrapper").append($(html)); 
-                   }
-               },
-               error : function(){
-                     alert("error");
-              }
-             });
-     });   
-    $("#pClassType").change(function(event){
-       $(".page-masonry").empty();
-       
-    var selectVal = $("#pClassType option:selected").val();
-   $.ajax({
-        url : "../dictionary/accident.action",
-        async : false,
-        type : "POST",      
-        data : {
-           searchword : selectVal
-        },
-        success : function(accs){
-           
-          $.each(accs, function(index, data){
-             var html = "<div class='item'>"+
-                       "<p>제목 : "+ data.content +"</p>"+
-                       "<a href="+ data.downUrl +"><p>다운로드</p></a>"+
-                       "<p>분류 : "+ data.pClass +"</p>"+
-                       "</div>";
-             $(".page-masonry").append(html);
-          });
-       },
-      error : function(xhr, ajaxOptions, thrownError){
-         console.log(xhr.status);
-         console.log(thrownError);
-      }
-   });
-    
-    event.preventDefault();
- });
+    	var selectVal = $("#pClassType option:selected").val();
+	   $.ajax({
+	        url : "../dictionary/accident.action",
+	        async : false,
+	        type : "POST",      
+	        data : {
+	           searchword : selectVal
+	        },
+	        success : function(accs){
+	           
+	          $.each(accs, function(index, data){
+	             var html = "<div class='item'>"+
+	                       "<p>제목 : "+ data.content +"</p>"+
+	                       "<a href="+ data.downUrl +"><p>다운로드</p></a>"+
+	                       "<p>분류 : "+ data.pClass +"</p>"+
+	                       "</div>";
+	             $(".page-masonry").append(html);
+	          });
+	       },
+	      error : function(xhr, ajaxOptions, thrownError){
+	         console.log(xhr.status);
+	         console.log(thrownError);
+	      }
+	   });
+	    
+	    event.preventDefault();
+	 });
     
 });
 
@@ -461,7 +378,7 @@ $(document).ready(function (){
                                     <!-- /.nav-third-level -->
                                 </li>
                                  <li>
-                                    <a href="../accident.action">농기계 안전·사고사례</a>
+                                    <a href="accident.action">농기계 안전·사고사례</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -524,19 +441,6 @@ $(document).ready(function (){
 
     </div>
     <!-- /#wrapper -->
-
-    
-   
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-
-    <!-- Custom Theme JavaScript -->
-    <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
 
 </body>
 </html>
