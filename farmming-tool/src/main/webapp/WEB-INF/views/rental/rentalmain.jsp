@@ -462,7 +462,7 @@
         </nav>
         
         <div id="page-wrapper" > 
-          <div class="row" style="margin-left: 10px">
+          <div class="row" style="margin-left: 10px;min-height: 850px">
 			<div class="page-masonry" id="sp1" style="padding-top: 10px;">
         	<h1 style="margin: 0">대여</h1>
         	<hr/>
