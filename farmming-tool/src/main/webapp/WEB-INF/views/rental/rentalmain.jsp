@@ -56,8 +56,7 @@
 			  });
 		     $(".ajaxfarmlist").click(function( event ) {
 		         var fmID = $(this).attr('id'); 
-		            $("#page-wrapper").empty();
-		            $(".page-masonry").empty();
+		         $("#sp1").empty();
 		            $.ajax({
 		               url : "../dictionary/ajaxfmList.action",
 		               async : false,
@@ -69,8 +68,7 @@
 		                  if (fmBytypeNo != null){
 		                     $.each(fmBytypeNo, function(index, listitem){
 		                        var html=
-
-		                           "<div class='item2' >"+
+		                           "<div class='item' >"+
 		                          "<div class='detail1' style='float: left; border: .3em'>"+
 		                            "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 		                              "<p>"+listitem.fmName+"</p>"+
@@ -106,7 +104,7 @@
 		                        "</div>"+
 		                        "</div>";
 		                           
-		                     $("#page-wrapper").append($(html)); 
+		                        $("#sp1").append($(html)); 
 		                        
 		                     });
 		                     

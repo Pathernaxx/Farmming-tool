@@ -204,6 +204,71 @@
 		});
 	  
     });
+    function myDateFunction(id, fromModal, selected1, selected2) {
+    	
+    	if('${loginuser}' == null || '${loginuser}' == ""){
+    		alert("대여는 로그인 후 이용가능 합니다.");
+    		$(location).attr("href", "../account/login.action");
+    	}
+    	var height = window.outerWidth;
+    	var wid = (height/2)-130;
+    	$('#date-popover').css("left", wid);
+    	
+        $("#date-popover").hide();
+        if (fromModal) {
+            $("#" + id + "_modal").modal("hide");
+        }
+        var date = $("#" + id).data("date");
+        var hasEvent = $("#" + id).data("hasEvent");
+        if (hasEvent && !fromModal) {
+            return false;
+        }
+        
+        $("#date-popover-content").html('<br/>선택한 날짜 : ' + date + '<br/>'+'예약하시겠습니까?<br/><br/>'+
+        								'<input type="hidden" value="'+date+'" id="rentalDate"/>'+
+        								'<input type="hidden" value="'+selected1+'" id="locationNo2"/>'+
+        								'<input type="hidden" value="'+selected2+'" id="fmNo"/>'+
+        								'<input type="button" value="확인" onclick="moveToCheckRental()"/>&nbsp;'+
+        								'<input type="button" value="취소" onclick="popoverClose()"/><br/>');
+        $("#date-popover").show();
+        return true;
+    }
+	
+    
+    function popoverClose() {
+    	$("#date-popover").hide();
+    }
+    
+    function moveToCheckRental() {
+    	//컨트롤러에서 예약처리
+    	var rentalDate = $("#rentalDate").val();
+    	var fmNo = $("#fmNo").val();
+    	var locationNo2 = $("#locationNo2").val();
+    	$.ajax({
+    		url: "../rental/rentalMachine.action",
+    		type: "POST",
+    		async: true,
+    		data: {
+    			"rentalDate" : rentalDate,
+    			"locationNo2" : locationNo2,
+    			"fmNo" : fmNo
+    			},
+    		success: function(result) { //result
+    			if(result != null)
+				{
+    				alert("예약 성공 : 확인 페이지로 이동합니다.")
+					var returnurl = '../rental/moveToCheckRental.action?machineNo='+result;
+					$(location).attr('href', returnurl);
+				} else {
+					$("#date-popover").hide();
+					alert("예약 실패 : 모든 기계가 대여 중입니다. 다른 날짜를 선택해주세요.");
+				}
+    		},
+    		error: function() {
+    			alert("예약 실패 : 다시 시도해주세요.");
+    		}
+    	});
+    }
     </script>
     
 <style>
@@ -395,46 +460,36 @@
 		<div id="page-wrapper" style="padding: 10px">
         <div class="row" style="margin-left: 10px">
         <div class="page-masonry" id="sp1" style="padding-top: 20px;">
-        	<h1 style="margin: 0">대여목록</h1>
+        	<h1 style="margin: 0">회원정보</h1>
         	<hr/>
-			<table  border="1" class="history" style=" width: 80%; min-width: 550px;font-size: 11pt">
-			<tr style=" text-align: center;font-weight:bold; ; height: 30px; border-bottom: double; ">
-				<td >대여번호</td>
-				<td >이름</td>
-				<td >아이디</td>
-				<td >기계명</td>
-				<td >대여날짜</td>
-				<td >상태</td>
-			</tr>
-				<c:forEach var="history" items="${ historys }">
-					<tr class="historyItem" id="${ history.historyNo }">
-						<td style="text-align: center;">${ history.historyNo }</td>
-						<td style="text-align: center;">${ history.memberName }</td>
-						<td style="text-align: center;">${ history.memberId }</td>
-						<td>&nbsp;&nbsp;&nbsp; ${ history.machineName }</td>
-						<td style="text-align: center;">${ history.historyRentalDateToString }</td>
-						<td style="text-align: center;">
-						<c:choose>
-							<c:when test="${ history.historyStatus == 1 }">
-								<input type="button" id="${ history.historyStatus }" class="status" value="대여 승인 대기">
-							</c:when>
-							<c:when test="${ history.historyStatus == 2}">
-								<input type="button" id="${ history.historyStatus }" class="status" value="대여 대기">
-							</c:when>
-							<c:when test="${ history.historyStatus == 3}">
-								<input type="button" id="${ history.historyStatus }" class="status" value="대여 중">
-							</c:when>
-							<c:when test="${ history.historyStatus == 4}">
-								<input type="button" disabled id="${ history.historyStatus }" class="status" value="대여 완료">
-							</c:when>
-							<c:otherwise>
-								<input type="button" id="${ history.historyStatus }" class="status" value="알 수 없음">
-							</c:otherwise>
-						</c:choose>
-						</td>
+			<div id="rentalCheck">
+				<table class='rentalInfo' border="1">
+					<tr>
+						<td>ID</td>
+						<td>${member.memberId}</td>
 					</tr>
-				</c:forEach>
-			</table>
+					<tr>
+						<td>이름</td>
+						<td>${member.memberName}</td>
+					</tr>
+					<tr>
+						<td>주소1</td>
+						<td>${member.memberAddress1}</td>
+					</tr>
+					<tr>
+						<td>주소2</td>
+						<td>${member.memberAddress2}</td>
+					</tr>
+					<tr>
+						<td>전화</td>
+						<td>${member.memberPhone1}</td>
+					</tr>
+					<tr>
+						<td>휴대폰</td>
+						<td>${member.memberPhone2}</td>
+					</tr>
+				</table>
+			</div>
 			</div>
 		</div><!-- /#page-wrapper -->
 	</div><!-- /#wrapper -->
