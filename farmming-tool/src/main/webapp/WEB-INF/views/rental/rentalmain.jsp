@@ -125,7 +125,6 @@
 		         });
 	  $("#searchbutton").click(function( event ) {
 		  var searchword = $("#searchword").val();
-		  	alert(searchword);
 	         $("#sp1").empty();
 	         
 	         $.ajax({
@@ -378,7 +377,7 @@
 									  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">${ loginuser.memberName }
 									  <span class="caret"></span></button>
 									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-									    <li role="presentation"><a role="menuitem" href="#">회원정보</a></li>
+									    <li role="presentation"><a role="menuitem" href="../account/updateMember.action">회원정보</a></li>
 									    <li role="presentation" class="divider"></li>
 									    <li role="presentation"><a role="menuitem" href="../account/logout.action">로그아웃</a></li>
 									  </ul>
@@ -466,10 +465,11 @@
         
         <div id="page-wrapper" > 
           <div class="row" style="margin-left: 10px">
-			<div class="page-masonry" id="sp1" style="padding-top: 20px;">
+			<div class="page-masonry" id="sp1" style="padding-top: 10px;">
         	<h1 style="margin: 0">대여</h1>
         	<hr/>
 			<h3 id="rental-condition-title1">지역선택</h3>
+			<h4 style="color: #0af">현재 충남 - 부여군만 대여가 가능합니다.<br/>다른지역은 대여품이 없어서 나오지 않습니다.</h4>
 			<select id="location1" name="location1" class="rental_option">
 				<option value="" selected="selected">지역선택1-도/시</option>
 				<option value="1">강원도</option>

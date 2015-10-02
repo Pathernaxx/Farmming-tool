@@ -217,7 +217,7 @@ public class AccountController {
 		
 		accountService.setMember(member);
 		
-		return "home";
+		return "redirect:../home.action";
 	}
 	
 	@RequestMapping(value="updateMember.action", method=RequestMethod.GET)
@@ -233,7 +233,7 @@ public class AccountController {
 		mav.addObject(phone);
 		mav.addObject(mobilePhone);
 		
-		mav.setViewName("admin/memberSetting");
+		mav.setViewName("account/memberinfo");
 		return mav;
 	}
 	
@@ -275,7 +275,7 @@ public class AccountController {
 		
 		accountService.setMemberInfo(member);
 		
-		return "home";
+		return "redirect:../home.action";
 	}
 	
 	@RequestMapping(value="logout.action", method=RequestMethod.GET)

@@ -108,7 +108,6 @@
 		         });
 	  $("#searchbutton").click(function( event ) {
 		  var searchword = $("#searchword").val();
-		  	alert(searchword);
 	         $("#sp1").empty();
 	         
 	         $.ajax({
@@ -207,94 +206,9 @@
 		});
 	  
     });
-    function myDateFunction(id, fromModal, selected1, selected2) {
-    	
-    	if('${loginuser}' == null || '${loginuser}' == ""){
-    		alert("대여는 로그인 후 이용가능 합니다.");
-    		$(location).attr("href", "../account/login.action");
-    	}
-    	var height = window.outerWidth;
-    	var wid = (height/2)-130;
-    	$('#date-popover').css("left", wid);
-    	
-        $("#date-popover").hide();
-        if (fromModal) {
-            $("#" + id + "_modal").modal("hide");
-        }
-        var date = $("#" + id).data("date");
-        var hasEvent = $("#" + id).data("hasEvent");
-        if (hasEvent && !fromModal) {
-            return false;
-        }
-        
-        $("#date-popover-content").html('<br/>선택한 날짜 : ' + date + '<br/>'+'예약하시겠습니까?<br/><br/>'+
-        								'<input type="hidden" value="'+date+'" id="rentalDate"/>'+
-        								'<input type="hidden" value="'+selected1+'" id="locationNo2"/>'+
-        								'<input type="hidden" value="'+selected2+'" id="fmNo"/>'+
-        								'<input type="button" value="확인" onclick="moveToCheckRental()"/>&nbsp;'+
-        								'<input type="button" value="취소" onclick="popoverClose()"/><br/>');
-        $("#date-popover").show();
-        return true;
-    }
-	
-    
-    function popoverClose() {
-    	$("#date-popover").hide();
-    }
-    
-    function moveToCheckRental() {
-    	//컨트롤러에서 예약처리
-    	var rentalDate = $("#rentalDate").val();
-    	var fmNo = $("#fmNo").val();
-    	var locationNo2 = $("#locationNo2").val();
-    	$.ajax({
-    		url: "../rental/rentalMachine.action",
-    		type: "POST",
-    		async: true,
-    		data: {
-    			"rentalDate" : rentalDate,
-    			"locationNo2" : locationNo2,
-    			"fmNo" : fmNo
-    			},
-    		success: function(result) { //result
-    			if(result != null)
-				{
-    				alert("예약 성공 : 확인 페이지로 이동합니다.")
-					var returnurl = '../rental/moveToCheckRental.action?machineNo='+result;
-					$(location).attr('href', returnurl);
-				} else {
-					$("#date-popover").hide();
-					alert("예약 실패 : 모든 기계가 대여 중입니다. 다른 날짜를 선택해주세요.");
-				}
-    		},
-    		error: function() {
-    			alert("예약 실패 : 다시 시도해주세요.");
-    		}
-    	});
-    }
     </script>
     
 <style>
- 
- .popover {
-	position: absolute;
-	top: 1020px;
-	z-index: 1060;
-	display: none;
-	width: 400px;
-	max-width: 276px;
-	padding: 1px;
-	text-align: center;
-	white-space: normal;
-	background-color: #fff;
-	-webkit-background-clip: padding-box;
-	background-clip: padding-box;
-	border: 1px solid #ccc;
-	border: 1px solid rgba(0, 0, 0, .2);
-	border-radius: 6px;
-	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-	box-shadow: 0 5px 10px rgba(0, 0, 0, .2)
-}
     
 .item {
    	width: 200px;
@@ -393,7 +307,7 @@
 									  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">${ loginuser.memberName }
 									  <span class="caret"></span></button>
 									  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-									    <li role="presentation"><a role="menuitem" href="#">회원정보</a></li>
+									    <li role="presentation"><a role="menuitem" href="../account/updateMember.action">회원정보</a></li>
 									    <li role="presentation" class="divider"></li>
 									    <li role="presentation"><a role="menuitem" href="../account/logout.action">로그아웃</a></li>
 									  </ul>
