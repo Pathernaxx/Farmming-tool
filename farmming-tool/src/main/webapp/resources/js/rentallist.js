@@ -130,7 +130,7 @@ $(document).ready(function (){
 							console.log(error);
 						}
 					});
-					
+					var now = new Date();
 					$("#calendar-area").html('<div id="my-calendar" style="margin-top:20px"></div>');
 					$("#my-calendar").zabuto_calendar({
 						action: function () {
@@ -138,8 +138,8 @@ $(document).ready(function (){
 						},
 						data: eventData,
 						language: "ko",
-						year: 2015,
-						month: 9,
+						year: now.getYear()+1900,
+						month: now.getMonth()+1,
 						show_previous: true,
 						show_next: 12,
 						cell_border: true,
