@@ -462,35 +462,34 @@
         <div class="page-masonry" id="sp1" style="padding-top: 20px;">
         	<h1 style="margin: 0">회원정보</h1>
         	<hr/>
-			<div id="rentalCheck">
-				<table class='rentalInfo' border="1">
-					<tr>
-						<td>ID</td>
-						<td>${member.memberId}</td>
-					</tr>
-					<tr>
-						<td>이름</td>
-						<td>${member.memberName}</td>
-					</tr>
-					<tr>
-						<td>주소1</td>
-						<td>${member.memberAddress1}</td>
-					</tr>
-					<tr>
-						<td>주소2</td>
-						<td>${member.memberAddress2}</td>
-					</tr>
-					<tr>
-						<td>전화</td>
-						<td>${member.memberPhone1}</td>
-					</tr>
-					<tr>
-						<td>휴대폰</td>
-						<td>${member.memberPhone2}</td>
-					</tr>
-				</table>
-			</div>
-			</div>
+			<table border="1" style="text-align: center ; width: 90%; min-width: 400px;font-size: 11pt">
+				<tr style=" height: 30px;">
+					<td style="min-width: 80px;font-weight:bold;">ID</td>
+					<td style="min-width: 150px">${member.memberId}</td>
+				</tr>
+				<tr style=" height: 30px;">
+					<td style="font-weight:bold;">이름</td>
+					<td>${member.memberName}</td>
+				</tr>
+				<tr style=" height: 30px;">
+					<td style="font-weight:bold;">주소1</td>
+					<td>${member.memberAddress1}</td>
+				</tr>
+				<tr style=" height: 30px;">
+					<td style="font-weight:bold;">주소2</td>
+					<td>${member.memberAddress2}</td>
+				</tr>
+				<tr>
+					<td style="font-weight:bold;">전화</td>
+					<td>${member.memberPhone1}</td>
+				</tr>
+				<tr style=" height: 30px;">
+					<td style="font-weight:bold;">휴대폰</td>
+					<td>${member.memberPhone2}</td>
+				</tr>
+			</table>
+			</div><!-- page-masonry -->
+			</div> <!-- row -->
 		</div><!-- /#page-wrapper -->
 	</div><!-- /#wrapper -->
 
