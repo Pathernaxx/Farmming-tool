@@ -263,6 +263,7 @@
 		         });
 	  $("#searchbutton").click(function( event ) {
 		  var searchword = $("#searchword").val();
+		  alert(searchword);
 	         $("#sp1").empty();
 	         
 	         $.ajax({
@@ -453,7 +454,7 @@
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button class="btn btn-default" id="searchbutton" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
