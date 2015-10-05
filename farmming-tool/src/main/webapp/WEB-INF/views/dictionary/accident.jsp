@@ -30,8 +30,8 @@
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
 <style>
 .item {
-    width: 260px;
-    height: 130px;
+    width: 200px;
+    height: 205px;
     border: 3px solid;
     margin: 5px;
     float: left;
@@ -53,8 +53,8 @@
  	height: 400px;
 }
  .item2 {
-    width: 200px;
-    height: 205px;
+    width: 260px;
+    height: 130px;
     border: 3px solid;
     margin: 5px;
     float: left;
@@ -91,8 +91,7 @@ $(document).ready(function (){
 		  });   
 	     $(".ajaxfarmlist").click(function( event ) {
 	         var fmID = $(this).attr('id'); 
-	            $("#page-wrapper").empty();
-	            $(".page-masonry").empty();
+	         	$("#sp1").empty();
 	            $.ajax({
 	               url : "../dictionary/ajaxfmList.action",
 	               async : false,
@@ -104,8 +103,7 @@ $(document).ready(function (){
 	                  if (fmBytypeNo != null){
 	                     $.each(fmBytypeNo, function(index, listitem){
 	                        var html=
-
-	                           "<div class='item2' >"+
+	                           "<div class='item' >"+
 	                          "<div class='detail1' style='float: left; border: .3em'>"+
 	                            "<img src='../resources/images/fmimage/"+listitem.fmPicture+"' width='200px' height='180px' style='padding-right: 4px'>"+
 	                              "<p>"+listitem.fmName+"</p>"+
@@ -141,8 +139,8 @@ $(document).ready(function (){
 	                        "</div>"+
 	                        "</div>";
 	                           
-	                     $("#page-wrapper").append($(html)); 
-	                        
+	                        $("#sp1").append($(html)); 
+	                         
 	                     });
 	                     
 	                  }
@@ -160,8 +158,7 @@ $(document).ready(function (){
 	         });
      $("#searchbutton").click(function( event ) {
         var searchword = $("#searchword").val();
-        $(".page-masonry").empty();
-        $("#page-wrapper").empty();
+        $("#sp1").empty();
             
             $.ajax({
                url : "../dictionary/ajaxfmSearch.action",
@@ -173,7 +170,8 @@ $(document).ready(function (){
                success : function(fmSearchList){
                   
                    if (fmSearchList != null && fmSearchList.length > 0){
-                        $.each(fmSearchList, function(index, listitem){
+                	   $("#sp1").empty(); 
+                	   $.each(fmSearchList, function(index, listitem){
                               var html=
                                  "<div class='item' >"+
                                 "<div class='detail1' style='float: left; border: .3em'>"+
@@ -210,8 +208,8 @@ $(document).ready(function (){
                                "</table>"+
                               "</div>"+
                               "</div>";
-                              $("#page-wrapper").append($(html)); 
-                              
+                              $("#sp1").append($(html)); 
+			                     
                            });                         
                    }else{
                       var html = "<div>"+
@@ -219,7 +217,8 @@ $(document).ready(function (){
                        "올바른 검색어를 입력하세요."+
                        "</div>"+
                         "</div>";
-                        $("#page-wrapper").append($(html)); 
+                      $("#sp1").append($(html)); 
+	                     
                    }
                },
                error : function(){
@@ -228,7 +227,7 @@ $(document).ready(function (){
              });
      });   
     $("#pClassType").change(function(event){
-       $(".page-masonry").empty();
+       $("#sp2").empty();
     	var selectVal = $("#pClassType option:selected").val();
 	   $.ajax({
 	        url : "../dictionary/accident.action",
@@ -240,12 +239,12 @@ $(document).ready(function (){
 	        success : function(accs){
 	           
 	          $.each(accs, function(index, data){
-	             var html = "<div class='item'>"+
+	             var html = "<div class='item2'>"+
 	                       "<p>제목 : "+ data.content +"</p>"+
 	                       "<a href="+ data.downUrl +"><p>다운로드</p></a>"+
 	                       "<p>분류 : "+ data.pClass +"</p>"+
 	                       "</div>";
-	             $(".page-masonry").append(html);
+	             $("#sp2").append(html);
 	          });
 	       },
 	      error : function(xhr, ajaxOptions, thrownError){
@@ -391,56 +390,55 @@ $(document).ready(function (){
         </nav>
 
         <div id="page-wrapper">
-        	<h1>농기계 안전·사고사례</h1>
-        <hr/>
-        
-          <div class="row">
-          </br>
-            <table>
-              <tr>
-              	<td>          	
-              	분류  
-				</td>
-              	<td>
-              	<select id="pClassType">
-				<option value="" selected="selected">전체</option>
-			    <option value="교통사고 판례해설">교통사고 판례해설</option>
-			    <option value="교통표지">교통표지</option>
-			    <option value="농기계 사고사례">농기계 사고사례</option>
-			    <option value="농기계 사고실태">농기계 사고실태</option>
-			    <option value="농기계 형식별 안전이용">농기계 형식별 안전이용</option>
-			    <option value="농기계별 안전이용">농기계별 안전이용</option>
-			    <option value="농작업 안전 일반사항">농작업 안전 일반사항</option>
-			    <option value="농작업 안전수칙">농작업 안전수칙</option>
-			    <option value="농작업 안전용품">농작업 안전용품</option>
-			    <option value="도로 상황별 안전사고 예방요령">도로 상황별 안전사고 예방요령</option>
-			    <option value="도로안전 운행요령">도로안전 운행요령</option>
-			    <option value="등화장치부착 및 조작">등화장치부착 및 조작</option>
-			    <option value="안전검정">안전검정</option>
-			    <option value="안전검정 기준 및 방법">안전검정 기준 및 방법</option>
-			    <option value="안전표지">안전표지</option>
-			    <option value="위험지역 작업요령">위험지역 작업요령</option>
-			    <option value="작업환경별 농작업요령">작업환경별 농작업요령</option>
-				</select>
-              	</td>
-              </tr>
-            </table>
-			<div class="page-masonry">
-			<c:forEach var="acc" items="${ accs }">
-			 <div class="item">
- 			 	 <p>제목 : ${ acc.content}</p>
-    			 <a href="${acc.downUrl}"><p>다운로드</p></a>
-    			 <p>분류 : ${acc.pClass} </p> 
-		     </div>
-		     </c:forEach>
-			 </div>
-			</div>
-		  </div>
-		  </div>
-        <!-- /#page-wrapper -->
+        	<div class="row" style="margin-left: 10px;min-height: 850px">
+				<div class="page-masonry" id="sp1" style="padding-top: 10px;">
+		           	<h1 style="margin: 0">농기계 안전·사고사례</h1>
+        			<hr/>
+		           	<div>
+			           	<table >
+			              <tr>
+			              	<td>          	
+			              	분류  
+							</td>
+			              	<td>
+			              	<select id="pClassType">
+							<option value="" selected="selected">전체</option>
+						    <option value="교통사고 판례해설">교통사고 판례해설</option>
+						    <option value="교통표지">교통표지</option>
+						    <option value="농기계 사고사례">농기계 사고사례</option>
+						    <option value="농기계 사고실태">농기계 사고실태</option>
+						    <option value="농기계 형식별 안전이용">농기계 형식별 안전이용</option>
+						    <option value="농기계별 안전이용">농기계별 안전이용</option>
+						    <option value="농작업 안전 일반사항">농작업 안전 일반사항</option>
+						    <option value="농작업 안전수칙">농작업 안전수칙</option>
+						    <option value="농작업 안전용품">농작업 안전용품</option>
+						    <option value="도로 상황별 안전사고 예방요령">도로 상황별 안전사고 예방요령</option>
+						    <option value="도로안전 운행요령">도로안전 운행요령</option>
+						    <option value="등화장치부착 및 조작">등화장치부착 및 조작</option>
+						    <option value="안전검정">안전검정</option>
+						    <option value="안전검정 기준 및 방법">안전검정 기준 및 방법</option>
+						    <option value="안전표지">안전표지</option>
+						    <option value="위험지역 작업요령">위험지역 작업요령</option>
+						    <option value="작업환경별 농작업요령">작업환경별 농작업요령</option>
+							</select>
+			              	</td>
+			              </tr>
+			            </table>
+		            </div>
+					<div class="page-masonry2" id="sp2" style="padding-top: 10px;">
+						<c:forEach var="acc" items="${ accs }">
+							<div class="item2">
+				 			 	 <p>제목 : ${ acc.content}</p>
+				    			 <a href="${acc.downUrl}"><p>다운로드</p></a>
+				    			 <p>분류 : ${acc.pClass} </p> 
+						    </div><!-- item -->
+					    </c:forEach>
+					</div><!-- page-masonry2 -->
+			  	</div><!-- page-masonry -->
+			</div><!-- row -->
+		  </div><!-- /#page-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+    </div><!-- /#wrapper -->
 
 </body>
 </html>
