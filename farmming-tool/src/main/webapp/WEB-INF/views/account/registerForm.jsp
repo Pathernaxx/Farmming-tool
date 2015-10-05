@@ -6,12 +6,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>회원가입</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 	<link rel="stylesheet" href="../resources/styles/account.css" />
 	<script src="//cdn.poesis.kr/post/popup.min.js"></script>
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
 	
 	<!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-2.1.3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.js"></script>
     
     <!-- Bootstrap Core CSS -->
